@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Unique"><title>Hexo博客搭建完整流程 · 个人博客</title><meta name="description" content="一，准备工作1.了解HexoHexo是高效的静态站点生成框架，它基于Node.js。 通过 Hexo 你可以使用Markdown 编写文章。
+2.搭建Node.js环境搭建博客网站首先需要安装Node.js环境。
+下载地址：http://nodejs.cn/download 
+测试安装：命令行使用n"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title><a href="/">个人博客</a></h3></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>文章作者: </span></a><a href="https://uniquezhou.github.io"> UniqueZhou </a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" title="Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)"> BY-NC-SA 3.0 许可协议</a>，转载请注明出处！;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Arquivo</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Hexo博客搭建完整流程</a></h3></div><div class="post-content"><h4 id="一，准备工作"><a href="#一，准备工作" class="headerlink" title="一，准备工作"></a>一，准备工作</h4><h5 id="1-了解Hexo"><a href="#1-了解Hexo" class="headerlink" title="1.了解Hexo"></a>1.了解Hexo</h5><p><a href="https://github.com/hexojs/hexo" target="_blank" rel="noopener">Hexo</a>是高效的静态站点生成框架，它基于Node.js。 通过 Hexo 你可以使用Markdown 编写文章。</p>
+<h5 id="2-搭建Node-js环境"><a href="#2-搭建Node-js环境" class="headerlink" title="2.搭建Node.js环境"></a>2.搭建Node.js环境</h5><p>搭建博客网站首先需要安装Node.js环境。</p>
+<p>下载地址：<a href="http://nodejs.cn/download" target="_blank" rel="noopener">http://nodejs.cn/download</a> </p>
+<p>测试安装：命令行使用<code>node -v</code> 、<code>npm -v</code>，查看显示版本号即成功。</p>
+<p><strong><em>Ps:大部分同学装的node版本是之前提供的5.0.0多的 hexo的初始化步骤中会出现报错，需要重新装最新的版本（10.0.0多的）</em></strong></p>
+<h5 id="3-安装Hexo博客框架工具"><a href="#3-安装Hexo博客框架工具" class="headerlink" title="3.安装Hexo博客框架工具"></a>3.安装Hexo博客框架工具</h5><p>Hexo是一个建站工具，可以帮助我们快速生成基本的博客文件，安装它需要在控制台下（Windows+R+<code>cmd</code>）使用如下命令：</p>
+<p><code>npm install hexo-cli -g</code></p>
+<h5 id="4-安装Git版本工具"><a href="#4-安装Git版本工具" class="headerlink" title="4.安装Git版本工具"></a>4.安装Git版本工具</h5><p>Git是目前世界上最流行的分布式版本控制系统</p>
+<p>使用Git可以帮助我们把本地的网页和文章等内容提交到Github上，实现同步。 </p>
+<p>下载地址：<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a>  </p>
+<p>测试安装:右击鼠标，如果有</p>
+<p><code>Git GUI here</code></p>
+<p><code>Git Bash here</code></p>
+<p>两个选项 即安装成功。</p>
+<h5 id="5-注册Github账号"><a href="#5-注册Github账号" class="headerlink" title="5.注册Github账号"></a>5.注册Github账号</h5><p>gitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，故名gitHub。这里用到Github，是因为我们需要通过Github得到自己的博客网站域名，而且需要使用gitHub同步我们个人博客的相关文件。 </p>
+<p> 注册地址：<a href="https://github.com" target="_blank" rel="noopener">https://github.com</a> </p>
+<h4 id="二，开始搭建博客"><a href="#二，开始搭建博客" class="headerlink" title="二，开始搭建博客"></a>二，开始搭建博客</h4><h5 id="1-开启Github服务"><a href="#1-开启Github服务" class="headerlink" title="1.开启Github服务"></a>1.开启Github服务</h5><p>通过Github Pages获得一个免费使用的域名，这需要我们在Github上新建一个仓库，如下：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p1.png" alt></p>
+<p><strong><em>注意：新仓库的名字，最好是</em></strong><code>UserName+“github.io”</code></p>
+<p><strong><em>的形式。这也是之前强调的要起一个好的用户名的原因。这样之后我们最后的博客网站的链接就会是：<a href="https://UserName.github.io的形式。" target="_blank" rel="noopener">https://UserName.github.io的形式。</a></em></strong></p>
+<p>点击<code>Create Repository</code>之后，随后选择<code>Setting</code>进入设置，找到<code>Github Pages</code>如下：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p2.png" alt></p>
+<p>这里我们需要点击<code>Choose a theme</code>任意选择一个选择主题，然后界面会跳转到仓库，我们看到有两个文件如下：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p3.png" alt></p>
+<p>再查看<code>setting</code>，我们会看到开启GitHub Pages之后得到的域名如下：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p4.png" alt></p>
+<p>现在，可以使用</p>
+<p><a href="https://dreamcoffeezs.github.io/" target="_blank" rel="noopener">https://UserName.github.io</a></p>
+<p>访问自己的博客网站了，打开链接我们会看到默认主题的个人博客样式如下(虽然点丑)：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p5.png" alt></p>
+<h5 id="2-创建本地博客站点"><a href="#2-创建本地博客站点" class="headerlink" title="2.创建本地博客站点"></a>2.创建本地博客站点</h5><p>上述的步骤相当于我们使用Github，创建了一个默认的博客页，并且得到了一个可外部访问的域名。但是这个博客页很丑。我们的目的是创建自己个性化的博客网站，所以我们使用Hexo在本地先创建一个本地博客站点，优化后再把它部署到github上。接下来我们使用控制台(Windows+R+<code>cmd</code>)命令在本地一个合适的位置右键<code>git bash here</code></p>
+<p>输入<code>hexo init blog</code></p>
+<p>创建博客站点文件夹如下：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p6.png" alt></p>
+<p>测试本地博客站点，进入blog文件夹（此即为本地博客根目录）右键<code>git bash here</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g //g是generetor的缩写，生成博客 </span><br><span class="line">hexo s //s是server的缩写，启动本地服务</span><br></pre></td></tr></table></figure>
+<p>此时打开浏览器，输入 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>，我们将会看到Hexo自带默认主题显示的博客样式如下:</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p7.png" alt></p>
+<h5 id="3-同步Github，允许公共访问"><a href="#3-同步Github，允许公共访问" class="headerlink" title="3.同步Github，允许公共访问"></a>3.同步Github，允许公共访问</h5><blockquote>
+<p>初次安装git需要配置用户名和邮箱，否则git会提示：</p>
+<p>please tell me who you are.</p>
+</blockquote>
+<p>你需要运行命令来配置你的用户名和邮箱：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;name&quot;</span><br><span class="line">$ git config --global user.email &quot;email&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：（引号内请输入你自己设置的名字，和你自己的邮箱）此用户名和邮箱是git提交代码时用来显示你身份和联系方式的，并不是github用户名和邮箱</strong></p>
+<h5 id="4-Git配置ssh-key"><a href="#4-Git配置ssh-key" class="headerlink" title="4.Git配置ssh key"></a>4.Git配置ssh key</h5><p>在博客站点右键<code>Git bash here</code></p>
+<p>输入<code>$  ssh-keygen -t rsa -C &quot;youremail&quot;</code></p>
+<p>第一次生成的话，直接一路回车，不需要输入密码。不是第一次生成的话，会提示 overwrite (y/n)? 问你是否覆盖旧的 SSH Key ，直接填 y ，然后一直回车就行了，最后得到了两个文件：<strong>id_rsa和id_rsa.pub</strong>。</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p8.png" alt></p>
+<p>记事本打开/C/Users/Administrator/.ssh/id_rsa.pub文件</p>
+<p>复制该段信息；登录github账户，点击头像进入</p>
+<p>Settings -&gt; SSH and GPG keys -&gt; New SSH key</p>
+<p>将复制的信息粘贴到该处。</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p9.png" alt></p>
+<p>测试是否成功</p>
+<p><code>$ssh -T git@github.com</code></p>
+<p>提示</p>
+<p><code>Hi xxx! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code></p>
+<p>说明添加成功。</p>
+<h5 id="5-部署博客"><a href="#5-部署博客" class="headerlink" title="5.部署博客"></a>5.部署博客</h5><p>在本地我们已经搭建了博客，但是还只能自己本地访问。若要别人也能看到，那就需要我们将其同步部署到GitHub上了。首先找到我们的博客仓库，并拷贝仓库地址：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p10.png" alt></p>
+<blockquote>
+<p>注意：只需复制用户名之后字段</p>
+</blockquote>
+<p>然后修改本地博客目录的配置：<br>修改本次博客根目录下的<code>_config.yml</code>文件，修改<code>deploy</code>下的配置如下：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p11.png" alt></p>
+<blockquote>
+<p>注意空格和单词不可以打错</p>
+</blockquote>
+<p>之后执行Git bash here命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git //安装部署插件</span><br><span class="line">hexo d //部署到github</span><br></pre></td></tr></table></figure>
+<p>再次访问链接：<a href="https://dreamcoffeezs.github.io/" target="_blank" rel="noopener">https://userName.github.io</a>，就会发现这里的界面和本地的一样了。如此一来我们搭建的个人博客网站就基本完成了。</p>
+<h4 id="三，发布博客"><a href="#三，发布博客" class="headerlink" title="三，发布博客"></a>三，发布博客</h4><h5 id="1-发布"><a href="#1-发布" class="headerlink" title="1.发布"></a>1.发布</h5><p>可以发布自己的第一篇博客了。来尝试一下以下的步骤：<br>在本地博客文件夹根目录(git bash here)输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;我个人博客的第一篇博客&quot; </span><br><span class="line">hexo g //生成网页 </span><br><span class="line">hexo d //部署到远端(github)</span><br></pre></td></tr></table></figure>
+<p>生成的博客md文件会存放在<code>blog\source\_posts</code>文件夹内。</p>
+<p>现在打开我们的博客网站：</p>
+<p><a href="http://username.github.io/" target="_blank" rel="noopener">http://UserName.github.io</a></p>
+<p>会看到网页</p>
+<p>（显示可能有延迟 所以可以采用以下方法(git bash)：</p>
+<p> hexo clean <em>//清理缓存</em> </p>
+<p>hexo g <em>//重新生成博客代码</em> </p>
+<p>hexo d <em>//部署到服务器</em></p>
+<blockquote>
+<p>可以用<code>hexo s</code>先查看本地情况再部署到服务器</p>
+</blockquote>
+<h5 id="2-Markdown写作语法"><a href="#2-Markdown写作语法" class="headerlink" title="2.Markdown写作语法"></a>2.Markdown写作语法</h5><p>推荐使用<code>Typora</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># 写作介绍</span><br><span class="line">## 1，字体介绍</span><br><span class="line">*这是斜体* 或 _这也是斜体_ </span><br><span class="line">**这是粗体**</span><br><span class="line">***这是加粗斜体***</span><br><span class="line">~~这是删除线~~</span><br><span class="line">## 2，分级标题</span><br><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br><span class="line">## 3，超链接</span><br><span class="line">写法：</span><br><span class="line"></span><br><span class="line">## 4,列表</span><br><span class="line">无序列表：</span><br><span class="line">写法：</span><br><span class="line"></span><br><span class="line">* 无序列表项1</span><br><span class="line">+ 无序列表项2</span><br><span class="line">- 无序列表项3</span><br><span class="line"></span><br><span class="line">有序列表：</span><br><span class="line">写法：</span><br><span class="line">1.有序列表项1</span><br><span class="line">2.有序列表项2</span><br><span class="line">3.有序列表项3</span><br><span class="line"></span><br><span class="line">## 5，插入图片</span><br><span class="line">在 Hexo 中插入图片，首先需要将图片放在 source/img/ 文件夹下，然后如下方式进行插入：</span><br><span class="line"></span><br><span class="line">![](url)</span><br><span class="line"></span><br><span class="line">## 6，表格</span><br><span class="line">| 表头1|表头2|表头3|表头4</span><br><span class="line">|-| :- | :-: | -: |</span><br><span class="line">|默认左对齐|左对齐|居中对其|右对齐|</span><br><span class="line">|默认左对齐|左对齐|居中对其|右对齐|</span><br><span class="line">|默认左对齐|左对齐|居中对其|右对齐|</span><br></pre></td></tr></table></figure>
+<h4 id="四，更换主题"><a href="#四，更换主题" class="headerlink" title="四，更换主题"></a>四，更换主题</h4><p>为了让它看起来更美观一些，我们可以为其更换主题（当然也可以自己在默认主题下自己编写美化博客界面）。这里以使用github上的next主题为例</p>
+<h5 id="1-下载主题"><a href="#1-下载主题" class="headerlink" title="1.下载主题"></a>1.下载主题</h5><p>切换到本地博客根目录下(git bash here)输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+<p>下载成之后我们会看到next的主题已经存在thems里了如下：</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p12.png" alt></p>
+<h5 id="2-修改博客配置文件，更换主题配置"><a href="#2-修改博客配置文件，更换主题配置" class="headerlink" title="2.修改博客配置文件，更换主题配置"></a>2.修改博客配置文件，更换主题配置</h5><p>修改博客根目录(不是next主题)下的<code>_config.yml</code>文件，搜索theme字段，并将其值修改为next</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p13.png" alt></p>
+<p>然后在控制台（git bash）下输入如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean //清理缓存</span><br><span class="line">hexo g //重新生成博客代码 </span><br><span class="line">hexo d //部署到服务器</span><br></pre></td></tr></table></figure>
+<p>再次打开我们的博客网站<a href="https://dreamcoffeezs.github.io/" target="_blank" rel="noopener">https://UserName.github.io</a>，将会看到更换的主题</p>
+<p><img src="/2019/03/31/Hexo博客搭建完整流程/p14.png" alt></p>
+<h2 id="主题美化后续更新……"><a href="#主题美化后续更新……" class="headerlink" title="主题美化后续更新……"></a><strong><em>主题美化后续更新……</em></strong></h2></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-03-31</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/2019/03/31/Hexo博客搭建完整流程/,个人博客,Hexo博客搭建完整流程,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2019/03/31/Test-Picture/" title="Test Picture">Próximo post</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
