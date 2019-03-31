@@ -5,7 +5,9 @@
 <h5 id="2-搭建Node-js环境"><a href="#2-搭建Node-js环境" class="headerlink" title="2.搭建Node.js环境"></a>2.搭建Node.js环境</h5><p>搭建博客网站首先需要安装Node.js环境。</p>
 <p>下载地址：<a href="http://nodejs.cn/download" target="_blank" rel="noopener">http://nodejs.cn/download</a> </p>
 <p>测试安装：命令行使用<code>node -v</code> 、<code>npm -v</code>，查看显示版本号即成功。</p>
-<p><strong><em>Ps:大部分同学装的node版本是之前提供的5.0.0多的 hexo的初始化步骤中会出现报错，需要重新装最新的版本（10.0.0多的）</em></strong></p>
+<blockquote>
+<p>Ps:大部分同学装的node版本是之前提供的5.0.0多的 hexo的初始化步骤中会出现报错，需要重新装最新的版本（10.0.0多的）</p>
+</blockquote>
 <h5 id="3-安装Hexo博客框架工具"><a href="#3-安装Hexo博客框架工具" class="headerlink" title="3.安装Hexo博客框架工具"></a>3.安装Hexo博客框架工具</h5><p>Hexo是一个建站工具，可以帮助我们快速生成基本的博客文件，安装它需要在控制台下（Windows+R+<code>cmd</code>）使用如下命令：</p>
 <p><code>npm install hexo-cli -g</code></p>
 <h5 id="4-安装Git版本工具"><a href="#4-安装Git版本工具" class="headerlink" title="4.安装Git版本工具"></a>4.安装Git版本工具</h5><p>Git是目前世界上最流行的分布式版本控制系统</p>
@@ -19,8 +21,11 @@
 <p> 注册地址：<a href="https://github.com" target="_blank" rel="noopener">https://github.com</a> </p>
 <h2 id="二，开始搭建博客"><a href="#二，开始搭建博客" class="headerlink" title="二，开始搭建博客"></a>二，开始搭建博客</h2><h5 id="1-开启Github服务"><a href="#1-开启Github服务" class="headerlink" title="1.开启Github服务"></a>1.开启Github服务</h5><p>通过Github Pages获得一个免费使用的域名，这需要我们在Github上新建一个仓库，如下：</p>
 <p><img src="/2019/03/31/Hexo博客搭建完整流程/p1.png" alt></p>
-<p><strong><em>注意：新仓库的名字，最好是</em></strong><code>UserName+“github.io”</code></p>
-<p><strong><em>的形式。这也是之前强调的要起一个好的用户名的原因。这样之后我们最后的博客网站的链接就会是：<a href="https://UserName.github.io的形式。" target="_blank" rel="noopener">https://UserName.github.io的形式。</a></em></strong></p>
+<blockquote>
+<p>注意：新仓库的名字，最好是</p>
+<p>UserName+“github.io”`</p>
+<p>的形式。这也是之前强调的要起一个好的用户名的原因。这样之后我们最后的博客网站的链接就会是：<a href="https://UserName.github.io的形式。" target="_blank" rel="noopener">https://UserName.github.io的形式。</a></p>
+</blockquote>
 <p>点击<code>Create Repository</code>之后，随后选择<code>Setting</code>进入设置，找到<code>Github Pages</code>如下：</p>
 <p><img src="/2019/03/31/Hexo博客搭建完整流程/p2.png" alt></p>
 <p>这里我们需要点击<code>Choose a theme</code>任意选择一个选择主题，然后界面会跳转到仓库，我们看到有两个文件如下：</p>
@@ -45,7 +50,9 @@
 </blockquote>
 <p>你需要运行命令来配置你的用户名和邮箱：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;name&quot;</span><br><span class="line">$ git config --global user.email &quot;email&quot;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：（引号内请输入你自己设置的名字，和你自己的邮箱）此用户名和邮箱是git提交代码时用来显示你身份和联系方式的，并不是github用户名和邮箱</strong></p>
+<blockquote>
+<p>注意：（引号内请输入你自己设置的名字，和你自己的邮箱）此用户名和邮箱是git提交代码时用来显示你身份和联系方式的，并不是github用户名和邮箱</p>
+</blockquote>
 <h5 id="4-Git配置ssh-key"><a href="#4-Git配置ssh-key" class="headerlink" title="4.Git配置ssh key"></a>4.Git配置ssh key</h5><p>在博客站点右键<code>Git bash here</code></p>
 <p>输入<code>$  ssh-keygen -t rsa -C &quot;youremail&quot;</code></p>
 <p>第一次生成的话，直接一路回车，不需要输入密码。不是第一次生成的话，会提示 overwrite (y/n)? 问你是否覆盖旧的 SSH Key ，直接填 y ，然后一直回车就行了，最后得到了两个文件：</p>
