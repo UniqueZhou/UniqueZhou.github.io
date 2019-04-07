@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>html学习总结（一） | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="HTML,">
+  
+
+  
+  <meta name="description" content="HTML">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-04-07
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    html学习总结（一）
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(http://s13.sinaimg.cn/mw690/002x5VcBgy71xQ2H3fSec&690);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <h3 id="一，浏览器内核"><a href="#一，浏览器内核" class="headerlink" title="一，浏览器内核"></a>一，浏览器内核</h3><h4 id="1-浏览器内核可分为渲染引擎和js引擎："><a href="#1-浏览器内核可分为渲染引擎和js引擎：" class="headerlink" title="1.浏览器内核可分为渲染引擎和js引擎："></a>1.浏览器内核可分为渲染引擎和js引擎：</h4><blockquote>
+<p>渲染引擎:它负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入 CSS 等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。</p>
+</blockquote>
+<blockquote>
+<p>JS 引擎:则是解析 Javascript 语言，执行 javascript语言来实现网页的动态效果。</p>
+</blockquote>
+<h4 id="2-常见浏览器分类"><a href="#2-常见浏览器分类" class="headerlink" title="2.常见浏览器分类"></a>2.常见浏览器分类</h4><p>（1） Trident（IE内核）</p>
+<p>（2）Gecko（火狐）</p>
+<p>（3）Webkit（Safari）</p>
+<p>（4）Chromium（Chrome）</p>
+<p>（5）Presto</p>
+<h4 id="3-Web标准的构成"><a href="#3-Web标准的构成" class="headerlink" title="3.Web标准的构成"></a>3.Web标准的构成</h4><p>主要包括结构，样式和行为三个方面</p>
+<blockquote>
+<p>结构标准：结构用于对网页元素进行整理和分类，咱们主要学的是HTML。 最重要<br>表现标准：表现用于设置网页元素的版式、颜色、大小等外观样式，主要指的是CSS。<br>行为标准：行为是指网页模型的定义及交互的编写，咱们主要学的是 Javascript</p>
+</blockquote>
+<h4 id="4-Html语法骨架"><a href="#4-Html语法骨架" class="headerlink" title="4.Html语法骨架"></a>4.Html语法骨架</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HTML</span>&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span>     </span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HTML</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>HTML标签：</p>
+<p>作用所有HTML中标签的一个根节点。 最大的标签   根标签</p>
+<p>head标签： 文档的头部</p>
+<p>文档的头部描述了文档的各种属性和信息，包括文档的标题、在 Web 中的位置以及和其他文档的关系等。绝大多数文档头部包含的数据都不会真正作为内容显示给读者。</p>
+<p>注意在head标签中我们必须要设置的标签是title</p>
+<p>title标签： 文档的标题</p>
+<p>作用：让页面拥有一个属于自己的标题。</p>
+<p>body标签：文档的主体  以后我们的页面内容 基本都是放到body里面的</p>
+<p>body 元素包含文档的所有内容（比如文本、超链接、图像、表格和列表等等。）</p>
+</blockquote>
+<h4 id="5-HTML标签分类"><a href="#5-HTML标签分类" class="headerlink" title="5.HTML标签分类"></a>5.HTML标签分类</h4><p>（1）双标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">标签名</span>&gt;</span>内容<span class="tag">&lt;/<span class="name">标签名</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>（2）单标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">标签名</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-HTML标签关系"><a href="#6-HTML标签关系" class="headerlink" title="6.HTML标签关系"></a>6.HTML标签关系</h4><p>（1）嵌套关系</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>（2）并列关系</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="7-文档类型-lt-DOCTYPE-gt"><a href="#7-文档类型-lt-DOCTYPE-gt" class="headerlink" title="7.文档类型&lt;!DOCTYPE&gt;"></a>7.文档类型&lt;!DOCTYPE&gt;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br></pre></td></tr></table></figure>
+<p>&lt;!DOCTYPE&gt; 标签位于文档的最前面，用于向浏览器说明当前文档使用哪种 HTML 或 XHTML 标准规范，必需在开头处使用&lt;!DOCTYPE&gt;标签为所有的XHTML文档指定XHTML版本和类型，只有这样浏览器才能按指定的文档类型进行解析。</p>
+<h4 id="8-字符集"><a href="#8-字符集" class="headerlink" title="8.字符集"></a>8.字符集</h4><p>utf-8是目前最常用的字符集编码方式，常用的字符集编码方式还有gbk和gb2312。</p>
+<p>gb2312 简单中文  包括6763个汉字</p>
+<p>BIG5   繁体中文 港澳台等用</p>
+<p>GBK包含全部中文字符    是GB2312的扩展，加入对繁体字的支持，兼容GB2312</p>
+<p>UTF-8则包含全世界所有国家需要用到的字符</p>
+<h4 id="9-HTML常用标签"><a href="#9-HTML常用标签" class="headerlink" title="9.HTML常用标签"></a>9.HTML常用标签</h4><h6 id="标题标签"><a href="#标题标签" class="headerlink" title="标题标签"></a>标题标签</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;、&lt;h2&gt;、&lt;h3&gt;、&lt;h4&gt;、&lt;h5&gt;和&lt;h6&gt;</span><br></pre></td></tr></table></figure>
+<p>标题标签语义：  作为标题使用，并且依据重要性递减</p>
+<p>基本语法格式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hn</span>&gt;</span>   标题文本   <span class="tag">&lt;/<span class="name">hn</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="段落标签"><a href="#段落标签" class="headerlink" title="段落标签"></a>段落标签</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>  文本内容  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>标签语义：文章分段</p>
+<h6 id="水平线标签"><a href="#水平线标签" class="headerlink" title="水平线标签"></a>水平线标签</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>标签语义：将段落与段落之间隔开，使得文档结构清晰，层次分明</p>
+<h6 id="换行标签"><a href="#换行标签" class="headerlink" title="换行标签"></a>换行标签</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="文本格式化标签"><a href="#文本格式化标签" class="headerlink" title="文本格式化标签"></a>文本格式化标签</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>加粗<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span>斜体<span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">del</span>&gt;</span>删除线<span class="tag">&lt;/<span class="name">del</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">u</span>&gt;</span>下划线<span class="tag">&lt;/<span class="name">u</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="10-图像标签"><a href="#10-图像标签" class="headerlink" title="10.图像标签"></a>10.图像标签</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"图像URL"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="标签属性："><a href="#标签属性：" class="headerlink" title="标签属性："></a>标签属性：</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">标签名</span> 属性<span class="attr">1</span>=<span class="string">"属性值1"</span> 属性<span class="attr">2</span>=<span class="string">"属性值2"</span> …&gt;</span> 内容 <span class="tag">&lt;/<span class="name">标签名</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在上面的语法中：</span><br><span class="line">1.标签可以拥有多个属性，必须写在开始标签中，位于标签名后面。</span><br><span class="line">2.属性之间不分先后顺序，标签名与属性、属性与属性之间均以空格分开。</span><br><span class="line">3.任何标签的属性都有默认值，省略该属性则取默认值。</span><br><span class="line">采取  键值对 的格式   key="value"  的格式</span><br></pre></td></tr></table></figure>
+<h6 id="img属性"><a href="#img属性" class="headerlink" title="img属性"></a>img属性</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">属性		属性值		描述</span><br><span class="line">src		 URL	   路径</span><br><span class="line">alt		 文本   	  不能显示时替换的文本</span><br><span class="line">title    文本       鼠标悬停的内容</span><br><span class="line">width 	 px        宽度</span><br><span class="line">height   px        高度</span><br><span class="line">border   数字       图像边框宽度</span><br></pre></td></tr></table></figure>
+<h4 id="11-链接标签"><a href="#11-链接标签" class="headerlink" title="11.链接标签"></a>11.链接标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;跳转目标&quot; target=&quot;目标窗口的弹出方式&quot;&gt;文本或图像&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">href：用于指定链接目标的url地址，当为标签应用href属性时，它就具有了超链接的功能。  Hypertext Reference的缩写。意思是超文本引用</span><br><span class="line"></span><br><span class="line">target：用于指定链接页面的打开方式，其取值有self和blank两种，其中self为默认值，blank为在新窗口中打开方式</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1.外部链接 需要添加 http:// <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p>
+<p>2.内部链接 直接链接内部页面名称即可 比如 &lt; a href=”index.html”&gt; 首页 </p>
+<p>3.如果当时没有确定链接目标时，通常将链接标签的href属性值定义为“#”(即href=”#”)，表示该链接暂时为一个空链接。</p>
+<p>4.不仅可以创建文本超链接，在网页中各种网页元素，如图像、表格、音频、视频等都可以添加超链接。</p>
+</blockquote>
+<h4 id="12-base标签"><a href="#12-base标签" class="headerlink" title="12.base标签"></a>12.base标签</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">base</span> <span class="attr">target</span>=<span class="string">"blank/self"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>标签语义：设置链接打开方式窗口是新建还是覆盖</p>
+<h4 id="13-锚点定位"><a href="#13-锚点定位" class="headerlink" title="13.锚点定位"></a>13.锚点定位</h4><p>通过创建锚点，快速定位到目标内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.使用“a href=”#id名&gt;“链接文本"<span class="tag">&lt;/<span class="name">a</span>&gt;</span>创建链接文本（被点击的）</span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#two"</span>&gt;</span>   </span><br><span class="line"></span><br><span class="line">2.使用相应的id名标注跳转目标的位置。</span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span> <span class="attr">id</span>=<span class="string">"two"</span>&gt;</span>第2集<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="14-注释标签"><a href="#14-注释标签" class="headerlink" title="14.注释标签"></a>14.注释标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--注释语句--&gt; Ctrl+/</span><br></pre></td></tr></table></figure>
+<p>注释的两个作用：</p>
+<p>1.让部分代码不让浏览器执行</p>
+<p>2.给程序员友好的提示</p>
+<h4 id="15-列表标签"><a href="#15-列表标签" class="headerlink" title="15.列表标签"></a>15.列表标签</h4><h6 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  ......</span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><p><ul></ul>中只能嵌套<li></li>，直接在<ul></ul>标签中输入其他标签或者文字的做法是不被允许的。</p>
+</li>
+<li><p><li>与</li>之间相当于一个容器，可以容纳所有元素。</p>
+</li>
+<li><p>无序列表会带有自己样式属性，放下那个样式，一会让CSS来！</p>
+</li>
+</ol>
+</blockquote>
+<h6 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  ......</span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>名词1<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>名词1解释1<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>名词1解释2<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">dt</span>&gt;</span>名词2<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>名词2解释1<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dd</span>&gt;</span>名词2解释2<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>定义列表常用于对术语或名词进行解释和描述，定义列表的列表项前没有任何项目符号。</p>
+<h4 id="16-表格"><a href="#16-表格" class="headerlink" title="16.表格"></a>16.表格</h4><h6 id="创建表格"><a href="#创建表格" class="headerlink" title="创建表格"></a>创建表格</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>单元格内的文字<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1.table用于定义一个表格。</p>
+<p>2.tr 用于定义表格中的一行，必须嵌套在 table标签中，在 table中包含几对 tr，就有几行表格。</p>
+<p>3.td /td：用于定义表格中的单元格，必须嵌套在<tr></tr>标签中，一对 <tr> </tr>中包含几对<td></td>，就表示该行中有多少列（或多少个单元格）。</p>
+</blockquote>
+<p>注意：</p>
+<ol>
+<li><tr></tr>中只能嵌套<td></td></li>
+<li><td></td>标签，他就像一个容器，可以容纳所有的元素</li>
+</ol>
+<h6 id="表格属性"><a href="#表格属性" class="headerlink" title="表格属性"></a>表格属性</h6><p>border：设置表格边框的宽度（默认border=’0’）</p>
+<p>cellspacing：单元格与单元格之间的空白间距</p>
+<p>cellspadding：单元格内容与边框之间的空白间距</p>
+<p>width：表格宽度</p>
+<p>height：表格高度</p>
+<p>align：表格在网页中的水平对齐方式（left,right,center）</p>
+<h6 id="表头标签"><a href="#表头标签" class="headerlink" title="表头标签"></a>表头标签</h6><p>表头一般位于表格的第一行或第一列，其文本加粗居中，如下图所示，即为设置了表头的表格。设置表头非常简单，只需用表头标签&lt;th&gt;&lt;/th&gt;替代相应的单元格标签&lt;td&gt;&lt;/td&gt;即可。</p>
+<h6 id="表格结构"><a href="#表格结构" class="headerlink" title="表格结构"></a>表格结构</h6><blockquote>
+<p>在使用表格进行布局时，可以将表格划分为头部、主体和页脚（页脚因为有兼容性问题，我们不在赘述），具体 如下所示：</p>
+<p><thead></thead>：用于定义表格的头部。</p>
+<p>必须位于<table></table> 标签中，一般包含网页的logo和导航等头部信息。</p>
+<p><tbody></tbody>：用于定义表格的主体。</p>
+<p>位于<table></table>标签中，一般包含网页中除头部和底部之外的其他内容。</p>
+</blockquote>
+<h6 id="表格标题"><a href="#表格标题" class="headerlink" title="表格标题"></a>表格标题</h6><p>caption</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">caption</span>&gt;</span>我是表格标题<span class="tag">&lt;/<span class="name">caption</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="合并表格"><a href="#合并表格" class="headerlink" title="合并表格"></a>合并表格</h6><p>跨行合并：rowspan（跨多少行删多少行）</p>
+<p>跨列合并：colspan（跨多少行删多少行）</p>
+<h4 id="17-div-span标签"><a href="#17-div-span标签" class="headerlink" title="17.div span标签"></a>17.div span标签</h4><blockquote>
+<p>div在浏览器中表示一个小区域，不会增加任何的效果改变，而是语义变了，div中所有子元素是在一个小区域中。div是一个容器，里面什么都能放，设置包括它自己 。</p>
+<p>span也是表示一个小区域，但是只能是文本级别的区域，也就是span中只能够放文字、图片、表单元素等信息。</p>
+<p>现在的网页开发基本都是用div+css布局实现的。</p>
+</blockquote>
+<h6 id="div和span的使用"><a href="#div和span的使用" class="headerlink" title="div和span的使用"></a>div和span的使用</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>中国主要城市<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>深圳<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>美国主要城市<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>伦敦<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span>纽约<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">   商品简介，商品简介</span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">””</span>&gt;</span>详细信息<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">””</span>&gt;</span>购买<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="18-内联元素和块级元素"><a href="#18-内联元素和块级元素" class="headerlink" title="18.内联元素和块级元素"></a>18.内联元素和块级元素</h4><blockquote>
+<ol>
+<li>div标签（独占一行 block） （div,form,table,p,pre,h1~h6,dl,ol,ul）<br>特点：块级元素独占一行，可以设置宽度和高度。如果不设置宽度，则默认宽度为父元素的宽度。</li>
+<li>span标签（占一块 inline）(span,a,label ,select)<br>特点：所有元素在一行显示。不能设置宽高。默认宽度为文字或者内容本身的宽度。</li>
+<li>行内块元素（inline-block）  (image  input)<br>特点：所有元素在一行显示，可以设置宽高(具备块级元素的特征，也具备行内元素的特征)。</li>
+</ol>
+</blockquote>
+<h4 id="19-表单标签"><a href="#19-表单标签" class="headerlink" title="19.表单标签"></a>19.表单标签</h4><blockquote>
+<p>包括表单控件，提示信息，表单域</p>
+</blockquote>
+<blockquote>
+<p>表单控件： 包含了具体的表单功能项，如单行文本输入框、密码输入框、复选框、提交按钮、重置按钮等。</p>
+<p>提示信息： 一个表单中通常还需要包含一些说明性的文字，提示用户进行填写和操作。</p>
+<p>表单域： 他相当于一个容器，用来容纳所有的表单控件和提示信息，可以通过他定义处理表单数据所用程序的url地址，以及数据提交到服务器的方法。如果不定义表单域，表单中的数据就无法传送到后台服务器。</p>
+</blockquote>
+<h6 id="表单域"><a href="#表单域" class="headerlink" title="表单域"></a>表单域</h6><p>在HTML中，form标签被用于定义表单域，即创建一个表单，以实现用户信息的收集和传递，form中的所有内容都会被提交给服务器。创建表单的基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"url地址"</span> <span class="attr">method</span>=<span class="string">"提交方式"</span> <span class="attr">name</span>=<span class="string">"表单名称"</span>&gt;</span></span><br><span class="line">  各种表单控件</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>常用属性：</p>
+<ol>
+<li><p>Action<br>在表单收集到信息后，需要将信息传递给服务器进行处理，action属性用于指定接收并处理表单数据的服务器程序的url地址。</p>
+</li>
+<li><p>method<br>用于设置表单数据的提交方式，其取值为get或post。</p>
+</li>
+<li><p>name绝对路径以Web站点根目录为参考基础的目录路径。之所以称为绝对，意指当所有网页引用同一个文件时，所使用的路径都是一样的</p>
+<p>“D:\web\img\logo.gif”，或完整的网络地址，例如“<a href="http://www.igeek.cn/images/logo.gif”。" target="_blank" rel="noopener">http://www.igeek.cn/images/logo.gif”。</a></p>
+</li>
+<li><p>用于指定表单的名称，以区分同一个页面中的多个表单。</p>
+</li>
+</ol>
+<p>注意：  每个表单都应该有自己表单域。</p>
+<h6 id="input控件"><a href="#input控件" class="headerlink" title="input控件"></a>input控件</h6><p>text属性</p>
+<p><code>&lt;input type=”text”&gt;</code></p>
+<p>定义单行的输入字段，用户可在其中输入文本。默认宽度为 20 个字符。</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称</p>
+<p>l     value:定义标签值</p>
+<p>l     size:定义输入字符的长度（可以输入超过指定长度的字符，但只会显示指定个数）</p>
+<p>l     maxlength:定义可输入最大字符个数</p>
+<p>l     placeholder: 占位文字</p>
+<hr>
+<p>password</p>
+<p><code>&lt;input type=”password”&gt;</code></p>
+<p>定义密码字段。该字段中的字符被掩码.</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称</p>
+<p>l     value:定义标签值</p>
+<p>l     size:定义输入字段的长度</p>
+<p>l     maxlength:定义可输入最大字符个数</p>
+<hr>
+<p>radio</p>
+<p><code>&lt;input type=”radio”&gt;</code></p>
+<p>定义单选按钮。</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称.注意，对于单选按钮，如果要想做到单一选择，多个radion的name值必一样。</p>
+<p>l     value:定义标签值</p>
+<p>l     checked:定义该标签默认被选中。</p>
+<hr>
+<p>checkbox</p>
+<p><code>&lt;input type=”checkbox”&gt;</code></p>
+<p>定义复选框。</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称.注意，一组的checkbox它们的name值应该是一样的。</p>
+<p>l     value:定义标签值</p>
+<p>l     checked:定义该标签默认被选中。</p>
+<hr>
+<p>file</p>
+<p><code>&lt;input type=”file”&gt;</code></p>
+<p>定义输入字段和 “浏览”按钮，供文件上传。</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称</p>
+<hr>
+<p>button</p>
+<p><code>&lt;input type=”button”&gt;</code></p>
+<p>定义可点击按钮（多数情况下，用于通过JavaScript 启动脚本，如果不写什么也不发生）</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称</p>
+<p>l     value:按钮显示名称</p>
+<hr>
+<p>submit</p>
+<input type="submit">
+
+<p>定义提交按钮。提交按钮会把表单数据发送到服务器。</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称</p>
+<p>l     value:按钮显示名称</p>
+<hr>
+<p>reset</p>
+<input type="reset">
+
+<p>定义重置按钮。重置按钮会清除表单中的所有数据。</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称</p>
+<p>l     value:按钮显示名称</p>
+<hr>
+<p>img</p>
+<p>定义图像形式的提交按钮。</p>
+<p>这个标签主要是用了替换submit按钮，因为默认产生的提交按钮并不漂亮，这个标签允许你采用指定的图片做为提交按钮。</p>
+<p>其它常用属性:</p>
+<p>l     name:定义标签名称</p>
+<p>l     src:定义作为提交按钮显示的图像的url</p>
+<p>l     alt:定义作用图像的替代文本。</p>
+<hr>
+<p>绝对路径以Web站点根目录为参考基础的目录路径。之所以称为绝对，意指当所有网页引用同一个文件时，所使用的路径都是一样的</p>
+<p>“D:\web\img\logo.gif”，或完整的网络地址，例如“<a href="http://www.igeek.cn/images/logo.gif”。hidden" target="_blank" rel="noopener">http://www.igeek.cn/images/logo.gif”。hidden</a></p>
+<p>&lt;inputtype=”hidden”&gt;</p>
+<p>定义隐藏的输入字段。提交时服务端需要用到的信息，但是又不想让用户看到</p>
+<p>常用属性:</p>
+<p>l     name: 定义标签名称</p>
+<p>l     value:定义标签值</p>
+<hr>
+<h4 id="20-label标签"><a href="#20-label标签" class="headerlink" title="20.label标签"></a>20.label标签</h4><p>label 标签为 input 元素定义标注（标签）。</p>
+<p>作用：  用于绑定一个表单元素, 当点击label标签的时候, 被绑定的表单元素就会获得输入焦点</p>
+<p>如何绑定元素呢？</p>
+<p>for 属性规定 label 与哪个表单元素绑定。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"male"</span>&gt;</span>Male<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">id</span>=<span class="string">"male"</span> <span class="attr">value</span>=<span class="string">"male"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="21-textarea控件"><a href="#21-textarea控件" class="headerlink" title="21.textarea控件"></a>21.textarea控件</h4><p>如果需要输入大量的信息，就需要用到&lt;textarea&gt;&lt;/textarea&gt;标签。通过textarea控件可以轻松地创建多行文本输入框，其基本语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">cols</span>=<span class="string">"每行中的字符数"</span> <span class="attr">rows</span>=<span class="string">"显示的行数"</span>&gt;</span></span><br><span class="line">  文本内容</span><br><span class="line"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="22-下拉菜单"><a href="#22-下拉菜单" class="headerlink" title="22.下拉菜单"></a>22.下拉菜单</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">"select"</span> <span class="attr">multiple</span>=<span class="string">"multiple"</span> <span class="attr">size</span>=<span class="string">"6"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"wx"</span> <span class="attr">selected</span>=<span class="string">"selected"</span>&gt;</span>无锡<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"wz"</span> <span class="attr">selected</span>=<span class="string">"selected"</span>&gt;</span>苏州<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"sh"</span> <span class="attr">selected</span>=<span class="string">"selected"</span>&gt;</span>上海<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"ks"</span> <span class="attr">selected</span>=<span class="string">"selected"</span>&gt;</span>昆山<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>&lt;select&gt;&lt;/select&gt;中至少应包含一对&lt;option&gt;&lt;/option&gt;。</li>
+<li>在option 中定义selected =” selected “时，当前项即为默认选中项。</li>
+</ol>
+<h4 id="23-其他标签"><a href="#23-其他标签" class="headerlink" title="23.其他标签"></a>23.其他标签</h4><h6 id="上标下标"><a href="#上标下标" class="headerlink" title="上标下标"></a>上标下标</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">This text contains <span class="tag">&lt;<span class="name">sub</span>&gt;</span>subscript<span class="tag">&lt;/<span class="name">sub</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">This text contains <span class="tag">&lt;<span class="name">sup</span>&gt;</span>superscript<span class="tag">&lt;/<span class="name">sup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="pre标签（照原样输出）"><a href="#pre标签（照原样输出）" class="headerlink" title="pre标签（照原样输出）"></a>pre标签（照原样输出）</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;pre&gt;</span><br><span class="line">        这是</span><br><span class="line">        预格式文本。</span><br><span class="line">        它保留了      空格</span><br><span class="line">        和换行。</span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="iframe"><a href="#iframe" class="headerlink" title="iframe"></a>iframe</h6><p>iframe 元素会创建包含另外一个文档的内联框架（即行内框架）。可以理解为浏览器中的浏览器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iframe 元素会创建包含另外一个文档的内联框架（即行内框架）。可以理解为浏览器中的浏览器</span><br></pre></td></tr></table></figure>
+<h4 id="24-路径"><a href="#24-路径" class="headerlink" title="24.路径"></a>24.路径</h4><h6 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h6><p>以引用文件之网页所在位置为参考基础，而建立出的目录路径。因此，当保存于不同目录的网页引用同一个文件时，所使用的路径将不相同，故称之为相对路径。</p>
+<ol>
+<li><p>图像文件和HTML文件位于同一文件夹：只需输入图像文件的名称即可，如&lt;img src=”logo.gif” /&gt;。</p>
+</li>
+<li><p>图像文件位于HTML文件的下一级文件夹：输入文件夹名和文件名，之间用“/”隔开，如&lt;img src=”img/img01/logo.gif” /&gt;。</p>
+</li>
+<li><p>图像文件位于HTML文件的上一级文件夹：在文件名之前加入“../” ，如果是上两级，则需要使用 “../ ../”，以此类推，如&lt;img src=”../logo.gif” /&gt;。</p>
+</li>
+</ol>
+<h6 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h6><p>绝对路径以Web站点根目录为参考基础的目录路径。之所以称为绝对，意指当所有网页引用同一个文件时，所使用的路径都是一样的</p>
+<p>“D:\web\img\logo.gif”，或完整的网络地址，例如“<a href="http://www.igeek.cn/images/logo.gif”。" target="_blank" rel="noopener">http://www.igeek.cn/images/logo.gif”。</a></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一，浏览器内核"><span class="toc-text">一，浏览器内核</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-浏览器内核可分为渲染引擎和js引擎："><span class="toc-text">1.浏览器内核可分为渲染引擎和js引擎：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-常见浏览器分类"><span class="toc-text">2.常见浏览器分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Web标准的构成"><span class="toc-text">3.Web标准的构成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Html语法骨架"><span class="toc-text">4.Html语法骨架</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-HTML标签分类"><span class="toc-text">5.HTML标签分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-HTML标签关系"><span class="toc-text">6.HTML标签关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-文档类型-lt-DOCTYPE-gt"><span class="toc-text">7.文档类型&lt;!DOCTYPE&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-字符集"><span class="toc-text">8.字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-HTML常用标签"><span class="toc-text">9.HTML常用标签</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#标题标签"><span class="toc-text">标题标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#段落标签"><span class="toc-text">段落标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#水平线标签"><span class="toc-text">水平线标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#换行标签"><span class="toc-text">换行标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#文本格式化标签"><span class="toc-text">文本格式化标签</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-图像标签"><span class="toc-text">10.图像标签</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#标签属性："><span class="toc-text">标签属性：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#img属性"><span class="toc-text">img属性</span></a></li></ol></li></ol><li class="toc-item toc-level-4"><a class="toc-link" href="#11-链接标签"><span class="toc-text">11.链接标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-base标签"><span class="toc-text">12.base标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-锚点定位"><span class="toc-text">13.锚点定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-注释标签"><span class="toc-text">14.注释标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-列表标签"><span class="toc-text">15.列表标签</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#无序列表"><span class="toc-text">无序列表</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#有序列表"><span class="toc-text">有序列表</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#自定义列表"><span class="toc-text">自定义列表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-表格"><span class="toc-text">16.表格</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建表格"><span class="toc-text">创建表格</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#表格属性"><span class="toc-text">表格属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#表头标签"><span class="toc-text">表头标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#表格结构"><span class="toc-text">表格结构</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#表格标题"><span class="toc-text">表格标题</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#合并表格"><span class="toc-text">合并表格</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-div-span标签"><span class="toc-text">17.div span标签</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#div和span的使用"><span class="toc-text">div和span的使用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-内联元素和块级元素"><span class="toc-text">18.内联元素和块级元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-表单标签"><span class="toc-text">19.表单标签</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#表单域"><span class="toc-text">表单域</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#input控件"><span class="toc-text">input控件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-label标签"><span class="toc-text">20.label标签</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-textarea控件"><span class="toc-text">21.textarea控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-下拉菜单"><span class="toc-text">22.下拉菜单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#23-其他标签"><span class="toc-text">23.其他标签</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#上标下标"><span class="toc-text">上标下标</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#pre标签（照原样输出）"><span class="toc-text">pre标签（照原样输出）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#iframe"><span class="toc-text">iframe</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-路径"><span class="toc-text">24.路径</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#相对路径"><span class="toc-text">相对路径</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#绝对路径"><span class="toc-text">绝对路径</span></a></li></ol></li>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/html学习总结（一）/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/HTML/"><i class="fa fa-tags"></i>HTML</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/JS学习总结（一）/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
