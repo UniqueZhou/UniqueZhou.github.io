@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>伸缩布局 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-04-16
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    伸缩布局
+  </h1>
+  
+  <article class="passage-article">
+    <h1 id="Flex伸缩布局"><a href="#Flex伸缩布局" class="headerlink" title="Flex伸缩布局"></a>Flex伸缩布局</h1><p>Flexible意为可伸缩的，Box意为盒子，可以理解为一种新式的盒模型——伸缩盒模型。由CSS3规范提出，这是在原有的大家非常熟悉的block, inline-block, inline的基础上延伸出的新一代布局模式。</p>
+<h2 id="伸缩的基本概念"><a href="#伸缩的基本概念" class="headerlink" title="伸缩的基本概念"></a>伸缩的基本概念</h2><p><img src="/passages/伸缩布局/pic1.png" alt></p>
+<h3 id="1-Flex-container"><a href="#1-Flex-container" class="headerlink" title="1.Flex container"></a>1.Flex container</h3><p>即伸缩盒容器，可以理解为将要被分的房子，分之前需要将display属性声明为flex或者inline-flex</p>
+<h3 id="2-Flex-item"><a href="#2-Flex-item" class="headerlink" title="2.Flex item"></a>2.Flex item</h3><p>即伸缩项可以理解为房子里的居民，他们会占有一定的住房面积，我们先用代码来解释一下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item4"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>样式设置为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-class">.container</span> &#123;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">     		<span class="attribute">display</span>: flex;</span><br><span class="line">       &#125;</span><br><span class="line"><span class="selector-class">.item1</span> &#123;</span><br><span class="line">           <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: blue;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-class">.item2</span> &#123;</span><br><span class="line">           <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: yellow;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-class">.item3</span> &#123;</span><br><span class="line">           <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: red;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>结果如图所示:</p>
+<p><img src="/passages/伸缩布局/pic2.png" alt></p>
+<p>可以看到房子被平分成三分！</p>
+<p>但是有人如果想住大点的房子，我们可以直接改变flex的值来实现，例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.item1 &#123;</span><br><span class="line">         flex: 1;</span><br><span class="line">         width: 100px;</span><br><span class="line">         height: 100px;</span><br><span class="line">         background-color: blue;</span><br><span class="line">     &#125;</span><br><span class="line">     .item2 &#123;</span><br><span class="line">         flex: 1;</span><br><span class="line">         width: 100px;</span><br><span class="line">         height: 100px;</span><br><span class="line">         background-color: yellow;</span><br><span class="line">     &#125;</span><br><span class="line">     .item3 &#123;</span><br><span class="line">         flex: 2;</span><br><span class="line">         width: 100px;</span><br><span class="line">         height: 100px;</span><br><span class="line">         background-color: red;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Axes轴"><a href="#3-Axes轴" class="headerlink" title="3.Axes轴"></a>3.Axes轴</h3><p>图中分别标注了主轴和次轴，但是事实上那一条是主轴可以由我们自己规定。</p>
+<blockquote>
+<p>flex-direction 此属性规定哪条轴为主轴。</p>
+<p>justify-content 此属性设置了伸缩项在主轴方向上的排列方式，这个稍后解释。</p>
+<p>align-items 此属性和上面的justify-content相对，表示伸缩项在次轴上的排列方式。</p>
+<p>align-self 此属性规定某一个特定的伸缩项元素在次轴上的布局方式，在某个元素上设置该属性会覆盖它的align-items属性。也就是这个属性会让某个元素更有个性，不走寻常路~</p>
+</blockquote>
+<h3 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h3><p>当我们不想沿着默认的方向分房子的时候，我们可以改变<code>flex-direction</code>属性的值来改变主轴和方向，该属性默认的取值为row；</p>
+<p>当取值为row-reverse时，伸缩项逆置：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">            <span class="attribute">display</span>: flex;</span><br><span class="line">            <span class="attribute">flex-direction</span>: row-reverse;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/passages/伸缩布局/pic3.png" alt></p>
+<p>当此属性设置为<code>column</code>时，主次轴就会对调，元素的排列方向也会随之改变：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">            width: 300px;</span><br><span class="line">            height: 100px;</span><br><span class="line">            display: flex;</span><br><span class="line">            flex-direction: column;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/passages/伸缩布局/pic5.png" alt></p>
+<p>至于<code>flex: column-reverse</code>的含义和row-reverse类似</p>
+<h3 id="5-justify-contents"><a href="#5-justify-contents" class="headerlink" title="5.justify-contents"></a>5.justify-contents</h3><p>有的时候，大家挨着住，一点空隙都没有也会很难受，连个过道都没有，隐私也不能保证对吧。这个时候，我们可以改变分配政策了，不再按比例分配，而是定额分配，每个人的面积是确定的。多出的房屋面积改成公共区域。</p>
+<p>为了更好地看见区别，我们将每一个item宽度缩小</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item1</span> &#123;</span><br><span class="line">           <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: blue;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-class">.item2</span> &#123;</span><br><span class="line">           <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: yellow;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="selector-class">.item3</span> &#123;</span><br><span class="line">           <span class="attribute">flex</span>: <span class="number">2</span>;</span><br><span class="line">           <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">           <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">           <span class="attribute">background-color</span>: red;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>设定了<code>width</code>属性后也要记得去掉<code>flex</code>属性的声明，不然<code>flex</code>属性的效果仍然会把<code>width</code>覆盖掉<br>同时，如果<code>width</code>属性也不设定的话，元素宽度会表现为内容的宽度，即当伸缩项内部无内容时，将不会进行渲染，其表现就和<code>display: none;</code>一样。</p>
+</blockquote>
+<p>这时，在容器上声明<code>justify-content</code>属性就可以安排伸缩项的位置了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.contianer</span> &#123;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/passages/伸缩布局/pic6.png" alt></p>
+<h3 id="6-align-items"><a href="#6-align-items" class="headerlink" title="6.align-items"></a>6.align-items</h3><p>这项属性会改变次轴上元素排列的方式，对于本例来说原来次轴方向上元素的高度是表现为<code>height: 100%;</code>的，设定了<code>align-items</code>属性后，其高度表现就会发生改变了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至于各项的作用，可以动手试试！</p>
+<h3 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h3><p>在伸缩项上声明此属性，可以无视HTML结构的顺序而按照<code>order</code>从小到大的顺序沿<code>flex-direction</code>方向排列。比如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item1</span> &#123;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">    <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item2</span> &#123;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">    <span class="attribute">order</span>: <span class="number">1</span>；</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item3</span> &#123;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">order</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/passages/伸缩布局/pic7.png" alt></p>
+<h3 id="8-flex-wrap"><a href="#8-flex-wrap" class="headerlink" title="8.flex-wrap"></a>8.flex-wrap</h3><p>此属性的默认值为<code>nowrap</code>，也就是忽略伸缩项的宽度，管你要多少住房面积，通通按照<code>flex</code>属性说好的分配，不许换行。</p>
+<p>为了方便观察，我们先将盒子宽度设为150px；</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item1</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: blue;</span><br><span class="line">        <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">       <span class="selector-class">.container</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">display</span>: flex;</span><br><span class="line">        <span class="attribute">flex-direction</span>: row;</span><br><span class="line">        flex-wrap: nowrap;//wrap</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/passages/伸缩布局/pic8.png" alt></p>
+<p><img src="/passages/伸缩布局/pic9.png" alt></p>
+<h3 id="9-flex-grow，flex-shrink-和-flex-basis"><a href="#9-flex-grow，flex-shrink-和-flex-basis" class="headerlink" title="9.flex-grow，flex-shrink 和 flex-basis"></a>9.flex-grow，flex-shrink 和 flex-basis</h3><p>上文提到的<code>flex</code>属性实际上是这三个属性的简写形式。这三个属性有相似性，都是表示项与项之间分配空间的相对比例关系，不同之处在于：</p>
+<p><code>flex-grow</code>属性：属性值为该伸缩项所占空间相对于其他伸缩项（声明了<code>flex</code>相关属性的项）的比值。</p>
+<p><code>flex-shrink</code>属性：该伸缩项相对于其他伸缩项缩小的比值，也就是说当<code>flex-shrink: 3;</code>时，该项所占空间为其他项的1/3。<br><code>flex-basis</code>属性：属性值为该项所占空间占容器空间的百分比。</p>
+<p>注意：对于<code>flex-basis</code>属性，当所有项的属性值相加&lt;=100%时，会严格按照百分比值来渲染。当属性值相加&gt;100%时，元素并不会溢出，而是表现为两两之间所占空间大小遵循相互的百分比比值。也就是说当存在三个伸缩项且<code>flex-basis</code>值都为<code>50%</code>时，表现行为与三个项均为<code>flex: 1;</code>一样。</p>
+<p>Flexible Boxes布局模式在响应式开发中尤其好用，对不同的终端，设置元素之间的空间分配关系将会变成一件非常简单的事。后期微信小程序中也是十分好用，伸缩盒布局和响应式布局中流行的流体布局哪种更好，还是可以结合起来，就看各位开发者发挥自己的聪明才智了！</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flex伸缩布局"><span class="toc-text">Flex伸缩布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#伸缩的基本概念"><span class="toc-text">伸缩的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Flex-container"><span class="toc-text">1.Flex container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Flex-item"><span class="toc-text">2.Flex item</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Axes轴"><span class="toc-text">3.Axes轴</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-flex-direction"><span class="toc-text">4.flex-direction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-justify-contents"><span class="toc-text">5.justify-contents</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-align-items"><span class="toc-text">6.align-items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-order"><span class="toc-text">7.order</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-flex-wrap"><span class="toc-text">8.flex-wrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-flex-grow，flex-shrink-和-flex-basis"><span class="toc-text">9.flex-grow，flex-shrink 和 flex-basis</span></a></li></ol></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/伸缩布局/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/JS学习总结（三）/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
