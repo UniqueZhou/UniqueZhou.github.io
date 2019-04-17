@@ -6,7 +6,7 @@
   <meta name="author" content="UniqueZhou">
   
   
-  <title>个人博客</title>
+  <title>TODOS案例（一） | 个人博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -42,7 +42,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2017-10-01",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "UniqueZhou",
     share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
@@ -160,205 +160,84 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="home">
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-04-16
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    TODOS案例（一）
+  </h1>
   
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="false">
-        <div class="home-article-inner" data-cover="false">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2019-04-16
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/TODOS案例（一）/">TODOS案例（一）</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              
-            
-          </div>
-          <a class="home-article-read" href="/passages/TODOS案例（一）/">
-            README MORE >>>
-          </a>
-          
-        </div>
-        
-      </div>
-    </div>
+  <article class="passage-article">
+    <h1 id="界面结构设计"><a href="#界面结构设计" class="headerlink" title="界面结构设计"></a>界面结构设计</h1><p>通过对微信小程序的学习，我们简单通过所学的知识设计一个TODOS案例，整个TODOS包括添加事件功能，标记功能，删除事件功能，标记所有功能，剩余事件提醒功能以及清除所有事件功能。</p>
+<p><img src="https://i.loli.net/2019/04/17/5cb671b771703.png"></p>
+<blockquote>
+<blockquote>
+<p>本片微博将分为14篇对本案例过程进行详细介绍。</p>
+</blockquote>
+</blockquote>
+<p>下面开始第一部分：界面结构设计。</p>
+<p>首先在pages中新建todos页面以及内容</p>
+<p><img src="https://i.loli.net/2019/04/17/5cb671b70cb56.png"></p>
+<p>在app.json中注册主页面以及导航栏的标题</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "pages": [</span><br><span class="line">        "pages/todos/todos"</span><br><span class="line">        </span><br><span class="line">    ],</span><br><span class="line">    "<span class="selector-tag">window</span>": &#123;</span><br><span class="line">        "backgroundTextStyle": "light",</span><br><span class="line">        "<span class="selector-tag">navigationBarBackgroundColor</span>": "<span class="selector-id">#fff</span>",</span><br><span class="line">        "<span class="selector-tag">navigationBarTitleText</span>": "<span class="selector-tag">TODOS</span>",</span><br><span class="line">        "<span class="selector-tag">navigationBarTextStyle</span>": "<span class="selector-tag">black</span>"</span><br><span class="line">    &#125;,</span><br><span class="line">    "<span class="selector-tag">sitemapLocation</span>": "<span class="selector-tag">sitemap</span><span class="selector-class">.json</span>"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来，我们根据界面图先设计好框架</p>
+<p>整个界面可分为上中下三部分：</p>
+<p>第一部分包括添加事件按钮，input输入框</p>
+<p>第二部分包括事件完成勾选icon，事件展示text，以及事件清除icon</p>
+<p>第三部分为底部事件提醒以及功能按钮</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class="container"&gt;</span><br><span class="line">    &lt;view class="search"&gt;</span><br><span class="line">        &lt;image src="../../images/plus.png" &gt;&lt;/image&gt;</span><br><span class="line">        &lt;input type='text' placeholder='Anything here ...'&gt;&lt;/input&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">    &lt;view class="todos"&gt;</span><br><span class="line">        &lt;view class='item'&gt;</span><br><span class="line">            &lt;icon type='success'&gt;&lt;/icon&gt;</span><br><span class="line">            &lt;text&gt;Learning HTML&lt;/text&gt;</span><br><span class="line">            &lt;icon type='clear'&gt;&lt;/icon&gt;</span><br><span class="line">        &lt;/view&gt;</span><br><span class="line">        &lt;view class='item'&gt;</span><br><span class="line">            &lt;icon type='circle'&gt;&lt;/icon&gt;</span><br><span class="line">            &lt;text&gt;Learning CSS&lt;/text&gt;</span><br><span class="line">            &lt;icon type='clear'&gt;&lt;/icon&gt;</span><br><span class="line">        &lt;/view&gt;</span><br><span class="line">        &lt;view class='item'&gt;</span><br><span class="line">            &lt;icon type='success'&gt;&lt;/icon&gt;</span><br><span class="line">            &lt;text&gt;Learning JS&lt;/text&gt;</span><br><span class="line">            &lt;icon type='clear'&gt;&lt;/icon&gt;&lt;/view&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line">    &lt;view class="footer"&gt;</span><br><span class="line">        &lt;text&gt;Toggle ALL&lt;/text&gt;</span><br><span class="line">        &lt;text&gt;0 item left&lt;/text&gt;</span><br><span class="line">        &lt;text&gt;Clear&lt;/text&gt;</span><br><span class="line">    &lt;/view&gt;</span><br><span class="line"></span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+<p>代码中的text文档暂时用文字代表，之后通过事件绑定进行渲染</p>
+<p>整个框架搭建完成后如图所示</p>
+<p><img src="https://i.loli.net/2019/04/17/5cb671b767724.png" alt></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#界面结构设计"><span class="toc-text">界面结构设计</span></a></li></ol>
+  </div>
+</aside>
   
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="true">
-        <div class="home-article-inner" data-cover="true">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2017-11-16
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/伸缩布局/">伸缩布局</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              伸缩布局
-            
-          </div>
-          <a class="home-article-read" href="/passages/伸缩布局/">
-            README MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/css/"><i class="fa fa-tags"></i>css</a>
-            
-            </div>
-          
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/TODOS案例（一）/</a>
         </div>
-        
-          <div class="home-article-cover">
-            <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1050691605,1383706325&fm=26&gp=0.jpg">
-          </div>
-        
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
       </div>
-    </div>
+    </aside>
   
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="true">
-        <div class="home-article-inner" data-cover="true">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2017-10-11
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/JS学习总结（三）/">JS学习总结（三）</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              数据类型
-            
-          </div>
-          <a class="home-article-read" href="/passages/JS学习总结（三）/">
-            README MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
-            
-            </div>
-          
-        </div>
-        
-          <div class="home-article-cover">
-            <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2334068377,514614985&fm=200&gp=0.jpg">
-          </div>
-        
-      </div>
-    </div>
-  
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="true">
-        <div class="home-article-inner" data-cover="true">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2017-10-03
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/html学习总结（一）/">html学习总结（一）</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              HTML
-            
-          </div>
-          <a class="home-article-read" href="/passages/html学习总结（一）/">
-            README MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/HTML/"><i class="fa fa-tags"></i>HTML</a>
-            
-            </div>
-          
-        </div>
-        
-          <div class="home-article-cover">
-            <img src="http://s13.sinaimg.cn/mw690/002x5VcBgy71xQ2H3fSec&690">
-          </div>
-        
-      </div>
-    </div>
-  
-    <div class="home-article-wrapper clearfix">
-      <div class="home-article" data-cover="true">
-        <div class="home-article-inner" data-cover="true">
-          <div class="passage-meta">
-            <span>
-              <i class="fa fa-calendar"></i>2017-10-03
-            </span>
-            
-            
-              <span>
-                | <i class="fa fa-unlock-alt"></i>UNLOCK
-              </span>
-            
-          </div>
-          <h1 class="home-article-title">
-            <a href="/passages/Hexo博客搭建完整流程/">Hexo博客搭建完整流程</a>
-          </h1>
-          <div class="home-article-content passage-article">
-            
-              Hexo搭建个人博客
-            
-          </div>
-          <a class="home-article-read" href="/passages/Hexo博客搭建完整流程/">
-            README MORE >>>
-          </a>
-          
-            <div class="passage-tags">
-             
-              <a href="/tags/Hexo搭建微博/"><i class="fa fa-tags"></i>Hexo搭建微博</a>
-            
-            </div>
-          
-        </div>
-        
-          <div class="home-article-cover">
-            <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2035530606,2762358597&fm=26&gp=0.jpg">
-          </div>
-        
-      </div>
-    </div>
   
 </div>
+
     </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
     
     <div class="site-footer-wrapper">
   <footer class="site-footer">
@@ -462,16 +341,16 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/passages/伸缩布局/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     
-      <a href="javascript:void(0);" data-enable="false">
+      <a href="#site-comment" data-enable="true">
         <i class="fa fa-commenting"></i>
       </a>
     
