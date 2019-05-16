@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>jQuery复习 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-05-16
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    jQuery复习
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="一-选择器"><a href="#一-选择器" class="headerlink" title="一.选择器"></a>一.选择器</h2><h3 id="1-1-基本选择器"><a href="#1-1-基本选择器" class="headerlink" title="1.1 基本选择器"></a>1.1 基本选择器</h3><p>#id      id选择器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&apos;one&apos;&gt;AAA&lt;/div&gt;</span><br><span class="line">$(&quot;#one&quot;).css(&quot;background-color&quot;,&quot;red&quot;);</span><br></pre></td></tr></table></figure>
+<p>element    标签选择器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">$(<span class="string">"div"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>.class     类选择器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">'mini'</span>&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$(".mini").css("background-color","blue");</span></span><br></pre></td></tr></table></figure>
+<p>*     所有元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;span&gt;bbb&lt;/</span>span&gt;</span><br><span class="line">&lt;h1&gt;ccc&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">$("*").css("background-color","green");</span></span><br></pre></td></tr></table></figure>
+<p>s1,s2,…  多选择器，将多个选择器的结果添加一个数组中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">'mini'</span>&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div id='two'&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;span&gt;CCC&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">$("span,#two,.mini").css("background-color","brown");</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-2-层级选择器"><a href="#1-2-层级选择器" class="headerlink" title="1.2 层级选择器"></a>1.2 层级选择器</h3><p>A  B  ，获得A元素内部所有的B元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">'mini'</span>&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">$(<span class="string">"body div"</span>).css(<span class="string">"background-color"</span>, <span class="string">"red"</span>);</span><br></pre></td></tr></table></figure>
+<p>A &gt; B ，获得A元素内部所有的B子元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">	&lt;span&gt;CCC&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">$(<span class="string">"body &gt; div"</span>).css(<span class="string">"background-color"</span>, <span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>A + B ，获得A元素后面的第一个兄弟B</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">$(<span class="string">"div + div"</span>).css(<span class="string">"background-color"</span>, <span class="string">"blue"</span>);</span><br></pre></td></tr></table></figure>
+<p>A ~ B ，获得A元素后面的所有的兄弟B</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;/div&gt;</span><br><span class="line">&lt;span&gt;BBB&lt;/span&gt;</span><br><span class="line">&lt;span&gt;ccc&lt;/span&gt;</span><br><span class="line">&lt;span&gt;ddd&lt;/span&gt;</span><br><span class="line">&lt;div&gt;eee&lt;/div&gt;</span><br><span class="line">$(&quot;div ~ span&quot;).css(&quot;background-color&quot;, &quot;green&quot;);</span><br></pre></td></tr></table></figure>
+<p>A.siblings(“B”)，A的所有是B的兄弟</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;BBB&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;AAA&lt;/</span>div&gt;</span><br><span class="line">&lt;span&gt;ccc&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">&lt;span&gt;ddd&lt;/</span>span&gt;</span><br><span class="line">$(<span class="string">"div"</span>).siblings(<span class="string">"span"</span>).css(<span class="string">"background-color"</span>, <span class="string">"brown"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-基本过滤选择器"><a href="#1-3-基本过滤选择器" class="headerlink" title="1.3 基本过滤选择器"></a>1.3 基本过滤选择器</h3><blockquote>
+<p>过滤选择器都有 :</p>
+</blockquote>
+<p>:first         选中第一个元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div:first").css("background-color", "red");</span></span><br></pre></td></tr></table></figure>
+<p>:last         选中最后一个</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div:last").css("background-color", "yellow");</span></span><br></pre></td></tr></table></figure>
+<p>:eq(index)    获得指定索引(从0开始)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div:eq(2)").css("background-color", "blue");</span></span><br></pre></td></tr></table></figure>
+<p>:gt(index)    大于</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div:gt(1)").css("background-color", "red");</span></span><br></pre></td></tr></table></figure>
+<p>:lt(index)    小于</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div:lt(1)").css("background-color", "green");</span></span><br></pre></td></tr></table></figure>
+<p>:animated     获得所有在动画的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">":animated"</span>).css(<span class="string">"background-color"</span>, <span class="string">"green"</span>);</span><br></pre></td></tr></table></figure>
+<p>:not(selector) 去除所有与给定选择器匹配的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"one"</span>&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div class="two"&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"three"</span>&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"> $("div:not('.one')").css("background-color", "blue");</span></span><br></pre></td></tr></table></figure>
+<p>:header     获得所有标题元素    例如：</p><h1>…<h6><p></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;h1&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">&lt;h2&gt;h2&lt;/</span>h2&gt;</span><br><span class="line">&lt;h3&gt;h3&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">$(":header").css("background-color", "green").css("font-size","30px");</span></span><br></pre></td></tr></table></figure>
+<p>:even      偶数，从 0 开始计数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;DDD&lt;/</span>div&gt;</span><br><span class="line">$(<span class="string">"div:even"</span>).css(<span class="string">"background-color"</span>, <span class="string">"brown"</span>);</span><br></pre></td></tr></table></figure>
+<p>:odd       奇数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;AAA&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;BBB&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;CCC&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;DDD&lt;/</span>div&gt;</span><br><span class="line">$(<span class="string">"div:odd"</span>).css(<span class="string">"background-color"</span>, <span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-内容过滤选择器"><a href="#1-4-内容过滤选择器" class="headerlink" title="1.4 内容过滤选择器"></a>1.4 内容过滤选择器</h3><blockquote>
+<p>均要加冒号</p>
+</blockquote>
+<p>:empty  当前元素是否为空（是否有标签体–子元素、文本）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;DDD&lt;/</span>div&gt;</span><br><span class="line">$(<span class="string">"div:empty"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:has(…)  当前元素，是否含有指定的子元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;DDD&lt;/</span>div&gt;</span><br><span class="line">$(<span class="string">"div:has('span')"</span>).css(<span class="string">"background-color"</span>,<span class="string">"blue"</span>);</span><br></pre></td></tr></table></figure>
+<p>:parent    当前元素是否是父元素（自己是否拥有子元素）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;DDD&lt;/</span>div&gt;</span><br><span class="line">$(<span class="string">"div:parent"</span>).css(<span class="string">"background-color"</span>,<span class="string">"green"</span>);</span><br></pre></td></tr></table></figure>
+<p>:contains( text ) 标签体是否含有指定的文本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;ddd&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div:contains('d')").css("background-color","red");</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-5-可见性过滤选择器"><a href="#1-5-可见性过滤选择器" class="headerlink" title="1.5 可见性过滤选择器"></a>1.5 可见性过滤选择器</h3><p>:hidden        隐藏。特指 <code>&lt;xxx style=&quot;display:none;&quot;&gt;</code> 或者 <code>&lt;input type=&quot;hidden&quot;&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"display:none"</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;input type=<span class="string">"hidden"</span>&gt;</span><br><span class="line">$(<span class="string">"div:hidden"</span>).show(<span class="number">1000</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:visible    可见（默认）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"display:none"</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;input type=<span class="string">"hidden"</span>&gt;</span><br><span class="line">$(<span class="string">"div:visible"</span>).css(<span class="string">"background-color"</span>,<span class="string">"red"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="1-6-属性选择器"><a href="#1-6-属性选择器" class="headerlink" title="1.6 属性选择器"></a>1.6 属性选择器</h3><p>[属性名]                 获得指定的属性名的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=<span class="string">'aaa'</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;div&gt;ddd&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div[title]").css("background-color","red");</span></span><br></pre></td></tr></table></figure>
+<p>[属性名=值]                获得属性名 等于 指定值的 的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=<span class="string">'aaa'</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;div title=<span class="string">'test'</span>&gt;ddd&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div[title='test']").css("background-color","blue");</span></span><br></pre></td></tr></table></figure>
+<p>[属性名!=值]            获得属性名 不等于 指定值的 的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=<span class="string">'aaa'</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div title='test'&gt;ddd&lt;/</span>div&gt;</span><br><span class="line"> $(<span class="string">"div[title!='test']"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>[as1][as2][as3]….        复合选择器，多个条件同时成立。类似 where …and…and</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=<span class="string">'aes'</span> id=<span class="string">"aaa"</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div &gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;div title=<span class="string">'test'</span> id=<span class="string">'ddd'</span>&gt;ddd&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div[id][title*='es']").css("background-color","red");</span></span><br></pre></td></tr></table></figure>
+<p>[属性名^=值]            获得以属性值 开头 的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=<span class="string">'test'</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div title='teve'&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;div title=<span class="string">'txt'</span>&gt;ddd&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div[title^='te']").css("background-color","green");</span></span><br></pre></td></tr></table></figure>
+<p>[属性名$=值]            获得以属性值 结尾 的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=<span class="string">'test'</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div title='teve'&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;div title=<span class="string">'txt'</span>&gt;ddd&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div[title$='est']").css("background-color","brown");</span></span><br></pre></td></tr></table></figure>
+<p>[属性名*=值]            获得 含有属性值  的元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=<span class="string">'test'</span>&gt;aaa&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div title='teve'&gt;bbb&lt;/</span>div&gt;</span><br><span class="line">&lt;div title=<span class="string">'txt'</span>&gt;ddd&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">$("div[title*='es']").css("background-color","yellow");</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-7-元素过滤选择器"><a href="#1-7-元素过滤选择器" class="headerlink" title="1.7 元素过滤选择器"></a>1.7 元素过滤选择器</h3><p>:nth-child(n)     第n个孩子(从1开始)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">$("body :nth-child(2)").css("background-color","yellow");</span></span><br></pre></td></tr></table></figure>
+<p>:first-child   第一个孩子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div&gt;&lt;/</span>div&gt;</span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/注意空格的区别</span></span><br><span class="line"><span class="regexp">$("div :first-chlid").css("background-color","yellow");/</span><span class="regexp">/div里面的元素的第一个</span></span><br><span class="line"><span class="regexp">$("div:first-chlid").css("background-color","yellow");/</span><span class="regexp">/div的第一个</span></span><br></pre></td></tr></table></figure>
+<p>:last-child    最后一个孩子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div&gt;&lt;/</span>div&gt;</span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/注意空格的区别</span></span><br><span class="line"><span class="regexp">$("div :last-chlid").css("background-color","yellow");/</span><span class="regexp">/div里面的元素的最后一个</span></span><br><span class="line"><span class="regexp">$("div:last-chlid").css("background-color","yellow");/</span><span class="regexp">/div的最后一个</span></span><br></pre></td></tr></table></figure>
+<p>:only-child    仅有一个孩子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div&gt;&lt;/</span>div&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	 	&lt;span&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div&gt;&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">$("div :last-chlid").css("background-color","yellow");</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-8-表单过滤选择器"><a href="#1-8-表单过滤选择器" class="headerlink" title="1.8 表单过滤选择器"></a>1.8 表单过滤选择器</h3><p>:input           所有的表单元素。<code>&lt;input&gt; / &lt;select&gt; / &lt;textarea&gt; / &lt;button&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input&gt;</span><br><span class="line">&lt;select&gt;<span class="xml"><span class="tag">&lt;<span class="name">option</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line">&lt;textarea&gt;<span class="xml"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></span><br><span class="line">&lt;button&gt;<span class="xml"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">$(<span class="string">":input"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:text            文本框<code>&lt;input type=&quot;text&quot;&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span>&gt;</span><br><span class="line">$(<span class="string">":text"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:password        密码框<code>&lt;input type=&quot; password &quot;&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"password"</span>&gt;</span><br><span class="line">$(<span class="string">":password"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:radio            单选<code>&lt;input type=&quot;radio&quot;&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>苹果 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>桃子 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>香蕉 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>梨 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>其它 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;input type=<span class="string">"radio"</span>&gt;</span><br><span class="line">$(<span class="string">":radio"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:checkbox        复选框<code>&lt;input type=&quot;checkbox&quot;&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"今日话题"</span> /&gt;</span>今日话题 <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>   </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"视觉焦点"</span> /&gt;</span>视觉焦点<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"财经"</span> /&gt;</span>财经<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"汽车"</span> /&gt;</span>汽车<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"科技"</span> /&gt;</span>科技<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"房产"</span> /&gt;</span>房产<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"旅游"</span> /&gt;</span>旅游<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;input type=<span class="string">"checkbox"</span>&gt;</span><br><span class="line">$(<span class="string">":checkbox"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:submit            提交按钮<code>&lt;input type=&quot;submit&quot;&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"submit"</span>&gt;</span><br><span class="line">$(<span class="string">":submit"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:image            图片按钮<code>&lt;input type=&quot;image&quot; src=&quot;&quot;&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"image"</span> src=<span class="string">""</span>&gt;</span><br><span class="line">$(<span class="string">":image"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:reset            重置按钮<code>&lt;input type=&quot;reset&quot;&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;reset&quot; src=&quot;&quot;&gt;</span><br><span class="line">$(&quot;:reset&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);</span><br></pre></td></tr></table></figure>
+<p>:file            文件上传<code>&lt;input type=&quot;file&quot;&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"file"</span>&gt;</span><br><span class="line">$(<span class="string">":file"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:hidden            隐藏域<code>&lt;input type=&quot;hidden&quot;&gt;</code> ,还可以获得<code>&lt;xxx style=&quot;display:none&quot;&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"hidden"</span>&gt;</span><br><span class="line">&lt;div style=<span class="string">"display:none"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">$(<span class="string">":hidden"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:button            所有普通按钮。<code>&lt;button &gt;</code> 或 <code>&lt;input type=&quot;button&quot;&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;button &gt;button&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;input type="button"&gt;</span></span><br><span class="line"><span class="regexp">$(":button").css("background-color","yellow");</span></span><br></pre></td></tr></table></figure>
+<p>select           下拉列表  (没有:号）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;select&gt;</span><br><span class="line">  &lt;option value =<span class="string">"volvo"</span>&gt;Volvo&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">  &lt;option value ="saab"&gt;Saab&lt;/</span>option&gt;</span><br><span class="line">  &lt;option value=<span class="string">"opel"</span>&gt;Opel&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">  &lt;option value="audi"&gt;Audi&lt;/</span>option&gt;</span><br><span class="line">&lt;<span class="regexp">/select&gt;</span></span><br><span class="line"><span class="regexp">$("select").css("background-color","yellow");</span></span><br></pre></td></tr></table></figure>
+<p>textarea         多行文本框（没有:号）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;textarea&gt;<span class="xml"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></span><br><span class="line">$(<span class="string">"textarea"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="1-9-表单独享属性过滤选择器"><a href="#1-9-表单独享属性过滤选择器" class="headerlink" title="1.9 表单独享属性过滤选择器"></a>1.9 表单独享属性过滤选择器</h3><p>:enabled        可用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">'text'</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">'text'</span> disabled=<span class="string">"disabled"</span>&gt;</span><br><span class="line">$(<span class="string">"input:enabled"</span>).val(<span class="string">"aaaa"</span>);</span><br></pre></td></tr></table></figure>
+<p>:disabled        不可用。<code>&lt;xxx disabled=&quot;disabled&quot;&gt;</code> 或<code>&lt;xxx disabled=&quot;&quot;&gt;</code> 或<code>&lt;xxx disabled&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">'text'</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">'text'</span> disable=<span class="string">""</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">'text'</span> disable&gt;</span><br><span class="line">&lt;input type=<span class="string">'text'</span> disabled=<span class="string">"disabled"</span>&gt;</span><br><span class="line">$(<span class="string">"input:disabled"</span>).val(<span class="string">"bbbb"</span>);</span><br></pre></td></tr></table></figure>
+<p>:checked        选中（单选框radio、复选框 checkbox）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"今日话题"</span> /&gt;</span>今日话题 <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>   </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"视觉焦点"</span> /&gt;</span>视觉焦点<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"财经"</span> /&gt;</span>财经<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"汽车"</span> <span class="attr">checked</span>=<span class="string">""</span>/&gt;</span>汽车<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"科技"</span> /&gt;</span>科技<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"房产"</span> /&gt;</span>房产<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>    </span><br><span class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">value</span>=<span class="string">"旅游"</span> /&gt;</span>旅游<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span>  <span class="attr">checked</span>=<span class="string">""</span>/&gt;</span>苹果 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>桃子 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>香蕉 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>梨 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span>其它 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line"></span><br><span class="line">$(<span class="string">":checked"</span>).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</span><br></pre></td></tr></table></figure>
+<p>:selected        选择（下拉列表 select option）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;select&gt;</span><br><span class="line">  &lt;option value =<span class="string">"volvo"</span> selected=<span class="string">""</span>&gt;Volvo&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">  &lt;option value ="saab"&gt;Saab&lt;/</span>option&gt;</span><br><span class="line">  &lt;option value=<span class="string">"opel"</span>&gt;Opel&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">  &lt;option value="audi"&gt;Audi&lt;/</span>option&gt;</span><br><span class="line">&lt;<span class="regexp">/select&gt;</span></span><br><span class="line"><span class="regexp">$("selected").css("background-color","yellow");</span></span><br></pre></td></tr></table></figure>
+<h2 id="二-jQuery属性和CSS"><a href="#二-jQuery属性和CSS" class="headerlink" title="二.jQuery属性和CSS"></a>二.jQuery属性和CSS</h2><h3 id="2-1-属性操作"><a href="#2-1-属性操作" class="headerlink" title="2.1 属性操作"></a>2.1 属性操作</h3><p>attr()</p>
+<p>设置单个属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img title=<span class="string">""</span>&gt;</span><br><span class="line">$(<span class="string">'img'</span>).attr(<span class="string">'title'</span>,<span class="string">'哎哟，不错哦'</span>);</span><br></pre></td></tr></table></figure>
+<p>设置多个属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;img title=<span class="string">""</span> alt=<span class="string">""</span> &gt;</span><br><span class="line">$(<span class="string">'img'</span>).attr(&#123;</span><br><span class="line">    title:<span class="string">'image'</span>,</span><br><span class="line">    alt:<span class="string">'缺省'</span>,</span><br><span class="line">    style:<span class="string">'opacity:.5'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>获取属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img title=<span class="string">"images"</span> alt=<span class="string">""</span> &gt;</span><br><span class="line"><span class="keyword">var</span> oTitle = $(<span class="string">'img'</span>).attr(<span class="string">'title'</span>);</span><br></pre></td></tr></table></figure>
+<p>removeattr()</p>
+<p>移除属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img title=<span class="string">"images"</span> alt=<span class="string">""</span> &gt;</span><br><span class="line">$(<span class="string">'img'</span>).removeAttr(<span class="string">'title'</span>);</span><br></pre></td></tr></table></figure>
+<p>prop()</p>
+<blockquote>
+<p>在jQuery1.6之后，对于checked、selected、disabled这类boolean类型的属性来说，不能用attr方法，只能用prop方法。</p>
+</blockquote>
+<p>设置和获取属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;label&gt;<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"Fruit"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">""</span>  <span class="attr">checked</span>=<span class="string">""</span>/&gt;</span>苹果 <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span> </span><br><span class="line"><span class="comment">// 设置属性</span></span><br><span class="line">$(<span class="string">':checked'</span>).prop(<span class="string">'checked'</span>,<span class="literal">true</span>);</span><br><span class="line"><span class="comment">// 获取属性</span></span><br><span class="line">$(<span class="string">':checked'</span>).prop(<span class="string">'checked'</span>);<span class="comment">// 返回true或者false</span></span><br></pre></td></tr></table></figure>
+<p>val()/text()/html()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$obj.val()		获取或者设置表单元素的value属性的值</span><br><span class="line">$obj.html() 	对应innerHTML</span><br><span class="line">$obj.text()		对应innerText/textContent，处理了浏览器的兼容性。注意点：如果获取jquery对象text属性的时候jquery对象是一个数组，那么此时会把数组中所有元素的文本都获取到</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-CSS操作"><a href="#2-2-CSS操作" class="headerlink" title="2.2 CSS操作"></a>2.2 CSS操作</h3><p>css()</p>
+<blockquote>
+<p>css(name)  获得指定名称的css值<br>css(name ,value) 设置一对值<br>css(prop) 设置一组值</p>
+</blockquote>
+<p>操作单个样式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">$(<span class="string">"div"</span>).css(<span class="string">"border"</span>,<span class="string">"1px solid red"</span>);</span><br></pre></td></tr></table></figure>
+<p>操作多个样式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">$(<span class="string">"div"</span>).css(&#123;</span><br><span class="line">    <span class="string">"width"</span>:<span class="string">"300px"</span>,</span><br><span class="line">    <span class="string">"height"</span>:<span class="string">"50px"</span>,</span><br><span class="line">    <span class="string">"font-size"</span>:<span class="string">"60px"</span>,</span><br><span class="line">    <span class="string">"color"</span>:<span class="string">"blue"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>获取样式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">'background-color:'</span>red<span class="string">'&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">$('</span>div<span class="string">').css('</span>background-color<span class="string">');</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>设置样式操作的时候，如果是多个元素，那么给所有的元素设置相同的值</li>
+<li>获取样式操作的时候，如果是多个元素，那么只会返回第一个元素的值。</li>
+</ol>
+</blockquote>
+<p>class类操作</p>
+<blockquote>
+<p>addClass(“A”)     追加一个类<br>removeClass(“A”)  将指定类移除<br>toggleClass(“A”)  如果有A将移除，如果没有将添加。<br>hasClass(“A”)     用于判断是否含有指定样式，返回值为true false</p>
+</blockquote>
+<h2 id="三-jQuery尺寸和位置操作"><a href="#三-jQuery尺寸和位置操作" class="headerlink" title="三. jQuery尺寸和位置操作"></a>三. jQuery尺寸和位置操作</h2><h3 id="3-1-CSS尺寸"><a href="#3-1-CSS尺寸" class="headerlink" title="3.1 CSS尺寸"></a>3.1 CSS尺寸</h3><blockquote>
+<p>height() 获得 或 设置 高度    //不包括内边距、边框和外边距<br>width()获得 或 设置 宽度</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"height:100px;width:110px"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">$(<span class="string">"div"</span>).css(<span class="string">"border"</span>,<span class="string">"1px solid red"</span>);</span><br><span class="line">alert($(<span class="string">"div"</span>).height()); <span class="comment">//数字类型</span></span><br><span class="line">alert($(<span class="string">"div"</span>).width());</span><br><span class="line">$(<span class="string">"div"</span>).height(<span class="string">"300px"</span>); <span class="comment">//设置高度，值可以是数字也可以是字符串</span></span><br></pre></td></tr></table></figure>
+<p>获取可视区宽高度</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取可视区宽度</span></span><br><span class="line">$(<span class="built_in">window</span>).width();</span><br><span class="line"><span class="comment">// 获取可视区高度</span></span><br><span class="line">$(<span class="built_in">window</span>).height();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>css获取到的宽高是带 px 的,需要数值则需要用parseInt()转换</p>
+<p>css设置样式可不加px</p>
+</blockquote>
+<h3 id="3-2-innerWidth-outerWidth"><a href="#3-2-innerWidth-outerWidth" class="headerlink" title="3.2 innerWidth/outerWidth"></a>3.2 innerWidth/outerWidth</h3><blockquote>
+<p>innerWidth()/innerHeight()    方法返回元素的宽度/高度（包括内边距）。 —&gt;clientWidth<br>outerWidth()/outerHeight()  方法返回元素的宽度/高度（包括内边距和边框）。 —&gt;offsetWidth<br>outerWidth(true)/outerHeight(true)  方法返回元素的宽度/高度（包括内边距、边框和外边距）。</p>
+</blockquote>
+<h3 id="3-3-scrollTop与scrollLeft"><a href="#3-3-scrollTop与scrollLeft" class="headerlink" title="3.3 scrollTop与scrollLeft"></a>3.3 scrollTop与scrollLeft</h3><p>获取页面滚出的位置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取页面被滚出的高度</span></span><br><span class="line">$(<span class="built_in">window</span>).scrollTop();</span><br><span class="line"><span class="comment">// 获取页面被滚出的宽度</span></span><br><span class="line">$(<span class="built_in">window</span>).scrollLeft();</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-offset方法与position方法"><a href="#3-4-offset方法与position方法" class="headerlink" title="3.4 offset方法与position方法"></a>3.4 offset方法与position方法</h3><p>offset()</p>
+<p>offset方法获取元素距离document的位置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取元素距离document的位置,返回值为对象：&#123;left:100, top:100&#125;</span></span><br><span class="line">$(selector).offset();</span><br><span class="line"><span class="comment">//设置位置</span></span><br><span class="line">$(<span class="string">"div"</span>).offset(&#123;<span class="string">"top"</span>:<span class="number">0</span>,<span class="string">"left"</span>:<span class="number">0</span>&#125;);<span class="comment">//不用加px</span></span><br></pre></td></tr></table></figure>
+<p>position方法获取的是元素距离第一个定位了的父元素(offsetParent)的位置</p>
+<p>获取相对于其最近的有定位的父元素的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// position仅用于获取当前元素相对于父元素的位置，不可以设置。如果非要设置，需要引入jquery-ui.js</span><br><span class="line">$(selector).position();</span><br></pre></td></tr></table></figure>
+<h2 id="四-jQuery文档处理"><a href="#四-jQuery文档处理" class="headerlink" title="四.jQuery文档处理"></a>四.jQuery文档处理</h2><h3 id="4-1-创建节点"><a href="#4-1-创建节点" class="headerlink" title="4.1 创建节点"></a>4.1 创建节点</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;span&gt;这是一个span元素&lt;/span&gt;'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-内部插入-不可重复插入"><a href="#4-2-内部插入-不可重复插入" class="headerlink" title="4.2 内部插入(不可重复插入)"></a>4.2 内部插入(不可重复插入)</h3><p>第一种方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">A.append(B)  将B插入到A的内部后面（之后的串联操作，操作A）</span><br><span class="line">	&lt;A&gt;</span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;B&gt;<span class="xml"><span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line">	&lt;A&gt;</span><br><span class="line">	</span><br><span class="line">A.prepend(B) 将B插入到A的内部前面</span><br><span class="line">	&lt;A&gt;</span><br><span class="line">		&lt;B&gt;<span class="xml"><span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">	&lt;A&gt;</span><br></pre></td></tr></table></figure>
+<p>第二种方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">A.appendTo(B) 将A插入到B的内部后面 （之后的串联操作，操作A）</span><br><span class="line">	&lt;A&gt;</span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;C&gt;<span class="xml"><span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line">		&lt;B&gt;<span class="xml"><span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line">	&lt;A&gt;</span><br><span class="line"></span><br><span class="line">A.prependTo(B) 将A插入到B的内部前面</span><br><span class="line">	&lt;B&gt;</span><br><span class="line">		&lt;A&gt;<span class="xml"><span class="tag">&lt;/<span class="name">A</span>&gt;</span></span></span><br><span class="line">		....</span><br><span class="line">	&lt;B&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-外部插入"><a href="#4-3-外部插入" class="headerlink" title="4.3 外部插入"></a>4.3 外部插入</h3><p>第一种方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A.insertAfter(B) , 将A插入到B后面（同级）</span><br><span class="line">	......</span><br><span class="line">	&lt;B&gt;&lt;/B&gt;</span><br><span class="line">	&lt;A&gt;&lt;/A&gt;</span><br><span class="line">A.insertBefore(B) 将A插入到B前面</span><br><span class="line">	&lt;A&gt;&lt;/A&gt;</span><br><span class="line">	&lt;B&gt;&lt;/B&gt;</span><br><span class="line">	......</span><br></pre></td></tr></table></figure>
+<p>第二种方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A.after(B)  , 将B插入到A后面（同级）</span><br><span class="line">	......</span><br><span class="line">	&lt;A&gt;&lt;/A&gt;</span><br><span class="line">	&lt;B&gt;&lt;/B&gt;</span><br><span class="line">A.before(B) ，将B插入到A前面</span><br><span class="line">	&lt;B&gt;&lt;/B&gt;</span><br><span class="line">	&lt;A&gt;&lt;/A&gt;</span><br><span class="line">	......</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-删除节点"><a href="#4-4-删除节点" class="headerlink" title="4.4 删除节点"></a>4.4 删除节点</h3><blockquote>
+<p>empty()  清空标签体（清空文本节点和子节点）,自身保留(清理门户),会清除子元素上绑定的内容<br>remove() 删除当前对象。如果之后再使用，元素本身保留，绑定事件 或 绑定数据 都会被移除<br>detach() 删除当前对象。如果之后再使用，元素本身保留，绑定事件 或 绑定数据 都保留</p>
+</blockquote>
+<p>注意:$(‘div’).html(‘’);// 使用html方法来清空元素，不推荐使用，会造成内存泄漏，绑定的事件不会被清除。</p>
+<h3 id="4-5-复制节点"><a href="#4-5-复制节点" class="headerlink" title="4.5 复制节点"></a>4.5 复制节点</h3><p>clone(even)</p>
+<p>even ：指示事件处理函数是否会被复制。V1.5以上版本默认值是：false</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">$("body").append($('div').clone(true));</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-6-替换节点"><a href="#4-6-替换节点" class="headerlink" title="4.6 替换节点"></a>4.6 替换节点</h3><p>A.replaceWith(B) ，使用B将A替换掉</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;p&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">$("p").replaceWith("&lt;a&gt;xxxx&lt;/</span>a&gt;<span class="string">");</span></span><br></pre></td></tr></table></figure>
+<p>A.replaceAll(B) ，使用A替换B</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;p&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p&gt;p&lt;/</span>p&gt;</span><br><span class="line">&lt;p&gt;p&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">$("&lt;a&gt;ssss&lt;/</span>a&gt;<span class="string">").replaceAll("</span>p<span class="string">");</span></span><br></pre></td></tr></table></figure>
+</h6></h1>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-选择器"><span class="toc-text">一.选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-基本选择器"><span class="toc-text">1.1 基本选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-层级选择器"><span class="toc-text">1.2 层级选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-基本过滤选择器"><span class="toc-text">1.3 基本过滤选择器</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">…
+1234&lt;h1&gt;h1&lt;/h1&gt;&lt;h2&gt;h2&lt;/h2&gt;&lt;h3&gt;h3&lt;/h3&gt;$(&quot;:header&quot;).css(&quot;background-color&quot;, &quot;green&quot;).css(&quot;font-size&quot;,&quot;30px&quot;);
+:even      偶数，从 0 开始计数
+12345&lt;div&gt;AAA&lt;/div&gt;&lt;div&gt;BBB&lt;/div&gt;&lt;div&gt;CCC&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:even&quot;).css(&quot;background-color&quot;, &quot;brown&quot;);
+:odd       奇数
+12345&lt;div&gt;AAA&lt;/div&gt;&lt;div&gt;BBB&lt;/div&gt;&lt;div&gt;CCC&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:odd&quot;).css(&quot;background-color&quot;, &quot;yellow&quot;);
+1.4 内容过滤选择器
+均要加冒号
+
+:empty  当前元素是否为空（是否有标签体–子元素、文本）
+1234567&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;	&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:empty&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:has(…)  当前元素，是否含有指定的子元素
+1234567&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;	&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:has(&#39;span&#39;)&quot;).css(&quot;background-color&quot;,&quot;blue&quot;);
+:parent    当前元素是否是父元素（自己是否拥有子元素）
+1234567&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;	&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:parent&quot;).css(&quot;background-color&quot;,&quot;green&quot;);
+:contains( text ) 标签体是否含有指定的文本
+1234&lt;div&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;div&gt;ddd&lt;/div&gt;$(&quot;div:contains(&#39;d&#39;)&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+1.5 可见性过滤选择器:hidden        隐藏。特指 &lt;xxx style=&quot;display:none;&quot;&gt; 或者 &lt;input type=&quot;hidden&quot;&gt;
+1234&lt;div style=&quot;display:none&quot;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;input type=&quot;hidden&quot;&gt;$(&quot;div:hidden&quot;).show(1000).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:visible    可见（默认）
+1234&lt;div style=&quot;display:none&quot;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;input type=&quot;hidden&quot;&gt;$(&quot;div:visible&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+1.6 属性选择器[属性名]                 获得指定的属性名的元素
+1234&lt;div title=&#39;aaa&#39;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;div&gt;ddd&lt;/div&gt;$(&quot;div[title]&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+[属性名=值]                获得属性名 等于 指定值的 的元素
+1234&lt;div title=&#39;aaa&#39;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;div title=&#39;test&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title=&#39;test&#39;]&quot;).css(&quot;background-color&quot;,&quot;blue&quot;);
+[属性名!=值]            获得属性名 不等于 指定值的 的元素
+123&lt;div title=&#39;aaa&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;test&#39;&gt;ddd&lt;/div&gt; $(&quot;div[title!=&#39;test&#39;]&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+[as1][as2][as3]….        复合选择器，多个条件同时成立。类似 where …and…and
+1234&lt;div title=&#39;aes&#39; id=&quot;aaa&quot;&gt;aaa&lt;/div&gt;&lt;div &gt;bbb&lt;/div&gt;&lt;div title=&#39;test&#39; id=&#39;ddd&#39;&gt;ddd&lt;/div&gt;$(&quot;div[id][title*=&#39;es&#39;]&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+[属性名^=值]            获得以属性值 开头 的元素
+1234&lt;div title=&#39;test&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;teve&#39;&gt;bbb&lt;/div&gt;&lt;div title=&#39;txt&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title^=&#39;te&#39;]&quot;).css(&quot;background-color&quot;,&quot;green&quot;);
+[属性名$=值]            获得以属性值 结尾 的元素
+1234&lt;div title=&#39;test&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;teve&#39;&gt;bbb&lt;/div&gt;&lt;div title=&#39;txt&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title$=&#39;est&#39;]&quot;).css(&quot;background-color&quot;,&quot;brown&quot;);
+[属性名*=值]            获得 含有属性值  的元素
+1234&lt;div title=&#39;test&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;teve&#39;&gt;bbb&lt;/div&gt;&lt;div title=&#39;txt&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title*=&#39;es&#39;]&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+1.7 元素过滤选择器:nth-child(n)     第n个孩子(从1开始)
+1234567&lt;body&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;$(&quot;body :nth-child(2)&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:first-child   第一个孩子
+12345678910111213&lt;body&gt;	&lt;div&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;//注意空格的区别$(&quot;div :first-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div里面的元素的第一个$(&quot;div:first-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div的第一个
+:last-child    最后一个孩子
+12345678910111213&lt;body&gt;	&lt;div&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;//注意空格的区别$(&quot;div :last-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div里面的元素的最后一个$(&quot;div:last-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div的最后一个
+:only-child    仅有一个孩子
+123456789101112&lt;body&gt;	&lt;div&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;		&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;$(&quot;div :last-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+1.8 表单过滤选择器:input           所有的表单元素。&lt;input&gt; / &lt;select&gt; / &lt;textarea&gt; / &lt;button&gt;
+12345&lt;input&gt;&lt;select&gt;&lt;option&gt;&lt;/option&gt;&lt;/select&gt;&lt;textarea&gt;&lt;/textarea&gt;&lt;button&gt;&lt;/button&gt;$(&quot;:input&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:text            文本框&lt;input type=&quot;text&quot;&gt;
+12&lt;input type=&quot;text&quot;&gt;$(&quot;:text&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:password        密码框&lt;input type=&quot; password &quot;&gt;
+12&lt;input type=&quot;password&quot;&gt;$(&quot;:password&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:radio            单选&lt;input type=&quot;radio&quot;&gt;
+1234567&lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;苹果 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;桃子 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;香蕉 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;梨 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;其它 &lt;/label&gt; &lt;input type=&quot;radio&quot;&gt;$(&quot;:radio&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:checkbox        复选框&lt;input type=&quot;checkbox&quot;&gt;
+123456789&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;今日话题&quot; /&gt;今日话题 &lt;/p&gt;   &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;视觉焦点&quot; /&gt;视觉焦点&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;财经&quot; /&gt;财经&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;汽车&quot; /&gt;汽车&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;科技&quot; /&gt;科技&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;房产&quot; /&gt;房产&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;旅游&quot; /&gt;旅游&lt;/p&gt;&lt;input type=&quot;checkbox&quot;&gt;$(&quot;:checkbox&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:submit            提交按钮&lt;input type=&quot;submit&quot;&gt;
+12&lt;input type=&quot;submit&quot;&gt;$(&quot;:submit&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:image            图片按钮&lt;input type=&quot;image&quot; src=&quot;&quot;&gt;
+12&lt;input type=&quot;image&quot; src=&quot;&quot;&gt;$(&quot;:image&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:reset            重置按钮&lt;input type=&quot;reset&quot;&gt;
+12&lt;input type=&quot;reset&quot; src=&quot;&quot;&gt;$(&quot;:reset&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:file            文件上传&lt;input type=&quot;file&quot;&gt;
+12&lt;input type=&quot;file&quot;&gt;$(&quot;:file&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:hidden            隐藏域&lt;input type=&quot;hidden&quot;&gt; ,还可以获得&lt;xxx style=&quot;display:none&quot;&gt;
+123&lt;input type=&quot;hidden&quot;&gt;&lt;div style=&quot;display:none&quot;&gt;&lt;/div&gt;$(&quot;:hidden&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:button            所有普通按钮。&lt;button &gt; 或 &lt;input type=&quot;button&quot;&gt;
+123&lt;button &gt;button&lt;/button&gt;&lt;input type=&quot;button&quot;&gt;$(&quot;:button&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+select           下拉列表  (没有:号）
+1234567&lt;select&gt;  &lt;option value =&quot;volvo&quot;&gt;Volvo&lt;/option&gt;  &lt;option value =&quot;saab&quot;&gt;Saab&lt;/option&gt;  &lt;option value=&quot;opel&quot;&gt;Opel&lt;/option&gt;  &lt;option value=&quot;audi&quot;&gt;Audi&lt;/option&gt;&lt;/select&gt;$(&quot;select&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+textarea         多行文本框（没有:号）
+12&lt;textarea&gt;&lt;/textarea&gt;$(&quot;textarea&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+1.9 表单独享属性过滤选择器:enabled        可用
+123&lt;input type=&#39;text&#39;&gt;&lt;input type=&#39;text&#39; disabled=&quot;disabled&quot;&gt;$(&quot;input:enabled&quot;).val(&quot;aaaa&quot;);
+:disabled        不可用。&lt;xxx disabled=&quot;disabled&quot;&gt; 或&lt;xxx disabled=&quot;&quot;&gt; 或&lt;xxx disabled&gt;
+12345&lt;input type=&#39;text&#39;&gt;&lt;input type=&#39;text&#39; disable=&quot;&quot;&gt;&lt;input type=&#39;text&#39; disable&gt;&lt;input type=&#39;text&#39; disabled=&quot;disabled&quot;&gt;$(&quot;input:disabled&quot;).val(&quot;bbbb&quot;);
+:checked        选中（单选框radio、复选框 checkbox）
+12345678910111213141516&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;今日话题&quot; /&gt;今日话题 &lt;/p&gt;   &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;视觉焦点&quot; /&gt;视觉焦点&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;财经&quot; /&gt;财经&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;汽车&quot; checked=&quot;&quot;/&gt;汽车&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;科技&quot; /&gt;科技&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;房产&quot; /&gt;房产&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;旅游&quot; /&gt;旅游&lt;/p&gt;&lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot;  checked=&quot;&quot;/&gt;苹果 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;桃子 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;香蕉 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;梨 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;其它 &lt;/label&gt; $(&quot;:checked&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:selected        选择（下拉列表 select option）
+1234567&lt;select&gt;  &lt;option value =&quot;volvo&quot; selected=&quot;&quot;&gt;Volvo&lt;/option&gt;  &lt;option value =&quot;saab&quot;&gt;Saab&lt;/option&gt;  &lt;option value=&quot;opel&quot;&gt;Opel&lt;/option&gt;  &lt;option value=&quot;audi&quot;&gt;Audi&lt;/option&gt;&lt;/select&gt;$(&quot;selected&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+二.jQuery属性和CSS2.1 属性操作attr()
+设置单个属性
+12&lt;img title=&quot;&quot;&gt;$(&#39;img&#39;).attr(&#39;title&#39;,&#39;哎哟，不错哦&#39;);
+设置多个属性
+123456&lt;img title=&quot;&quot; alt=&quot;&quot; &gt;$(&#39;img&#39;).attr({    title:&#39;image&#39;,    alt:&#39;缺省&#39;,    style:&#39;opacity:.5&#39;});
+获取属性
+12&lt;img title=&quot;images&quot; alt=&quot;&quot; &gt;var oTitle = $(&#39;img&#39;).attr(&#39;title&#39;);
+removeattr()
+移除属性
+12&lt;img title=&quot;images&quot; alt=&quot;&quot; &gt;$(&#39;img&#39;).removeAttr(&#39;title&#39;);
+prop()
+
+在jQuery1.6之后，对于checked、selected、disabled这类boolean类型的属性来说，不能用attr方法，只能用prop方法。
+
+设置和获取属性
+12345&lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot;  checked=&quot;&quot;/&gt;苹果 &lt;/label&gt; // 设置属性$(&#39;:checked&#39;).prop(&#39;checked&#39;,true);// 获取属性$(&#39;:checked&#39;).prop(&#39;checked&#39;);// 返回true或者false
+val()/text()/html()
+123$obj.val()		获取或者设置表单元素的value属性的值$obj.html() 	对应innerHTML$obj.text()		对应innerText/textContent，处理了浏览器的兼容性。注意点：如果获取jquery对象text属性的时候jquery对象是一个数组，那么此时会把数组中所有元素的文本都获取到
+2.2 CSS操作css()
+
+css(name)  获得指定名称的css值css(name ,value) 设置一对值css(prop) 设置一组值
+
+操作单个样式
+12&lt;div&gt;&lt;/div&gt;$(&quot;div&quot;).css(&quot;border&quot;,&quot;1px solid red&quot;);
+操作多个样式
+1234567&lt;div&gt;&lt;/div&gt;$(&quot;div&quot;).css({    &quot;width&quot;:&quot;300px&quot;,    &quot;height&quot;:&quot;50px&quot;,    &quot;font-size&quot;:&quot;60px&quot;,    &quot;color&quot;:&quot;blue&quot;});
+获取样式
+12&lt;div style=&#39;background-color:&#39;red&#39;&gt;&lt;/div&gt;$(&#39;div&#39;).css(&#39;background-color&#39;);
+
+
+设置样式操作的时候，如果是多个元素，那么给所有的元素设置相同的值
+获取样式操作的时候，如果是多个元素，那么只会返回第一个元素的值。
+
+
+class类操作
+
+addClass(“A”)     追加一个类removeClass(“A”)  将指定类移除toggleClass(“A”)  如果有A将移除，如果没有将添加。hasClass(“A”)     用于判断是否含有指定样式，返回值为true false
+
+三. jQuery尺寸和位置操作3.1 CSS尺寸
+height() 获得 或 设置 高度    //不包括内边距、边框和外边距width()获得 或 设置 宽度
+
+12345&lt;div style=&quot;height:100px;width:110px&quot;&gt;&lt;/div&gt;$(&quot;div&quot;).css(&quot;border&quot;,&quot;1px solid red&quot;);alert($(&quot;div&quot;).height()); //数字类型alert($(&quot;div&quot;).width());$(&quot;div&quot;).height(&quot;300px&quot;); //设置高度，值可以是数字也可以是字符串
+获取可视区宽高度
+1234// 获取可视区宽度$(window).width();// 获取可视区高度$(window).height();
+
+css获取到的宽高是带 px 的,需要数值则需要用parseInt()转换
+css设置样式可不加px
+
+3.2 innerWidth/outerWidth
+innerWidth()/innerHeight()    方法返回元素的宽度/高度（包括内边距）。 —&gt;clientWidthouterWidth()/outerHeight()  方法返回元素的宽度/高度（包括内边距和边框）。 —&gt;offsetWidthouterWidth(true)/outerHeight(true)  方法返回元素的宽度/高度（包括内边距、边框和外边距）。
+
+3.3 scrollTop与scrollLeft获取页面滚出的位置
+1234// 获取页面被滚出的高度$(window).scrollTop();// 获取页面被滚出的宽度$(window).scrollLeft();
+3.4 offset方法与position方法offset()
+offset方法获取元素距离document的位置
+1234// 获取元素距离document的位置,返回值为对象：{left:100, top:100}$(selector).offset();//设置位置$(&quot;div&quot;).offset({&quot;top&quot;:0,&quot;left&quot;:0});//不用加px
+position方法获取的是元素距离第一个定位了的父元素(offsetParent)的位置
+获取相对于其最近的有定位的父元素的位置。
+12// position仅用于获取当前元素相对于父元素的位置，不可以设置。如果非要设置，需要引入jquery-ui.js$(selector).position();
+四.jQuery文档处理4.1 创建节点1$(&#39;&lt;span&gt;这是一个span元素&lt;/span&gt;&#39;);
+4.2 内部插入(不可重复插入)第一种方式
+123456789101112131415A.append(B)  将B插入到A的内部后面（之后的串联操作，操作A）	&lt;A&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;B&gt;&lt;/B&gt;	&lt;A&gt;	A.prepend(B) 将B插入到A的内部前面	&lt;A&gt;		&lt;B&gt;&lt;/B&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;	&lt;A&gt;
+第二种方式
+12345678910111213A.appendTo(B) 将A插入到B的内部后面 （之后的串联操作，操作A）	&lt;A&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;B&gt;&lt;/B&gt;	&lt;A&gt;A.prependTo(B) 将A插入到B的内部前面	&lt;B&gt;		&lt;A&gt;&lt;/A&gt;		....	&lt;B&gt;
+4.3 外部插入第一种方法
+12345678A.insertAfter(B) , 将A插入到B后面（同级）	......	&lt;B&gt;&lt;/B&gt;	&lt;A&gt;&lt;/A&gt;A.insertBefore(B) 将A插入到B前面	&lt;A&gt;&lt;/A&gt;	&lt;B&gt;&lt;/B&gt;	......
+第二种方法
+12345678A.after(B)  , 将B插入到A后面（同级）	......	&lt;A&gt;&lt;/A&gt;	&lt;B&gt;&lt;/B&gt;A.before(B) ，将B插入到A前面	&lt;B&gt;&lt;/B&gt;	&lt;A&gt;&lt;/A&gt;	......
+4.4 删除节点
+empty()  清空标签体（清空文本节点和子节点）,自身保留(清理门户),会清除子元素上绑定的内容remove() 删除当前对象。如果之后再使用，元素本身保留，绑定事件 或 绑定数据 都会被移除detach() 删除当前对象。如果之后再使用，元素本身保留，绑定事件 或 绑定数据 都保留
+
+注意:$(‘div’).html(‘’);// 使用html方法来清空元素，不推荐使用，会造成内存泄漏，绑定的事件不会被清除。
+4.5 复制节点clone(even)
+even ：指示事件处理函数是否会被复制。V1.5以上版本默认值是：false
+1234&lt;body&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;$(&quot;body&quot;).append($(&#39;div&#39;).clone(true));
+4.6 替换节点A.replaceWith(B) ，使用B将A替换掉
+12&lt;p&gt;p&lt;/p&gt;$(&quot;p&quot;).replaceWith(&quot;&lt;a&gt;xxxx&lt;/a&gt;&quot;);
+A.replaceAll(B) ，使用A替换B
+1234&lt;p&gt;p&lt;/p&gt;&lt;p&gt;p&lt;/p&gt;&lt;p&gt;p&lt;/p&gt;$(&quot;&lt;a&gt;ssss&lt;/a&gt;&quot;).replaceAll(&quot;p&quot;);
+</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-text">
+1234&lt;h1&gt;h1&lt;/h1&gt;&lt;h2&gt;h2&lt;/h2&gt;&lt;h3&gt;h3&lt;/h3&gt;$(&quot;:header&quot;).css(&quot;background-color&quot;, &quot;green&quot;).css(&quot;font-size&quot;,&quot;30px&quot;);
+:even      偶数，从 0 开始计数
+12345&lt;div&gt;AAA&lt;/div&gt;&lt;div&gt;BBB&lt;/div&gt;&lt;div&gt;CCC&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:even&quot;).css(&quot;background-color&quot;, &quot;brown&quot;);
+:odd       奇数
+12345&lt;div&gt;AAA&lt;/div&gt;&lt;div&gt;BBB&lt;/div&gt;&lt;div&gt;CCC&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:odd&quot;).css(&quot;background-color&quot;, &quot;yellow&quot;);
+1.4 内容过滤选择器
+均要加冒号
+
+:empty  当前元素是否为空（是否有标签体–子元素、文本）
+1234567&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;	&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:empty&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:has(…)  当前元素，是否含有指定的子元素
+1234567&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;	&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:has(&#39;span&#39;)&quot;).css(&quot;background-color&quot;,&quot;blue&quot;);
+:parent    当前元素是否是父元素（自己是否拥有子元素）
+1234567&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;	&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;DDD&lt;/div&gt;$(&quot;div:parent&quot;).css(&quot;background-color&quot;,&quot;green&quot;);
+:contains( text ) 标签体是否含有指定的文本
+1234&lt;div&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;div&gt;ddd&lt;/div&gt;$(&quot;div:contains(&#39;d&#39;)&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+1.5 可见性过滤选择器:hidden        隐藏。特指 &lt;xxx style=&quot;display:none;&quot;&gt; 或者 &lt;input type=&quot;hidden&quot;&gt;
+1234&lt;div style=&quot;display:none&quot;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;input type=&quot;hidden&quot;&gt;$(&quot;div:hidden&quot;).show(1000).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:visible    可见（默认）
+1234&lt;div style=&quot;display:none&quot;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;input type=&quot;hidden&quot;&gt;$(&quot;div:visible&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+1.6 属性选择器[属性名]                 获得指定的属性名的元素
+1234&lt;div title=&#39;aaa&#39;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;div&gt;ddd&lt;/div&gt;$(&quot;div[title]&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+[属性名=值]                获得属性名 等于 指定值的 的元素
+1234&lt;div title=&#39;aaa&#39;&gt;aaa&lt;/div&gt;&lt;div&gt;bbb&lt;/div&gt;&lt;div title=&#39;test&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title=&#39;test&#39;]&quot;).css(&quot;background-color&quot;,&quot;blue&quot;);
+[属性名!=值]            获得属性名 不等于 指定值的 的元素
+123&lt;div title=&#39;aaa&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;test&#39;&gt;ddd&lt;/div&gt; $(&quot;div[title!=&#39;test&#39;]&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+[as1][as2][as3]….        复合选择器，多个条件同时成立。类似 where …and…and
+1234&lt;div title=&#39;aes&#39; id=&quot;aaa&quot;&gt;aaa&lt;/div&gt;&lt;div &gt;bbb&lt;/div&gt;&lt;div title=&#39;test&#39; id=&#39;ddd&#39;&gt;ddd&lt;/div&gt;$(&quot;div[id][title*=&#39;es&#39;]&quot;).css(&quot;background-color&quot;,&quot;red&quot;);
+[属性名^=值]            获得以属性值 开头 的元素
+1234&lt;div title=&#39;test&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;teve&#39;&gt;bbb&lt;/div&gt;&lt;div title=&#39;txt&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title^=&#39;te&#39;]&quot;).css(&quot;background-color&quot;,&quot;green&quot;);
+[属性名$=值]            获得以属性值 结尾 的元素
+1234&lt;div title=&#39;test&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;teve&#39;&gt;bbb&lt;/div&gt;&lt;div title=&#39;txt&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title$=&#39;est&#39;]&quot;).css(&quot;background-color&quot;,&quot;brown&quot;);
+[属性名*=值]            获得 含有属性值  的元素
+1234&lt;div title=&#39;test&#39;&gt;aaa&lt;/div&gt;&lt;div title=&#39;teve&#39;&gt;bbb&lt;/div&gt;&lt;div title=&#39;txt&#39;&gt;ddd&lt;/div&gt;$(&quot;div[title*=&#39;es&#39;]&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+1.7 元素过滤选择器:nth-child(n)     第n个孩子(从1开始)
+1234567&lt;body&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;$(&quot;body :nth-child(2)&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:first-child   第一个孩子
+12345678910111213&lt;body&gt;	&lt;div&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;//注意空格的区别$(&quot;div :first-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div里面的元素的第一个$(&quot;div:first-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div的第一个
+:last-child    最后一个孩子
+12345678910111213&lt;body&gt;	&lt;div&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;//注意空格的区别$(&quot;div :last-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div里面的元素的最后一个$(&quot;div:last-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);//div的最后一个
+:only-child    仅有一个孩子
+123456789101112&lt;body&gt;	&lt;div&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;	&lt;div&gt;		&lt;span&gt;&lt;/span&gt;	 	&lt;span&gt;&lt;/span&gt;	&lt;/div&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;$(&quot;div :last-chlid&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+1.8 表单过滤选择器:input           所有的表单元素。&lt;input&gt; / &lt;select&gt; / &lt;textarea&gt; / &lt;button&gt;
+12345&lt;input&gt;&lt;select&gt;&lt;option&gt;&lt;/option&gt;&lt;/select&gt;&lt;textarea&gt;&lt;/textarea&gt;&lt;button&gt;&lt;/button&gt;$(&quot;:input&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:text            文本框&lt;input type=&quot;text&quot;&gt;
+12&lt;input type=&quot;text&quot;&gt;$(&quot;:text&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:password        密码框&lt;input type=&quot; password &quot;&gt;
+12&lt;input type=&quot;password&quot;&gt;$(&quot;:password&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:radio            单选&lt;input type=&quot;radio&quot;&gt;
+1234567&lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;苹果 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;桃子 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;香蕉 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;梨 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;其它 &lt;/label&gt; &lt;input type=&quot;radio&quot;&gt;$(&quot;:radio&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:checkbox        复选框&lt;input type=&quot;checkbox&quot;&gt;
+123456789&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;今日话题&quot; /&gt;今日话题 &lt;/p&gt;   &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;视觉焦点&quot; /&gt;视觉焦点&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;财经&quot; /&gt;财经&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;汽车&quot; /&gt;汽车&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;科技&quot; /&gt;科技&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;房产&quot; /&gt;房产&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;旅游&quot; /&gt;旅游&lt;/p&gt;&lt;input type=&quot;checkbox&quot;&gt;$(&quot;:checkbox&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:submit            提交按钮&lt;input type=&quot;submit&quot;&gt;
+12&lt;input type=&quot;submit&quot;&gt;$(&quot;:submit&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:image            图片按钮&lt;input type=&quot;image&quot; src=&quot;&quot;&gt;
+12&lt;input type=&quot;image&quot; src=&quot;&quot;&gt;$(&quot;:image&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:reset            重置按钮&lt;input type=&quot;reset&quot;&gt;
+12&lt;input type=&quot;reset&quot; src=&quot;&quot;&gt;$(&quot;:reset&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:file            文件上传&lt;input type=&quot;file&quot;&gt;
+12&lt;input type=&quot;file&quot;&gt;$(&quot;:file&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:hidden            隐藏域&lt;input type=&quot;hidden&quot;&gt; ,还可以获得&lt;xxx style=&quot;display:none&quot;&gt;
+123&lt;input type=&quot;hidden&quot;&gt;&lt;div style=&quot;display:none&quot;&gt;&lt;/div&gt;$(&quot;:hidden&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:button            所有普通按钮。&lt;button &gt; 或 &lt;input type=&quot;button&quot;&gt;
+123&lt;button &gt;button&lt;/button&gt;&lt;input type=&quot;button&quot;&gt;$(&quot;:button&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+select           下拉列表  (没有:号）
+1234567&lt;select&gt;  &lt;option value =&quot;volvo&quot;&gt;Volvo&lt;/option&gt;  &lt;option value =&quot;saab&quot;&gt;Saab&lt;/option&gt;  &lt;option value=&quot;opel&quot;&gt;Opel&lt;/option&gt;  &lt;option value=&quot;audi&quot;&gt;Audi&lt;/option&gt;&lt;/select&gt;$(&quot;select&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+textarea         多行文本框（没有:号）
+12&lt;textarea&gt;&lt;/textarea&gt;$(&quot;textarea&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+1.9 表单独享属性过滤选择器:enabled        可用
+123&lt;input type=&#39;text&#39;&gt;&lt;input type=&#39;text&#39; disabled=&quot;disabled&quot;&gt;$(&quot;input:enabled&quot;).val(&quot;aaaa&quot;);
+:disabled        不可用。&lt;xxx disabled=&quot;disabled&quot;&gt; 或&lt;xxx disabled=&quot;&quot;&gt; 或&lt;xxx disabled&gt;
+12345&lt;input type=&#39;text&#39;&gt;&lt;input type=&#39;text&#39; disable=&quot;&quot;&gt;&lt;input type=&#39;text&#39; disable&gt;&lt;input type=&#39;text&#39; disabled=&quot;disabled&quot;&gt;$(&quot;input:disabled&quot;).val(&quot;bbbb&quot;);
+:checked        选中（单选框radio、复选框 checkbox）
+12345678910111213141516&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;今日话题&quot; /&gt;今日话题 &lt;/p&gt;   &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;视觉焦点&quot; /&gt;视觉焦点&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;财经&quot; /&gt;财经&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;汽车&quot; checked=&quot;&quot;/&gt;汽车&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;科技&quot; /&gt;科技&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;房产&quot; /&gt;房产&lt;/p&gt;    &lt;p&gt;&lt;input type=&quot;checkbox&quot; name=&quot;category&quot; value=&quot;旅游&quot; /&gt;旅游&lt;/p&gt;&lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot;  checked=&quot;&quot;/&gt;苹果 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;桃子 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;香蕉 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;梨 &lt;/label&gt; &lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot; /&gt;其它 &lt;/label&gt; $(&quot;:checked&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+:selected        选择（下拉列表 select option）
+1234567&lt;select&gt;  &lt;option value =&quot;volvo&quot; selected=&quot;&quot;&gt;Volvo&lt;/option&gt;  &lt;option value =&quot;saab&quot;&gt;Saab&lt;/option&gt;  &lt;option value=&quot;opel&quot;&gt;Opel&lt;/option&gt;  &lt;option value=&quot;audi&quot;&gt;Audi&lt;/option&gt;&lt;/select&gt;$(&quot;selected&quot;).css(&quot;background-color&quot;,&quot;yellow&quot;);
+二.jQuery属性和CSS2.1 属性操作attr()
+设置单个属性
+12&lt;img title=&quot;&quot;&gt;$(&#39;img&#39;).attr(&#39;title&#39;,&#39;哎哟，不错哦&#39;);
+设置多个属性
+123456&lt;img title=&quot;&quot; alt=&quot;&quot; &gt;$(&#39;img&#39;).attr({    title:&#39;image&#39;,    alt:&#39;缺省&#39;,    style:&#39;opacity:.5&#39;});
+获取属性
+12&lt;img title=&quot;images&quot; alt=&quot;&quot; &gt;var oTitle = $(&#39;img&#39;).attr(&#39;title&#39;);
+removeattr()
+移除属性
+12&lt;img title=&quot;images&quot; alt=&quot;&quot; &gt;$(&#39;img&#39;).removeAttr(&#39;title&#39;);
+prop()
+
+在jQuery1.6之后，对于checked、selected、disabled这类boolean类型的属性来说，不能用attr方法，只能用prop方法。
+
+设置和获取属性
+12345&lt;label&gt;&lt;input name=&quot;Fruit&quot; type=&quot;radio&quot; value=&quot;&quot;  checked=&quot;&quot;/&gt;苹果 &lt;/label&gt; // 设置属性$(&#39;:checked&#39;).prop(&#39;checked&#39;,true);// 获取属性$(&#39;:checked&#39;).prop(&#39;checked&#39;);// 返回true或者false
+val()/text()/html()
+123$obj.val()		获取或者设置表单元素的value属性的值$obj.html() 	对应innerHTML$obj.text()		对应innerText/textContent，处理了浏览器的兼容性。注意点：如果获取jquery对象text属性的时候jquery对象是一个数组，那么此时会把数组中所有元素的文本都获取到
+2.2 CSS操作css()
+
+css(name)  获得指定名称的css值css(name ,value) 设置一对值css(prop) 设置一组值
+
+操作单个样式
+12&lt;div&gt;&lt;/div&gt;$(&quot;div&quot;).css(&quot;border&quot;,&quot;1px solid red&quot;);
+操作多个样式
+1234567&lt;div&gt;&lt;/div&gt;$(&quot;div&quot;).css({    &quot;width&quot;:&quot;300px&quot;,    &quot;height&quot;:&quot;50px&quot;,    &quot;font-size&quot;:&quot;60px&quot;,    &quot;color&quot;:&quot;blue&quot;});
+获取样式
+12&lt;div style=&#39;background-color:&#39;red&#39;&gt;&lt;/div&gt;$(&#39;div&#39;).css(&#39;background-color&#39;);
+
+
+设置样式操作的时候，如果是多个元素，那么给所有的元素设置相同的值
+获取样式操作的时候，如果是多个元素，那么只会返回第一个元素的值。
+
+
+class类操作
+
+addClass(“A”)     追加一个类removeClass(“A”)  将指定类移除toggleClass(“A”)  如果有A将移除，如果没有将添加。hasClass(“A”)     用于判断是否含有指定样式，返回值为true false
+
+三. jQuery尺寸和位置操作3.1 CSS尺寸
+height() 获得 或 设置 高度    //不包括内边距、边框和外边距width()获得 或 设置 宽度
+
+12345&lt;div style=&quot;height:100px;width:110px&quot;&gt;&lt;/div&gt;$(&quot;div&quot;).css(&quot;border&quot;,&quot;1px solid red&quot;);alert($(&quot;div&quot;).height()); //数字类型alert($(&quot;div&quot;).width());$(&quot;div&quot;).height(&quot;300px&quot;); //设置高度，值可以是数字也可以是字符串
+获取可视区宽高度
+1234// 获取可视区宽度$(window).width();// 获取可视区高度$(window).height();
+
+css获取到的宽高是带 px 的,需要数值则需要用parseInt()转换
+css设置样式可不加px
+
+3.2 innerWidth/outerWidth
+innerWidth()/innerHeight()    方法返回元素的宽度/高度（包括内边距）。 —&gt;clientWidthouterWidth()/outerHeight()  方法返回元素的宽度/高度（包括内边距和边框）。 —&gt;offsetWidthouterWidth(true)/outerHeight(true)  方法返回元素的宽度/高度（包括内边距、边框和外边距）。
+
+3.3 scrollTop与scrollLeft获取页面滚出的位置
+1234// 获取页面被滚出的高度$(window).scrollTop();// 获取页面被滚出的宽度$(window).scrollLeft();
+3.4 offset方法与position方法offset()
+offset方法获取元素距离document的位置
+1234// 获取元素距离document的位置,返回值为对象：{left:100, top:100}$(selector).offset();//设置位置$(&quot;div&quot;).offset({&quot;top&quot;:0,&quot;left&quot;:0});//不用加px
+position方法获取的是元素距离第一个定位了的父元素(offsetParent)的位置
+获取相对于其最近的有定位的父元素的位置。
+12// position仅用于获取当前元素相对于父元素的位置，不可以设置。如果非要设置，需要引入jquery-ui.js$(selector).position();
+四.jQuery文档处理4.1 创建节点1$(&#39;&lt;span&gt;这是一个span元素&lt;/span&gt;&#39;);
+4.2 内部插入(不可重复插入)第一种方式
+123456789101112131415A.append(B)  将B插入到A的内部后面（之后的串联操作，操作A）	&lt;A&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;B&gt;&lt;/B&gt;	&lt;A&gt;	A.prepend(B) 将B插入到A的内部前面	&lt;A&gt;		&lt;B&gt;&lt;/B&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;	&lt;A&gt;
+第二种方式
+12345678910111213A.appendTo(B) 将A插入到B的内部后面 （之后的串联操作，操作A）	&lt;A&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;C&gt;&lt;/C&gt;		&lt;B&gt;&lt;/B&gt;	&lt;A&gt;A.prependTo(B) 将A插入到B的内部前面	&lt;B&gt;		&lt;A&gt;&lt;/A&gt;		....	&lt;B&gt;
+4.3 外部插入第一种方法
+12345678A.insertAfter(B) , 将A插入到B后面（同级）	......	&lt;B&gt;&lt;/B&gt;	&lt;A&gt;&lt;/A&gt;A.insertBefore(B) 将A插入到B前面	&lt;A&gt;&lt;/A&gt;	&lt;B&gt;&lt;/B&gt;	......
+第二种方法
+12345678A.after(B)  , 将B插入到A后面（同级）	......	&lt;A&gt;&lt;/A&gt;	&lt;B&gt;&lt;/B&gt;A.before(B) ，将B插入到A前面	&lt;B&gt;&lt;/B&gt;	&lt;A&gt;&lt;/A&gt;	......
+4.4 删除节点
+empty()  清空标签体（清空文本节点和子节点）,自身保留(清理门户),会清除子元素上绑定的内容remove() 删除当前对象。如果之后再使用，元素本身保留，绑定事件 或 绑定数据 都会被移除detach() 删除当前对象。如果之后再使用，元素本身保留，绑定事件 或 绑定数据 都保留
+
+注意:$(‘div’).html(‘’);// 使用html方法来清空元素，不推荐使用，会造成内存泄漏，绑定的事件不会被清除。
+4.5 复制节点clone(even)
+even ：指示事件处理函数是否会被复制。V1.5以上版本默认值是：false
+1234&lt;body&gt;	&lt;div&gt;&lt;/div&gt;&lt;/body&gt;$(&quot;body&quot;).append($(&#39;div&#39;).clone(true));
+4.6 替换节点A.replaceWith(B) ，使用B将A替换掉
+12&lt;p&gt;p&lt;/p&gt;$(&quot;p&quot;).replaceWith(&quot;&lt;a&gt;xxxx&lt;/a&gt;&quot;);
+A.replaceAll(B) ，使用A替换B
+1234&lt;p&gt;p&lt;/p&gt;&lt;p&gt;p&lt;/p&gt;&lt;p&gt;p&lt;/p&gt;$(&quot;&lt;a&gt;ssss&lt;/a&gt;&quot;).replaceAll(&quot;p&quot;);
+</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-内容过滤选择器"><span class="toc-text">1.4 内容过滤选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-可见性过滤选择器"><span class="toc-text">1.5 可见性过滤选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-属性选择器"><span class="toc-text">1.6 属性选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-元素过滤选择器"><span class="toc-text">1.7 元素过滤选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-表单过滤选择器"><span class="toc-text">1.8 表单过滤选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-表单独享属性过滤选择器"><span class="toc-text">1.9 表单独享属性过滤选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-jQuery属性和CSS"><span class="toc-text">二.jQuery属性和CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-属性操作"><span class="toc-text">2.1 属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-CSS操作"><span class="toc-text">2.2 CSS操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-jQuery尺寸和位置操作"><span class="toc-text">三. jQuery尺寸和位置操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-CSS尺寸"><span class="toc-text">3.1 CSS尺寸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-innerWidth-outerWidth"><span class="toc-text">3.2 innerWidth/outerWidth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-scrollTop与scrollLeft"><span class="toc-text">3.3 scrollTop与scrollLeft</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-offset方法与position方法"><span class="toc-text">3.4 offset方法与position方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-jQuery文档处理"><span class="toc-text">四.jQuery文档处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-创建节点"><span class="toc-text">4.1 创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-内部插入-不可重复插入"><span class="toc-text">4.2 内部插入(不可重复插入)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-外部插入"><span class="toc-text">4.3 外部插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-删除节点"><span class="toc-text">4.4 删除节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-复制节点"><span class="toc-text">4.5 复制节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-替换节点"><span class="toc-text">4.6 替换节点</span></a></li></ol></li>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/jQuery复习/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/Javascript冒泡事件机制/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
