@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>浅谈BFC原理及作用 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CSS,">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-06
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    浅谈BFC原理及作用
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565078962838&di=a5aec599149e4e5d156e03a2c4759a21&imgtype=0&src=http%3A%2F%2Fwww.epx365.cn%2Fuploads%2Fallimg%2F1901%2F1613046329-0.jpg);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <h3 id="一-BFC的概念"><a href="#一-BFC的概念" class="headerlink" title="一. BFC的概念"></a>一. BFC的概念</h3><p>BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述布局模式的流动模型。是W3C CSS2.1规范中的一个概念，决定了元素如何对其内容进行定位，以及与其他元素的关系和相互作用。</p>
+<blockquote>
+<p>具有BFC特性的元素可以看做是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且BFC具有普通容器所没有的的一些特性。</p>
+</blockquote>
+<p>通俗一点来讲，可以把BFC理解为一个封闭的大箱子，箱子内部的元素无论如何翻江倒海，都不会影响到外部。</p>
+<h3 id="二-BFC的形成条件"><a href="#二-BFC的形成条件" class="headerlink" title="二.BFC的形成条件"></a>二.BFC的形成条件</h3><p>只要元素满足下面任一条件即可触发BFC特性：</p>
+<ul>
+<li>body 根元素</li>
+<li>浮动元素：float 除 none 以外的值</li>
+<li>绝对定位元素：position (absolute、fixed)</li>
+<li>display 为 inline-block、table-cells、flex</li>
+<li>overflow 除了 visible 以外的值 (hidden、auto、scroll)</li>
+</ul>
+<h3 id="三-BFC常见的作用"><a href="#三-BFC常见的作用" class="headerlink" title="三.BFC常见的作用"></a>三.BFC常见的作用</h3><h4 id="1-组织外边距重叠"><a href="#1-组织外边距重叠" class="headerlink" title="1.组织外边距重叠"></a>1.组织外边距重叠</h4><p>例：margin塌陷问题：在标准文档流中，块级标签之间竖直方向的margin会以大的为准，这就是margin的塌陷现象。</p>
+<p>可以用overflow：hidden产生bfc来解决。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">div&#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: lightblue;</span><br><span class="line">    margin: 100px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​    <img src="https://img-blog.csdn.net/20180521165928794?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RGRjE5OTM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<p>因为两个div元素都处于同一个BFC容器下（这里指body元素），所以第一个div的下边距和第二个div的上边距发生了重叠，所以两个盒子之间距离只有100px，而不是200px。</p>
+<p>首先这不是 CSS 的 bug，我们可以理解为一种规范，如果想要避免外边距的重叠，可以将其放在不同的 BFC 容器中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">background</span>: lightblue;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    <img src="https://img-blog.csdn.net/20180521170236501?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RGRjE5OTM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<h4 id="2-包含浮动元素"><a href="#2-包含浮动元素" class="headerlink" title="2.包含浮动元素"></a>2.包含浮动元素</h4><p> 例：高度塌陷问题，在通常情况下父元素的高度会被子元素撑开，而在这里因为其子元素为浮动元素所以父元素发生了高度坍塌，上下边界重合，这时就可以用BFC来清除浮动了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"border: 1px solid #000;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 100px;height: 100px;background: grey;float: left;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于容器内元素浮动，脱离了文档流，所以容器只剩下2px的边距高度。如果触发容器的BFC，那么容器将会包裹浮动元素。</p>
+<div style="border: 1px solid #000;overflow: hidden"><br>    <div style="width: 100px;height: 100px;background: grey;float: left;"></div><br></div>
+
+<p>​    </p>
+<h4 id="3、阻止元素被浮动元素覆盖"><a href="#3、阻止元素被浮动元素覆盖" class="headerlink" title="3、阻止元素被浮动元素覆盖"></a>3、阻止元素被浮动元素覆盖</h4><p>  例：div浮动兄弟这该问题：由于左侧块级元素发生了浮动，所以和右侧未发生浮动的块级元素不在同一层内，所以会发生div遮挡问题。可以给右侧元素添加 overflow: hidden，触发BFC来解决遮挡问题。</p>
+<div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div><br><div style="width: 200px; height: 200px;background: grey">我是一个没有设置浮动,<br>也没有触发 BFC 元素, width: 200px; height:200px; background: grey;</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这时候其实第二个元素有部分被浮动元素所覆盖，但是文本信息不会被浮动元素所覆盖，如果想避免元素被覆盖，可触发第二个元素的BFC特性，在第二个元素中加入overflow：hidden，就会变成：</span><br></pre></td></tr></table></figure>
+<div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div><br><div style="width: 200px; height: 200px;background: grey;overflow:hidden">我是一个没有设置浮动,<br>也没有触发 BFC 元素, width: 200px; height:200px; background: grey;</div>
+
+<p>​    </p>
+<p>这个方法可以用来实现两列自适应布局，效果不错，这时候左边的宽度固定，右边的内容自适应宽度。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-BFC的概念"><span class="toc-text">一. BFC的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-BFC的形成条件"><span class="toc-text">二.BFC的形成条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-BFC常见的作用"><span class="toc-text">三.BFC常见的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-组织外边距重叠"><span class="toc-text">1.组织外边距重叠</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-包含浮动元素"><span class="toc-text">2.包含浮动元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、阻止元素被浮动元素覆盖"><span class="toc-text">3、阻止元素被浮动元素覆盖</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/浅谈BFC原理及作用/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/CSS/"><i class="fa fa-tags"></i>CSS</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/media与screen的自适应网页布局/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
