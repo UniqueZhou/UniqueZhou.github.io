@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>media与screen的自适应网页布局 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CSS,">
+  
+
+  
+  <meta name="description" content="响应式">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-06
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    media与screen的自适应网页布局
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2144351799,3482561932&fm=26&gp=0.jpg);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <h3 id="1：设置Meta标签"><a href="#1：设置Meta标签" class="headerlink" title="1：设置Meta标签"></a>1：设置Meta标签</h3><p>首先我们在使用Media的时候需要先设置下面这段代码，来兼容移动设备的展示效果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这段代码的几个参数解释：</p>
+<ul>
+<li>width = device-width：宽度等于当前设备的宽度</li>
+<li>height = device-height：高度等于当前设备的高度</li>
+<li>initial-scale：初始的缩放比例（默认设置为1.0）  </li>
+<li>minimum-scale：允许用户缩放到的最小比例（默认设置为1.0）    </li>
+<li>maximum-scale：允许用户缩放到的最大比例（默认设置为1.0）   </li>
+<li>user-scalable：用户是否可以手动缩放（默认设置为no，因为我们不希望用户放大缩小页面） </li>
+</ul>
+<h3 id="2：加载兼容文件JS"><a href="#2：加载兼容文件JS" class="headerlink" title="2：加载兼容文件JS"></a>2：加载兼容文件JS</h3><p>因为IE8既不支持HTML5也不支持CSS3 Media，所以我们需要加载两个JS文件，来保证我们的代码实现兼容效果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3：设置IE渲染方式默认为最高-这部分可以选择添加也可以不添加"><a href="#3：设置IE渲染方式默认为最高-这部分可以选择添加也可以不添加" class="headerlink" title="3：设置IE渲染方式默认为最高(这部分可以选择添加也可以不添加)"></a>3：设置IE渲染方式默认为最高(这部分可以选择添加也可以不添加)</h3><p>现在有很多人的IE浏览器都升级到IE9以上了，所以这个时候就有又很多诡异的事情发生了，例如现在是IE9的浏览器，但是浏览器的文档模式却是IE8:</p>
+<p>为了防止这种情况，我们需要下面这段代码来让IE的文档模式永远都是最新的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> （如果想使用固定的IE版本，可写成：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=EmulateIE9"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>）</p>
+<p>除此之外，还有一个更好的写法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=Edge，chrome=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>怎么这段代码后面加了一个chrome=1，这个<a href="http://zh.wikipedia.org/wiki/Google_Chrome_Frame" target="_blank" rel="noopener">Google Chrome Frame（谷歌内嵌浏览器框架GCF）</a>，如果有的用户电脑里面装了这个chrome的插件，就可以让电脑里面的IE不管是哪个版本的都可以使用Webkit引擎及V8引擎进行排版及运算，如果用户没装这个插件，那这段代码就会让IE以最高的文档模式展现效果。</p>
+<h3 id="CSS3-Media写法"><a href="#CSS3-Media写法" class="headerlink" title="CSS3 Media写法"></a>CSS3 Media写法</h3><p>我们先来看下下面这段代码，估计很多人在响应式的网站CSS很经常看到类似下面的这段代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">960px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个应该算是一个media的一个标准写法，上面这段CSS代码意思是：当页面小于960px的时候执行它下面的CSS.</p>
+<p>应该有人会发现上面这段代码里面有个screen，他的意思是在告知设备在打印页面时使用<a href="http://baike.baidu.com/link?url=FOnnUbOa6X590ao9mYca7Rgz_z5bLBtmMV0qwimHDZIsaZFTC5vztLLlPvOnzCo5hGU5loIN9zhxJDBBRaQeTa" target="_blank" rel="noopener">衬线字体</a>，在屏幕上显示时用无衬线字体。但是目前我发现很多网站都会直接省略screen,因为你的网站可能不需要考虑用户去打印时，你可以直接这样写：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> (max-width: <span class="number">960px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="CSS2-Media用法"><a href="#CSS2-Media用法" class="headerlink" title="CSS2 Media用法"></a>CSS2 Media用法</h3><p>其实并不是只有CSS3才支持Media的用法，早在CSS2开始就已经支持Media，具体用法，就是在HTML页面的head标签中插入如下的一段代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"screen"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面其实是CSS2实现的衬线用法，那CSS2的media难道就只能支持上面这一个功能吗？答案当然不是，他还有很多用法。</p>
+<p>例如我们想知道现在的移动设备是不是纵向放置的显示屏，可以这样写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"screen and (orientation:portrait)"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们把第一段的代码也用CSS2来实现，让它一样可以让页面宽度小于960的执行指定的样式文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"screen and (max-width:960px)"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>既然CSS2可以实现CSS的这个效果为什么不用这个方法呢，很多人应该会问，但是上面这个方法，最大的弊端是他会增加页面http的请求次数，增加了页面负担，我们用CSS3把样式都写在一个文件里面才是最佳的方法。</p>
+<h3 id="回归CSS3-Media"><a href="#回归CSS3-Media" class="headerlink" title="回归CSS3 Media"></a>回归CSS3 Media</h3><p>上面我们大概讲了下CSS2的媒体查询用法，现在我们重新回到CSS3的媒体查询，在第一段代码上面我用的是小于960px的尺寸的写法，那现在我们来实现等于960px尺寸的代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (max-device-width:<span class="number">960px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>:red;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后就是当浏览器尺寸大于960px时候的代码了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">960px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>:orange;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们还可以混合使用上面的用法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">960px</span>) and (max-width:<span class="number">1200px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>:yellow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的这段代码的意思是当页面宽度大于960px小于1200px的时候执行下面的CSS。</p>
+<h3 id="Media所有参数汇总"><a href="#Media所有参数汇总" class="headerlink" title="Media所有参数汇总"></a>Media所有参数汇总</h3><p>以上就是我们最常需要用到的媒体查询器的三个特性，大于，等于，小于的写法。媒体查询器的全部功能肯定不止这三个功能，下面是我总结的它的一些参数用法解释：</p>
+<ul>
+<li>width:浏览器可视宽度。</li>
+<li>height:浏览器可视高度。</li>
+<li>device-width:设备屏幕的宽度。</li>
+<li>device-height:设备屏幕的高度。</li>
+<li>orientation:检测设备目前处于横向还是纵向状态。</li>
+<li>aspect-ratio:检测浏览器可视宽度和高度的比例。(例如：aspect-ratio:16/9)</li>
+<li>device-aspect-ratio:检测设备的宽度和高度的比例。</li>
+<li>color:检测颜色的位数。（例如：min-color:32就会检测设备是否拥有32位颜色）</li>
+<li>color-index:检查设备颜色索引表中的颜色，他的值不能是负数。</li>
+<li>monochrome:检测单色楨缓冲区域中的每个像素的位数。（这个太高级，估计咱很少会用的到）</li>
+<li>resolution:检测屏幕或打印机的分辨率。(例如：min-resolution:300dpi或min-resolution:118dpcm)。</li>
+<li>grid：检测输出的设备是网格的还是位图设备。</li>
+</ul>
+<hr>
+<p>注意下顺序，如果你把@media (min-width: 768px)写在了下面那么很悲剧，</p>
+<p>@media (min-width: 1200){ //&gt;=1200的设备 }</p>
+<p>@media (min-width: 992px){ //&gt;=992的设备 }</p>
+<p>@media (min-width: 768px){ //&gt;=768的设备 }</p>
+<p>因为如果是1440,由于1440&gt;768那么你的1200就会失效。</p>
+<p>所以我们用min-width时，小的放上面大的在下面，同理如果是用max-width那么就是大的在上面，小的在下面</p>
+<p>@media (max-width: 1199){ //&lt;=1199的设备 }</p>
+<p>@media (max-width: 991px){ //&lt;=991的设备 }</p>
+<p>@media (max-width: 767px){ //&lt;=768的设备 }</p>
+<p>1280分辨率以上（大于1200px）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">1200px</span>)&#123;</span><br><span class="line">    <span class="selector-id">#page</span>&#123; <span class="attribute">width</span>: <span class="number">1100px</span>; &#125;<span class="selector-id">#content</span>,<span class="selector-class">.div1</span>&#123;<span class="attribute">width</span>: <span class="number">730px</span>;&#125;<span class="selector-id">#secondary</span>&#123;<span class="attribute">width</span>:<span class="number">310px</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1100分辨率（大于960px，小于1199px）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width: <span class="number">960px</span>) and (max-width: <span class="number">1199px</span>) &#123;</span><br><span class="line">    <span class="selector-id">#page</span>&#123; <span class="attribute">width</span>: <span class="number">960px</span>; &#125;<span class="selector-id">#content</span>,<span class="selector-class">.div1</span>&#123;<span class="attribute">width</span>: <span class="number">650px</span>;&#125;<span class="selector-id">#secondary</span>&#123;<span class="attribute">width</span>:<span class="number">250px</span>&#125;<span class="selector-tag">select</span>&#123;<span class="attribute">max-width</span>:<span class="number">200px</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>880分辨率（大于768px，小于959px）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width: <span class="number">768px</span>) and (max-width: <span class="number">959px</span>) &#123;</span><br><span class="line">    <span class="selector-id">#page</span>&#123; <span class="attribute">width</span>: <span class="number">900px</span>; &#125;<span class="selector-id">#content</span>,<span class="selector-class">.div1</span>&#123;<span class="attribute">width</span>: <span class="number">620px</span>;&#125;<span class="selector-id">#secondary</span>&#123;<span class="attribute">width</span>:<span class="number">220px</span>&#125;<span class="selector-tag">select</span>&#123;<span class="attribute">max-width</span>:<span class="number">180px</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>720分辨率（大于480px，小于767px）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> only screen and (min-width: <span class="number">480px</span>) and (max-width: <span class="number">767px</span>)&#123;</span><br><span class="line">    <span class="selector-id">#page</span>&#123; <span class="attribute">width</span>: <span class="number">450px</span>; &#125;<span class="selector-id">#content</span>,<span class="selector-class">.div1</span>&#123;<span class="attribute">width</span>: <span class="number">420px</span>;<span class="attribute">position</span>: relative; &#125;<span class="selector-id">#secondary</span>&#123;<span class="attribute">display</span>:none&#125;<span class="selector-id">#access</span>&#123;<span class="attribute">width</span>: <span class="number">450px</span>; &#125;<span class="selector-id">#access</span> <span class="selector-tag">a</span> &#123;<span class="attribute">padding-right</span>:<span class="number">5px</span>&#125;<span class="selector-id">#access</span> <span class="selector-tag">a</span> <span class="selector-tag">img</span>&#123;<span class="attribute">display</span>:none&#125;<span class="selector-id">#rss</span>&#123;<span class="attribute">display</span>:none&#125;<span class="selector-id">#branding</span> <span class="selector-id">#s</span>&#123;<span class="attribute">display</span>:none&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>440分辨率以下（小于479px）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> only screen and (max-width: <span class="number">479px</span>) &#123;</span><br><span class="line">    <span class="selector-id">#page</span>&#123; <span class="attribute">width</span>: <span class="number">300px</span>; &#125;<span class="selector-id">#content</span>,<span class="selector-class">.div1</span>&#123;<span class="attribute">width</span>: <span class="number">300px</span>;&#125;<span class="selector-id">#secondary</span>&#123;<span class="attribute">display</span>:none&#125;<span class="selector-id">#access</span>&#123;<span class="attribute">width</span>: <span class="number">330px</span>;&#125; <span class="selector-id">#access</span> <span class="selector-tag">a</span> &#123;<span class="attribute">padding-right</span>:<span class="number">10px</span>;<span class="attribute">padding-left</span>:<span class="number">10px</span>&#125;<span class="selector-id">#access</span> <span class="selector-tag">a</span> <span class="selector-tag">img</span>&#123;<span class="attribute">display</span>:none&#125;<span class="selector-id">#rss</span>&#123;<span class="attribute">display</span>:none&#125;<span class="selector-id">#branding</span> <span class="selector-id">#s</span>&#123;<span class="attribute">display</span>:none&#125;<span class="selector-id">#access</span> <span class="selector-tag">ul</span> <span class="selector-tag">ul</span> <span class="selector-tag">a</span>&#123;<span class="attribute">width</span>:<span class="number">100px</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 竖屏 */</span></span><br><span class="line">@<span class="keyword">media</span> screen and (orientation: portrait) and (max-width: <span class="number">720px</span>) &#123; 对应样式 &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 横屏 */</span></span><br><span class="line">@<span class="keyword">media</span> screen and (orientation: landscape) &#123; 对应样式 &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中用到了screen ，他的意思是在告知设备在打印页面时使用<a href="http://baike.baidu.com/link?url=FOnnUbOa6X590ao9mYca7Rgz_z5bLBtmMV0qwimHDZIsaZFTC5vztLLlPvOnzCo5hGU5loIN9zhxJDBBRaQeTa" target="_blank" rel="noopener">衬线字体</a>，在屏幕上显示时用无衬线字体。但是目前我发现很多网站都会直接省略screen,因为你的网站可能不需要考虑用户去打印时。</p>
+<p>PC端按屏幕宽度大小排序</p>
+<p>分辨率   比例 | 设备尺寸</p>
+<p>1024<em>500 （8.9寸）<br>1024</em>768 （比例4：3  | 10.4寸、12.1寸、14.1寸、15寸; ）<br>1280<em>800（16：10  |15.4寸）<br>1280</em>1024(比例：5：4  | 14.1寸、15.0寸)<br>1280<em>854(比例：15：10 | 15.2）<br>1366</em>768 (比例：16：9 | 不常见）<br>1440<em>900 （16：10  17寸 仅苹果用）<br>1440</em>1050（比例：5：4  | 14.1寸、15.0寸）<br>1600<em>1024（14：9  不常见）<br>1600</em>1200 （4：3 | 15、16.1）<br>1680<em>1050（16：10 | 15.4寸、20.0寸）<br>1920</em>1200 (23寸）</p>
+<p>通过上面的电脑屏蔽及尺寸的例表上我们得到了几个宽度<br>1024  1280  1366  1440  1680  1920  </p>
+<p>CSS代码</p>
+<p>@media (min-width: 1024px){<br>  body{font-size: 18px}<br>} /<em>&gt;=1024的设备</em>/<br>@media (min-width: 1100px) {<br>  body{font-size: 20px}<br>} /<em>&gt;=1024的设备</em>/<br>@media (min-width: 1280px) {<br>  body{font-size: 22px;}<br>}<br>@media (min-width: 1366px) {<br>  body{font-size: 24px;}<br>}<br>@media (min-width: 1440px) {<br>  body{font-size: 25px !important;}<br>}<br>@media (min-width: 1680px) {<br>  body{font-size: 28px;}<br>}<br>@media (min-width: 1920px) {<br>  body{font-size: 33px;}<br>} </p>
+<p><img src="https://img-blog.csdn.net/20170109135106984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSW51eWFzaGExMTIx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1：设置Meta标签"><span class="toc-text">1：设置Meta标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2：加载兼容文件JS"><span class="toc-text">2：加载兼容文件JS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3：设置IE渲染方式默认为最高-这部分可以选择添加也可以不添加"><span class="toc-text">3：设置IE渲染方式默认为最高(这部分可以选择添加也可以不添加)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS3-Media写法"><span class="toc-text">CSS3 Media写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS2-Media用法"><span class="toc-text">CSS2 Media用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回归CSS3-Media"><span class="toc-text">回归CSS3 Media</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Media所有参数汇总"><span class="toc-text">Media所有参数汇总</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/media与screen的自适应网页布局/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/CSS/"><i class="fa fa-tags"></i>CSS</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/jQuery复习/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
