@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>RN中没有固定定位怎么办？</title>
+      <link href="/passages/RN%E4%B8%AD%E6%B2%A1%E6%9C%89%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/"/>
+      <url>/passages/RN%E4%B8%AD%E6%B2%A1%E6%9C%89%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://img2018.cnblogs.com/blog/1227538/201903/1227538-20190319110324634-428942820.png" alt="img"></p><p>如上图的底部新增按钮，要是放在web里那是相当简单，直接是用固定定位就行，但是在RN里是没有固定定位。</p><p>怎么解决?</p><h3 id="方案一-绝对定位"><a href="#方案一-绝对定位" class="headerlink" title="方案一     绝对定位"></a>方案一     绝对定位</h3><p>采用绝对定位，相对于最外层的定位在底部位置。</p><blockquote><p>在部分安卓机上有问题，动态计算的高度，定位底部的高度有问题，导致底部按钮定位脱离了视野</p></blockquote><h3 id="方案二-flex布局"><a href="#方案二-flex布局" class="headerlink" title="方案二    flex布局"></a>方案二    flex布局</h3><p>如上图，头部导航<headerview> 是固定的，</headerview></p><p>剩下的就是<segmentedcontrol> 组件（红色方框区域） </segmentedcontrol></p><p>设置属性 flex:1 使它撑满剩余空间，这时候可以设置它为相对定位，然后底部那个按钮绝对定位，这样可行，</p><p><strong>但是我们可以用flex一层一层撑开</strong>。</p><p>按钮底部空白的位置，不是定位出来的，其实是适应iphoneX组件的空间，忽略。</p><p>接下来只要把内部划成三块就行：tab导航  列表内容  底部按钮 。</p><p>列表内容和底部导航是由一个VIew 包着 和tab 导航同一层级的。所以这个View 设置<code>flex:1</code>.</p><p>到了最后一层，就是设置列表内容 <code>flex:1</code> ， 底部按钮固定高度。这样根据flex布局的属性，底部按钮就被挤在 最下面这个位置了。</p><p>这个方法相对于直接用一层定位来，多了几层<code>flex:1</code>，但是省去了计算高度的工作，不存在安卓的兼容性，免去了样式爆炸的烦恼。</p><p>总结：最核心就是一点，一层层设置<code>flex：1</code>,把固定高度的挤在固定的地方就行。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> react-native </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>浅谈BFC原理及作用</title>
       <link href="/passages/%E6%B5%85%E8%B0%88BFC%E5%8E%9F%E7%90%86%E5%8F%8A%E4%BD%9C%E7%94%A8/"/>
       <url>/passages/%E6%B5%85%E8%B0%88BFC%E5%8E%9F%E7%90%86%E5%8F%8A%E4%BD%9C%E7%94%A8/</url>

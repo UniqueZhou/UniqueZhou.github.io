@@ -6,12 +6,12 @@
   <meta name="author" content="UniqueZhou">
   
   
-  <title>归档 | 个人博客</title>
+  <title>RN中没有固定定位怎么办？ | 个人博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD">
+    <meta name="keywords" content="react-native,">
   
 
   
@@ -42,7 +42,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2017-10-01",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "UniqueZhou",
     share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
@@ -160,81 +160,90 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 11篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-07
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    RN中没有固定定位怎么办？
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2019</h3>
-    
-    <div class="timeline-item">
-      <time>2019-08-07</time>
-      <a target="_self" href="/passages/RN中没有固定定位怎么办？/">RN中没有固定定位怎么办？</a>
+    <div class="passage-cover">
+      <figure style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565161286859&di=f5917a5778ed3ab71517954198d8f038&imgtype=0&src=http%3A%2F%2Fmng.apicloud.com%2Fnews_image%2F1481181873543_image002.jpg);"></figure>
     </div>
   
-    
-    <div class="timeline-item">
-      <time>2019-08-06</time>
-      <a target="_self" href="/passages/浅谈BFC原理及作用/">浅谈BFC原理及作用</a>
-    </div>
+  <article class="passage-article">
+    <p><img src="https://img2018.cnblogs.com/blog/1227538/201903/1227538-20190319110324634-428942820.png" alt="img"></p>
+<p>如上图的底部新增按钮，要是放在web里那是相当简单，直接是用固定定位就行，但是在RN里是没有固定定位。</p>
+<p>怎么解决?</p>
+<h3 id="方案一-绝对定位"><a href="#方案一-绝对定位" class="headerlink" title="方案一     绝对定位"></a>方案一     绝对定位</h3><p>采用绝对定位，相对于最外层的定位在底部位置。</p>
+<blockquote>
+<p>在部分安卓机上有问题，动态计算的高度，定位底部的高度有问题，导致底部按钮定位脱离了视野</p>
+</blockquote>
+<h3 id="方案二-flex布局"><a href="#方案二-flex布局" class="headerlink" title="方案二    flex布局"></a>方案二    flex布局</h3><p>如上图，头部导航<headerview> 是固定的，</headerview></p>
+<p>剩下的就是<segmentedcontrol> 组件（红色方框区域） </segmentedcontrol></p>
+<p>设置属性 flex:1 使它撑满剩余空间，这时候可以设置它为相对定位，然后底部那个按钮绝对定位，这样可行，</p>
+<p><strong>但是我们可以用flex一层一层撑开</strong>。</p>
+<p>按钮底部空白的位置，不是定位出来的，其实是适应iphoneX组件的空间，忽略。</p>
+<p>接下来只要把内部划成三块就行：tab导航  列表内容  底部按钮 。</p>
+<p>列表内容和底部导航是由一个VIew 包着 和tab 导航同一层级的。所以这个View 设置<code>flex:1</code>.</p>
+<p>到了最后一层，就是设置列表内容 <code>flex:1</code> ， 底部按钮固定高度。这样根据flex布局的属性，底部按钮就被挤在 最下面这个位置了。</p>
+<p>这个方法相对于直接用一层定位来，多了几层<code>flex:1</code>，但是省去了计算高度的工作，不存在安卓的兼容性，免去了样式爆炸的烦恼。</p>
+<p>总结：最核心就是一点，一层层设置<code>flex：1</code>,把固定高度的挤在固定的地方就行。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#方案一-绝对定位"><span class="toc-text">方案一     绝对定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方案二-flex布局"><span class="toc-text">方案二    flex布局</span></a></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2019-08-06</time>
-      <a target="_self" href="/passages/media与screen的自适应网页布局/">media与screen的自适应网页布局</a>
-    </div>
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/RN中没有固定定位怎么办？/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
   
-    
-    <div class="timeline-item">
-      <time>2019-05-16</time>
-      <a target="_self" href="/passages/jQuery复习/">jQuery复习</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/react-native/"><i class="fa fa-tags"></i>react-native</a>
     
-      <h3 class="timeline-subtitle">2017</h3>
-    
-    <div class="timeline-item">
-      <time>2017-11-24</time>
-      <a target="_self" href="/passages/Javascript冒泡事件机制/">Javascript冒泡事件机制</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2017-11-19</time>
-      <a target="_self" href="/passages/TODOS案例（二）/">TODOS案例（二）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2017-11-18</time>
-      <a target="_self" href="/passages/TODOS案例（一）/">TODOS案例（一）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2017-11-16</time>
-      <a target="_self" href="/passages/伸缩布局/">伸缩布局</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2017-10-11</time>
-      <a target="_self" href="/passages/JS学习总结（三）/">JS学习总结（三）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2017-10-03</time>
-      <a target="_self" href="/passages/html学习总结（一）/">html学习总结（一）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2017-10-03</time>
-      <a target="_self" href="/passages/Hexo博客搭建完整流程/">Hexo博客搭建完整流程</a>
     </div>
   
 </div>
+
     </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
     
     <div class="site-footer-wrapper">
   <footer class="site-footer">
@@ -338,16 +347,16 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/passages/浅谈BFC原理及作用/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     
-      <a href="javascript:void(0);" data-enable="false">
+      <a href="#site-comment" data-enable="true">
         <i class="fa fa-commenting"></i>
       </a>
     
