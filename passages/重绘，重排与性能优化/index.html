@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>重绘，重排与性能优化 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="javascript,">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-08
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    重绘，重排与性能优化
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565251291977&di=4ff9d4c260d79adf82b16d36f3ab075e&imgtype=0&src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_gif%2FzPh0erYjkib1o0UiaE5wwR7hwF5dTQNbcuYicjP1EnhTGYhTJB7f5HY4g545tJwJmUo285Y7icNtxEbXm2DQY262bw%2F640%3Fwx_fmt%3Dgif);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <h3 id="一-什么是重绘与重排"><a href="#一-什么是重绘与重排" class="headerlink" title="一.什么是重绘与重排"></a>一.什么是重绘与重排</h3><p>浏览器下载完页面中的所有组件——HTML标记、JavaScript、CSS、图片之后会解析生成两个内部数据结构——DOM树和渲染树。</p>
+<p>DOM树表示页面结构，渲染树表示DOM节点如何显示。DOM树中的每一个需要显示的节点在渲染树种至少存在一个对应的节点（隐藏的DOM元素disply值为none 在渲染树中没有对应的节点）。渲染树中的节点被称为“帧”或“盒”,符合CSS模型的定义，理解页面元素为一个具有填充，边距，边框和位置的盒子。一旦DOM和渲染树构建完成，浏览器就开始显示（绘制）页面元素。</p>
+<p>当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。<strong>这个过程称为重排</strong>。完成重排后，浏览器会重新绘制受影响的部分到屏幕，<strong>该过程称为重绘</strong>。由于浏览器的流布局，对渲染树的计算通常只需要遍历一次就可以完成。但table及其内部元素除外，它可能需要多次计算才能确定好其在渲染树中节点的属性，通常要花3倍于同等元素的时间。这也是为什么我们要避免使用table做布局的一个原因。</p>
+<p>并不是所有的DOM变化都会影响几何属性，比如改变一个元素的背景色并不会影响元素的宽和高，这种情况下只会发生重绘。</p>
+<p>不管页面发生了重绘还是重排，它们都会影响性能</p>
+<h3 id="二-怎样触发重排"><a href="#二-怎样触发重排" class="headerlink" title="二.怎样触发重排"></a>二.怎样触发重排</h3><p>页面布局和元素几何属性的改变就会导致重排<br>下列情况会发生重排</p>
+<ul>
+<li>页面初始渲染</li>
+<li>添加/删除可见DOM元素</li>
+<li>改变元素位置</li>
+<li>改变元素尺寸（宽、高、内外边距、边框等）</li>
+<li>改变元素内容（文本或图片等）</li>
+<li>改变窗口尺寸</li>
+</ul>
+<p>不同的条件下发生重排的范围及程度会不同<br>某些情况甚至会重排整个页面，比如滑动滚动条</p>
+<h3 id="三-浏览器优化"><a href="#三-浏览器优化" class="headerlink" title="三.浏览器优化"></a>三.浏览器优化</h3><p>例如：</p>
+<p>假如我要用js修改某个div的样式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div.style.left = <span class="string">'10px'</span>;</span><br><span class="line">div.style.top = <span class="string">'10px'</span>;</span><br><span class="line">div.style.width = <span class="string">'10px'</span>;</span><br><span class="line">div.style.height = <span class="string">'10px'</span>;</span><br></pre></td></tr></table></figure>
+<p>我们修改了元素的left、top、width、height属性 ,满足我们发生重排的条件 ,理论上会发生4次重排 ,但是<strong>实际上只会发生1次重排</strong> ,因为我们现代的浏览器都有<strong>渲染队列</strong>的机制 ,当我改变了元素的一个样式会导致浏览器发生重排或重绘时 ,它会进入一个渲染队列 ,然后浏览器继续往下看，如果下面还有样式修改 ,那么同样入队 ,直到下面没有样式修改 ,浏览器会按照渲染队列批量执行来优化重排过程，一并修改样式 ,这样就把本该4次的重排优化为1次</p>
+<p><strong><em>But</em></strong>,当我们写如下代码时：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">div.style.left = <span class="string">'10px'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(div.offsetLeft);</span><br><span class="line"></span><br><span class="line">div.style.top = <span class="string">'10px'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(div.offsetTop);</span><br><span class="line"></span><br><span class="line">div.style.width = <span class="string">'20px'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(div.offsetWidth);</span><br><span class="line"></span><br><span class="line">div.style.height = <span class="string">'20px'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(div.offsetHeight);</span><br></pre></td></tr></table></figure>
+<p>还是1次重排吗？</p>
+<p>Obviously not! <strong>此时发生了4次重排！</strong></p>
+<p>上文不是说浏览器有渲染队列优化机制吗？ 为什么会有4次？</p>
+<p>这和offsetLeft/Top/Width/Height有关</p>
+<blockquote>
+<ul>
+<li>offsetTop、offsetLeft、offsetWidth、offsetHeight</li>
+<li>clientTop、clientLeft、clientWidth、clientHeight</li>
+<li>scrollTop、scrollLeft、scrollWidth、scrollHeight</li>
+<li>getComputedStyle()（IE中currentStyle）</li>
+</ul>
+<p>这些会强制刷新队列要求样式修改任务立刻执行 </p>
+</blockquote>
+<p>因为浏览器并不确定在下面的代码中是否还有修改同样的样式，为了获取到当前正确的的即时值不得不立刻执行渲染队列触发重排！！！</p>
+<h3 id="四-重绘与重排性能优化"><a href="#四-重绘与重排性能优化" class="headerlink" title="四.重绘与重排性能优化"></a>四.重绘与重排性能优化</h3><h4 id="1-分离读写操作"><a href="#1-分离读写操作" class="headerlink" title="1.分离读写操作"></a>1.分离读写操作</h4><p>我们就可以对上面的代码进行优化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">div.style.left = <span class="string">'10px'</span>;</span><br><span class="line">div.style.top = <span class="string">'10px'</span>;</span><br><span class="line">div.style.width = <span class="string">'20px'</span>;</span><br><span class="line">div.style.height = <span class="string">'20px'</span>;</span><br><span class="line"><span class="comment">//所有的读操作写在所有的写操作之后</span></span><br><span class="line"><span class="built_in">console</span>.log(div.offsetLeft);</span><br><span class="line"><span class="built_in">console</span>.log(div.offsetTop);</span><br><span class="line"><span class="built_in">console</span>.log(div.offsetWidth);</span><br><span class="line"><span class="built_in">console</span>.log(div.offsetHeight);</span><br></pre></td></tr></table></figure>
+<p>这样就仅仅发生1次重排了！</p>
+<h4 id="2-样式集中改变"><a href="#2-样式集中改变" class="headerlink" title="2.样式集中改变"></a>2.样式集中改变</h4><p>还是我们最初修改样式的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div.style.left = <span class="string">'10px'</span>;</span><br><span class="line">div.style.top = <span class="string">'10px'</span>;</span><br><span class="line">div.style.width = <span class="string">'20px'</span>;</span><br><span class="line">div.style.height = <span class="string">'20px'</span>;</span><br></pre></td></tr></table></figure>
+<p>虽然现代浏览器有渲染队列的优化机制，但是古董浏览器效率仍然底下，触发了4次重排 ，即便这样，我们仍然可以做出优化 ，我们需要cssText属性合并所有样式改变</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.style.cssText = <span class="string">'left:10px;top:10px;width:20px;height:20px;'</span>;</span><br></pre></td></tr></table></figure>
+<p>这样只需要修改DOM一次一并处理，仅仅触发了1次重排 ，而且只用了一行代码</p>
+<blockquote>
+<p>cssText会覆盖已有的行间样式<br>如果想保留原有行间样式，这样做</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; div.style.cssText += <span class="string">';left:10px;'</span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>除了cssText以外，我们还可以通过修改class类名来进行样式修改</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.className = <span class="string">'new-class'</span>;</span><br></pre></td></tr></table></figure>
+<p>这种办法可维护性好，还可以帮助我们免除显示性代码，但是会消耗一点点的性能</p>
+<h4 id="3-缓存布局信息"><a href="#3-缓存布局信息" class="headerlink" title="3.缓存布局信息"></a>3.缓存布局信息</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">div.style.left = div.offsetLeft + <span class="number">1</span> + <span class="string">'px'</span>;</span><br><span class="line">div.style.top = div.offsetTop + <span class="number">1</span> + <span class="string">'px'</span>;</span><br></pre></td></tr></table></figure>
+<p>这种读操作完就执行写操作造成了2次重排<br>缓存可以进行优化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> curLeft = div.offsetLeft;</span><br><span class="line"><span class="keyword">var</span> curTop = div.offsetTop;</span><br><span class="line">div.style.left = curLeft + <span class="number">1</span> + <span class="string">'px'</span>;</span><br><span class="line">div.style.top = curTop + <span class="number">1</span> + <span class="string">'px'</span>;</span><br></pre></td></tr></table></figure>
+<p>相当于是分离读写操作，优化为1次重排</p>
+<h4 id="4-元素批量操作"><a href="#4-元素批量操作" class="headerlink" title="4.元素批量操作"></a>4.元素批量操作</h4><p>现在我们想要向ul中循环添加大量li （如果ul还不存在，最好的办法是先循环添加li到ul，然后再把ul添加到文档，1次重排）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1e5</span>; i++)&#123;</span><br><span class="line">	<span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(i);</span><br><span class="line">	li.appendChild(text);</span><br><span class="line">	ul.appendChild(li);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我可以做出下面的优化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>);</span><br><span class="line">ul.style.display = <span class="string">'none'</span>; </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1e5</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">    <span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(i);</span><br><span class="line">    li.appendChild(text);</span><br><span class="line">    ul.appendChild(li);</span><br><span class="line">&#125;</span><br><span class="line">ul.style.display = <span class="string">'block'</span>;</span><br><span class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>);</span><br><span class="line"><span class="keyword">var</span> frg = <span class="built_in">document</span>.createDocumentFragment(); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1e5</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">    <span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(i);</span><br><span class="line">    li.appendChild(text);</span><br><span class="line">    frg.appendChild(li); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ul.appendChild(frg); </span><br><span class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>);</span><br><span class="line"><span class="keyword">var</span> clone = ul.cloneNode(<span class="literal">true</span>); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1e5</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">    <span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(i);</span><br><span class="line">    li.appendChild(text);</span><br><span class="line">    clone.appendChild(li); </span><br><span class="line">&#125;</span><br><span class="line">ul.parentNode.replaceChild(clone,ul);</span><br></pre></td></tr></table></figure>
+<p>上面的方法减少重绘和重排的原理很简单</p>
+<ul>
+<li>元素脱离文档</li>
+<li>改变样式</li>
+<li>元素回归文档</li>
+</ul>
+<p>而改变元素就分别使用了隐藏元素、文档碎片和克隆元素 </p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-什么是重绘与重排"><span class="toc-text">一.什么是重绘与重排</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-怎样触发重排"><span class="toc-text">二.怎样触发重排</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-浏览器优化"><span class="toc-text">三.浏览器优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-重绘与重排性能优化"><span class="toc-text">四.重绘与重排性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-分离读写操作"><span class="toc-text">1.分离读写操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-样式集中改变"><span class="toc-text">2.样式集中改变</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-缓存布局信息"><span class="toc-text">3.缓存布局信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-元素批量操作"><span class="toc-text">4.元素批量操作</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/重绘，重排与性能优化/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/javascript/"><i class="fa fa-tags"></i>javascript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/RN中没有固定定位怎么办？/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
