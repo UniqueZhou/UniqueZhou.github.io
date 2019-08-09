@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>iframe的实际应用 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="iframe,">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-09
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    iframe的实际应用
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1876320533,2000308526&fm=26&gp=0.jpg);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <h3 id="一-何为iframe"><a href="#一-何为iframe" class="headerlink" title="一 何为iframe"></a>一 何为iframe</h3><p><code>iframe</code>是一个标签<code>dom</code>元素, 我们可以使用向一个网页里嵌入另一个网页，以及用在导航栏tab切换页（古老的做法）、在线编辑器、广告植入，以及跨域通信等</p>
+<h3 id="二-iframe的优点和缺点"><a href="#二-iframe的优点和缺点" class="headerlink" title="二 iframe的优点和缺点"></a>二 iframe的优点和缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>解决跨域问题（已经很少使用了）</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>触发 window 的 <code>onload</code> 事件是非常重要的。<code>onload</code> 事件触发使浏览器的 “忙” 指示器停止，告诉用户当前网页已经加载完毕。当 <code>onload</code> 事件加载延迟后，它给用户的感觉就是这个网页非常慢。如果含有多个<code>iframe</code>,那么<code>window</code> 的 <code>onload</code>事件需要在所有 <code>iframe</code> 加载完毕后(包含里面的元素)才会触发。通过JavaScript 动态设置 <code>iframe</code> 的 <code>Src</code> 可以避免这种阻塞情况</p>
+<h3 id="三-iframe的使用"><a href="#三-iframe的使用" class="headerlink" title="三 iframe的使用"></a>三 iframe的使用</h3><blockquote>
+<p>不管是获取子<code>iframe</code>还是父<code>iframe</code>都受跨域限制</p>
+</blockquote>
+<ul>
+<li>获取子窗口<ul>
+<li><code>document.getElementsByTagName(&#39;iframe&#39;)[0].contentWindow</code></li>
+<li><code>document.getElementsById(&#39;id&#39;).contentWindow</code></li>
+</ul>
+</li>
+<li>简易写法<ul>
+<li><code>window.frames[&#39;iframe的name&#39;]</code></li>
+</ul>
+</li>
+<li>IE专用<ul>
+<li><code>document.iframes[name].contentWindow</code></li>
+<li><code>document.iframes[i].contentWindow</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="父子页面窗口的关系"><a href="#父子页面窗口的关系" class="headerlink" title="父子页面窗口的关系"></a>父子页面窗口的关系</h3><ul>
+<li>window.self: 就是自己</li>
+<li>window.parent: 父级窗口对象</li>
+<li>window.top: 顶级窗口对象</li>
+</ul>
+<h3 id="父子窗口通信"><a href="#父子窗口通信" class="headerlink" title="父子窗口通信"></a>父子窗口通信</h3><p>等待子<code>iframe</code>加载完成后可以通过<code>iframe.contentWindow.变量</code>访问子窗口</p>
+<h4 id="判断iframe加载完成"><a href="#判断iframe加载完成" class="headerlink" title="判断iframe加载完成"></a>判断<code>iframe</code>加载完成</h4><ul>
+<li>非ie下使用onload事件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iframe(dom元素).onload = function () &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ie下使用onreadystatechange或者设定计时器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iframe.onreadystatechange = function()&#123; </span><br><span class="line">      if (iframe.readyState == &quot;complete&quot; || iframe.readyState == &apos;&apos;loaded”)&#123;</span><br><span class="line">         alert(&quot;Local iframe is now loaded.&quot;);</span><br><span class="line">     &#125; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>父访问子和子访问父涉都会及跨域问题</p>
+<h4 id="iframe受跨域限制如何解决"><a href="#iframe受跨域限制如何解决" class="headerlink" title="iframe受跨域限制如何解决"></a><code>iframe</code>受跨域限制如何解决</h4><ul>
+<li><p><code>document.domain</code>: 解决跨域限制最好的办法,而且域名必须属于同一个基础域名!而且所用的协议，端口都要一致，否则无法跨域。</p>
+</li>
+<li><p><code>window.location.hash</code>: 解决父页面向子页面传递数据问题(<code>window.location.href</code>)，不论是否跨域，都可以取得后面的<code>hash</code>值，即锚点后面的值，所以可使用锚点来传输数据，如下<code>&lt;iframe src=&#39;http://baidu.com#1&#39;&gt;</code>,然后在子页面中使用定时器定时访问location.hash来获得传过来的值，如下图所示，注意里面<code>lasthash</code>的使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age=<span class="number">20</span></span><br><span class="line"><span class="keyword">var</span> lastHash = <span class="built_in">window</span>.location.hash;</span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"><span class="number">0</span>&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">                      if(lastHash!=window.location.hash</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(location.hash.slice(<span class="number">1</span>))</span><br><span class="line">    lastHash=<span class="built_in">window</span>.location.hash</span><br><span class="line">&#125;</span><br><span class="line">                      &#125;),<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>window.name</code>: 解决父页面访问子页面的数据问题，<code>window.name</code>是放在整个窗口上，只要该浏览器窗口没有关闭，一个标签下，不管两个页面是否同源,以及是否刷星，<code>window.name</code>就可以取到，但是对于一个页面中镶嵌另外一个<code>iframe</code>，由于<code>iframe</code>是一个新的页面含有新的<code>window</code>，所以不能直接用<code>window.name</code>取得<code>iframe</code>中的<code>window.name</code>由于是不同的<code>window</code>,像下面这样使用<code>window.name</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">'https://still-caverns-23465.herokuapp.com/ds.html'</span> <span class="attr">frameborder</span>=<span class="string">'0'</span> <span class="attr">name</span>=<span class="string">'ds'</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> oIframe=<span class="built_in">document</span>.getElementByTagName(<span class="string">'iframe'</span>)[<span class="number">0</span>]</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> oldAge=<span class="number">55</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> flag=<span class="literal">true</span></span></span><br><span class="line"><span class="javascript">    oIframe.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(flag)&#123;</span></span><br><span class="line"><span class="javascript">            oIframe.src=<span class="string">'./xl.html'</span></span></span><br><span class="line"><span class="javascript">            flag=<span class="literal">false</span></span></span><br><span class="line"><span class="javascript">        &#125;<span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(oIframe.contentWindow.name)</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>实现的思路是当子<code>iframe</code>加载完成后，我们替换掉<code>iframe</code>的<code>src</code>为当前页面的同源页面，这样我们就可以借助这个同源页面去<code>iframe</code>里面取<code>window.name</code>了</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-何为iframe"><span class="toc-text">一 何为iframe</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-iframe的优点和缺点"><span class="toc-text">二 iframe的优点和缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-iframe的使用"><span class="toc-text">三 iframe的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父子页面窗口的关系"><span class="toc-text">父子页面窗口的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父子窗口通信"><span class="toc-text">父子窗口通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#判断iframe加载完成"><span class="toc-text">判断iframe加载完成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iframe受跨域限制如何解决"><span class="toc-text">iframe受跨域限制如何解决</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/iframe的实际应用/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/iframe/"><i class="fa fa-tags"></i>iframe</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/重绘，重排与性能优化/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
