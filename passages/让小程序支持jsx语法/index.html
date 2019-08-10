@@ -190,13 +190,13 @@
 <p>这种方式把对 <code>JSX</code>的处理，主要放在了编译阶段，他依赖于编译阶段的信息收集，以上面为例，它必须识别出逻辑表达式，然后做对应的 <code>wx:if</code>转换处理。</p>
 <p>那编译阶段有什么问题和局限呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        const a=&lt;Text&gt;hello&lt;/Text&gt;</span><br><span class="line">        const b=a</span><br><span class="line">        return (</span><br><span class="line">        	&lt;View&gt;</span><br><span class="line">            	&#123;b&#125;</span><br><span class="line">            &lt;/View&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>首先我们声明 <code>consta=&lt;Text&gt;Hello&lt;/Text&gt;</code>，然后把 <code>a</code>赋值给了 <code>b</code>，我们看下最新版本 <code>Taro1.3</code>的转换</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/I4OWBs9UyBsUuiagwb40QuicKBl9iaQrJBlrNibC198QTQCww7ZpibVpOibMkoOibl6qpmN3TCA9kAoc2RmNRFA9QC9Kw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<p>报错了！！！为什么？</p>
+<p>首先我们声明 <code>consta=&lt;Text&gt;Hello&lt;/Text&gt;</code>，然后把 <code>a</code>赋值给了 <code>b</code>，在最新版本 <code>Taro1.3</code>的转换后报错了！！！</p>
+<p><code>a is not defined</code></p>
+<p>为什么呢？</p>
 <p>想理解上面的代码为什么报错，我们首先要理解编译阶段。本质上来说在编译阶段，代码其实就是‘字符串’，而编译阶段处理方案，就需要从这个‘字符串’中分析出必要的信息（通过 <code>AST</code>，正则等方式）然后做对应的等效转换处理。</p>
 <p>而对于上面的例子，需要做什么等效处理呢？需要我们在编译阶段分析出 <code>b</code>是 <code>JSX</code>片段：<code>b=a=&lt;Text&gt;Hello&lt;/Text&gt;</code>，然后把 <code>&lt;View&gt;{b}&lt;/View&gt;</code>中的 <code>{b}</code>等效替换为 <code>&lt;Text&gt;Hello&lt;/Text&gt;</code>。然而在编译阶段要想确定 <code>b</code>的值是很困难的，有人说可以往前追溯来确定b的值，也不是不可以，但是考虑一下 由于 <code>b=a</code>，那么就先要确定 <code>a</code>的值，这个 <code>a</code>的值怎么确定呢？需要在 <code>b</code>可以访问到的作用域链中确定 <code>a</code>，然而 <code>a</code>可能又是由其他变量赋值而来，循环往复，期间一旦出现不是简单赋值的情况，比如函数调用，三元判断等运行时信息，追溯就宣告失败，要是 <code>a</code>本身就是挂在全局对象上的变量，追溯就更加无从谈起。</p>
 <p>所以在编译阶段 是无法简单确定 <code>b</code>的值的。</p>
-<p>我们再仔细看下上图的报错信息：<code>a is not defined</code>。</p>
+<p>我们再仔细看下报错信息：<code>a is not defined</code>。</p>
 <p>什么说 <code>a</code>未定义呢？这是涉及到另外一个问题，我们知道 <code>&lt;Text&gt;Hello&lt;/Text&gt;</code>，其实等效于 <code>React.createElement(Text,null,&#39;Hello&#39;)</code>，而 <code>React.createElement</code>方法的返回值就是一个普通 <code>JS</code>对象</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    tag:Text,</span><br><span class="line">    props:<span class="literal">null</span>,</span><br><span class="line">    children:<span class="string">'hello'</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>所以上面那一段代码在 <code>JS</code>环境真正运行的时候，大概等效如下：</p>
