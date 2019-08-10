@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>让小程序支持jsx语法 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="jsx,">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-10
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    让小程序支持jsx语法
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=582346068,310013598&fm=26&gp=0.jpg);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <h3 id="一-现有思路的局限性"><a href="#一-现有思路的局限性" class="headerlink" title="一 现有思路的局限性"></a>一 现有思路的局限性</h3><p>先看看 <code>Taro</code>， <code>nanachi</code>是怎么在小程序端处理 <code>JSX</code>语法的。简单来说，主要是通过在编译阶段把 <code>JSX</code>转化为等效的小程序 <code>wxml</code>来把 <code>React</code>代码运行在小程序端的</p>
+<p>比如将</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xx &amp;&amp; &lt;Text&gt;hello&lt;/Text&gt;</span><br></pre></td></tr></table></figure>
+<p>将会被转化为<code>wx：if</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Text wx:if=&quot;&#123;&#123;xx&#125;&#125;&quot;&gt;Hello&lt;/Text&gt;</span><br></pre></td></tr></table></figure>
+<p>这种方式把对 <code>JSX</code>的处理，主要放在了编译阶段，他依赖于编译阶段的信息收集，以上面为例，它必须识别出逻辑表达式，然后做对应的 <code>wx:if</code>转换处理。</p>
+<p>那编译阶段有什么问题和局限呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        const a=&lt;Text&gt;hello&lt;/Text&gt;</span><br><span class="line">        const b=a</span><br><span class="line">        return (</span><br><span class="line">        	&lt;View&gt;</span><br><span class="line">            	&#123;b&#125;</span><br><span class="line">            &lt;/View&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先我们声明 <code>consta=&lt;Text&gt;Hello&lt;/Text&gt;</code>，然后把 <code>a</code>赋值给了 <code>b</code>，我们看下最新版本 <code>Taro1.3</code>的转换</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/I4OWBs9UyBsUuiagwb40QuicKBl9iaQrJBlrNibC198QTQCww7ZpibVpOibMkoOibl6qpmN3TCA9kAoc2RmNRFA9QC9Kw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>报错了！！！为什么？</p>
+<p>想理解上面的代码为什么报错，我们首先要理解编译阶段。本质上来说在编译阶段，代码其实就是‘字符串’，而编译阶段处理方案，就需要从这个‘字符串’中分析出必要的信息（通过 <code>AST</code>，正则等方式）然后做对应的等效转换处理。</p>
+<p>而对于上面的例子，需要做什么等效处理呢？需要我们在编译阶段分析出 <code>b</code>是 <code>JSX</code>片段：<code>b=a=&lt;Text&gt;Hello&lt;/Text&gt;</code>，然后把 <code>&lt;View&gt;{b}&lt;/View&gt;</code>中的 <code>{b}</code>等效替换为 <code>&lt;Text&gt;Hello&lt;/Text&gt;</code>。然而在编译阶段要想确定 <code>b</code>的值是很困难的，有人说可以往前追溯来确定b的值，也不是不可以，但是考虑一下 由于 <code>b=a</code>，那么就先要确定 <code>a</code>的值，这个 <code>a</code>的值怎么确定呢？需要在 <code>b</code>可以访问到的作用域链中确定 <code>a</code>，然而 <code>a</code>可能又是由其他变量赋值而来，循环往复，期间一旦出现不是简单赋值的情况，比如函数调用，三元判断等运行时信息，追溯就宣告失败，要是 <code>a</code>本身就是挂在全局对象上的变量，追溯就更加无从谈起。</p>
+<p>所以在编译阶段 是无法简单确定 <code>b</code>的值的。</p>
+<p>我们再仔细看下上图的报错信息：<code>a is not defined</code>。</p>
+<p>什么说 <code>a</code>未定义呢？这是涉及到另外一个问题，我们知道 <code>&lt;Text&gt;Hello&lt;/Text&gt;</code>，其实等效于 <code>React.createElement(Text,null,&#39;Hello&#39;)</code>，而 <code>React.createElement</code>方法的返回值就是一个普通 <code>JS</code>对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    tag:Text,</span><br><span class="line">    props:<span class="literal">null</span>,</span><br><span class="line">    children:<span class="string">'hello'</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以上面那一段代码在 <code>JS</code>环境真正运行的时候，大概等效如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        const a=&#123;</span><br><span class="line">            tag:Text,</span><br><span class="line">            props:null,</span><br><span class="line">            children:&apos;hello&apos;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        const b=a</span><br><span class="line">        return &#123;</span><br><span class="line">            tag:View,</span><br><span class="line">            props:null,</span><br><span class="line">            children:b</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，之前说编译阶段需要对 <code>JSX</code>做等效处理，需要把 <code>JSX</code>转换为 <code>wxml</code>，所以 <code>&lt;Text&gt;Hello&lt;/Text&gt;</code>这个 <code>JSX</code>片段被特殊处理了， <code>a</code>不再是一个普通 <code>js</code>对象，这里我们看到 <code>a</code>变量甚至丢失了，这里暴露了一个很严重的问题：代码语义被破坏了，也就是说由于编译时方案对 <code>JSX</code>的特殊处理，真正运行在小程序上的代码语义并不是你的预期。</p>
+<h3 id="二-新的思路"><a href="#二-新的思路" class="headerlink" title="二 新的思路"></a>二 新的思路</h3><p>下面我们介绍一种全新的处理思路，这种思路在小程序运行期间和真正的 <code>React</code>几无区别，不会改变任何代码语义， <code>JSX</code>表达式只会被处理为 <code>React.createElement</code>方法调用，实际运行的时候就是普通 <code>js</code>对象，最终通过其他方式渲染出小程序视图。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">第一步：给每个独立的 `JSX`片段打上唯一标识 `uuid`，例如：</span><br><span class="line"></span><br><span class="line">const a=&lt;Text uuid=&apos;00001&apos;&gt;&lt;/Text&gt;</span><br><span class="line">const y=&lt;View uuid=&apos;00002&apos;&gt;</span><br><span class="line">      	&lt;Image&gt;&lt;/Image&gt;</span><br><span class="line">          &lt;Text&gt;&lt;/Text&gt;</span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">      </span><br><span class="line">我们给 `a`片段， `y`片段 添加了 `uuid`属性</span><br><span class="line"></span><br><span class="line">第二步：把 `React`代码通过 `babel`转义为小程序可以识别的代码，例如 `JSX`片段用等效的 `React.createElement`替换等</span><br><span class="line"></span><br><span class="line">const a=React.createElement(Text,&#123;</span><br><span class="line">    uuid:&apos;00001&apos;</span><br><span class="line">&#125;,&apos;hello&apos;)</span><br><span class="line"></span><br><span class="line">第三步：提取每个独立的 `JSX`片段，用小程序 `template`包裹，生成 `wxml`文件</span><br><span class="line"></span><br><span class="line">&lt;template name=&apos;00001&apos;&gt;</span><br><span class="line">	&lt;Text&gt;hello&lt;/Text&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;template name=&apos;00002&apos;&gt;</span><br><span class="line">	&lt;View uuid=&apos;00002&apos;&gt;</span><br><span class="line">      	&lt;Image&gt;&lt;/Image&gt;</span><br><span class="line">          &lt;Text&gt;&lt;/Text&gt;</span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;template is=&quot;&#123;&#123;uiDes.name&#125;&#125;&quot; data=&quot;&#123;&#123;...uiDes&#125;&#125;&quot;&gt;&lt;/template&gt;</span><br><span class="line">    </span><br><span class="line">注意这里每一个 `template` 的 `name`标识和 `JSX`片段的唯一标识 `uuid`是一样的。最后，需要在结尾生成一个占位模版：`&lt;templateis=&quot;&#123;&#123;uiDes.name&#125;&#125;&quot;data=&quot;&#123;&#123;...uiDes&#125;&#125;&quot;/&gt;`。</span><br><span class="line"></span><br><span class="line">第四步：修改 `ReactDOM.render`的递归（ `React16.x`之后，不在是递归的方式）过程，递归执行阶段，聚合 `JSX`片段的 `uuid`属性，生成并返回 `uiDes`数据结构。</span><br><span class="line"></span><br><span class="line">第五步：把第四步生成的 `uiDes`，传递给小程序环境，小程序把 `uiDes` 设置给占位模版 `&lt;templateis=&quot;&#123;&#123;uiDes.name&#125;&#125;&quot;data=&quot;&#123;&#123;...uiDes&#125;&#125;&quot;/&gt;`，渲染出最终的视图。</span><br><span class="line"></span><br><span class="line">const uiDes=&#123;</span><br><span class="line">    name:&apos;00002&apos;,</span><br><span class="line">    child0001:&#123;</span><br><span class="line">        name:00001,</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这整个过程中，你的所有 <code>JS</code>代码都是运行在 <code>React</code>过程中的，语义完全一致， <code>JSX</code>片段也不会被任何特殊处理，只是简单的 <code>React.createElement</code>调用，另外由于这里的 <code>React</code>过程只是纯 <code>js</code>运算，执行是非常迅速的，通常只有几ms。最终会输出一个 <code>uiDes</code>数据到小程序，小程序通过这个 <code>uiDes</code>渲染出视图。</p>
+<p>现在我们在看之前的赋值 <code>const b=a</code>，就不会有任何问题了，因为 <code>a</code> 不过是普通对象。另外对于常见的编译时方案的限制，比如任意函数返回 <code>JSX</code>片段，动态生成 <code>JSX</code>片段， <code>for</code>循环使用 <code>JSX</code>片段等等，都可以完全解除了，因为 <code>JSX</code>片段只是 <code>js</code>对象，你可以做任何操作，最终 <code>ReactDOM.render</code>会搜集所有执行结果的片段的 <code>uuid</code>标识，生成 <code>uiDes</code>，而小程序会根据这个 <code>uiDes</code>数据结构渲染出最终视图。</p>
+<p>可以看出这种新的思路和以前编译时方案还是有很大的区别的，对 <code>JSX</code>片段的处理是动态的，你可以在任何地方，任何函数出现任何 <code>JSX</code>片段, 最终执行结果会确定渲染哪一个片段，只有执行结果的片段的 <code>uuid</code>会被写入 <code>uiDes</code>。这和编译时方案的静态识别有着本质的区别。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-现有思路的局限性"><span class="toc-text">一 现有思路的局限性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-新的思路"><span class="toc-text">二 新的思路</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/让小程序支持jsx语法/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/jsx/"><i class="fa fa-tags"></i>jsx</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/iframe的实际应用/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
