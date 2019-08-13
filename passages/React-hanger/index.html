@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>React-hanger | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="react,">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-13
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    React-hanger
+  </h1>
+  
+    <div class="passage-cover">
+      <figure style="background-image:url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1814983793,2697794432&fm=26&gp=0.jpg);"></figure>
+    </div>
+  
+  <article class="passage-article">
+    <h3 id="一-Hooks"><a href="#一-Hooks" class="headerlink" title="一 Hooks"></a>一 Hooks</h3><p>在Hooks之前，开发react组件主要是class组件和function组件。function组件没有state，所以也叫SFC（stateless functional component），简单的将props映射成view；class组件有state，能够处理更加复杂的逻辑。但是基于class的组建并不是完美的，总结起来就像Dan说的那样，有三个主要的问题：</p>
+<ol>
+<li>代码重用：在hooks出来之前，常见的代码重用方式是HOCs和render props，这两种方式带来的问题是：你需要解构自己的组件，非常的笨重，同时会带来很深的组件嵌套</li>
+<li>复杂的组件逻辑：在class组件中，有许多的lifecycle 函数，你需要在各个函数的里面去做对应的事情。这种方式带来的痛点是：逻辑分散在各处，开发者去维护这些代码会分散自己的精力，理解代码逻辑也很吃力</li>
+<li>class组件的困惑：对于初学者来说，需要理解class组件里面的this是比较吃力的(这个理由有点勉强~)，同时，基于class的组件难以优化(举个不恰当的例子，看一下babel转移出来的class代码量增长了多少)</li>
+</ol>
+<p>为了解决上面的这三个问题，react hooks提案登场了，它有以下几个特点：</p>
+<ol>
+<li>无痛接入，不破坏现有的项目结构</li>
+<li>完全向后兼容，不包含任何不兼容breaking changes</li>
+<li>现在就能使用</li>
+</ol>
+<p>Hooks 允许你在不编写 class 的情况下使用状态(state)和其他 React 特性。 你还可以构建自己的 Hooks, 跨组件共享可重用的有状态逻辑。</p>
+<p>现在React中内置的Hooks有：</p>
+<ul>
+<li><p>Basic Hooks</p>
+</li>
+<li><ul>
+<li>useState</li>
+<li>useEffect</li>
+<li>useContext</li>
+</ul>
+</li>
+<li><p>Additional Hooks</p>
+</li>
+<li><ul>
+<li>useReducer</li>
+<li>useCallback</li>
+<li>useMemo</li>
+<li>useRef</li>
+<li>useImperativeHandle</li>
+<li>useLayoutEffect</li>
+<li>useDebugValue</li>
+</ul>
+</li>
+</ul>
+<h3 id="二-React-hanger"><a href="#二-React-hanger" class="headerlink" title="二 React-hanger"></a>二 React-hanger</h3><p>react-hanger的Usage里提供了6个API，从名字里就可以看出这些Hook都是做什么的(Hooks都以”use”开头，这是一种约定)，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import </span><br><span class="line">&#123;</span><br><span class="line">  useInput,</span><br><span class="line">  useBoolean,</span><br><span class="line">  useNumber,</span><br><span class="line">  useArray,</span><br><span class="line">  useOnMount,</span><br><span class="line">  useOnUnmount</span><br><span class="line">&#125; from &quot;react-hanger&quot;;</span><br></pre></td></tr></table></figure>
+<p>使用起来也很简单，比如 <code>useNumber</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const App = () =&gt; &#123;  </span><br><span class="line">    const showCounter = useBoolean(true);  </span><br><span class="line">    const counter = useNumber(0);  </span><br><span class="line">    return (    </span><br><span class="line">        &lt;div&gt;      </span><br><span class="line">            &lt;button onClick=&#123;counter.increase&#125;&gt; increase &lt;/button&gt;      </span><br><span class="line">            &#123;showCounter.value &amp;&amp; &lt;span&gt; &#123;counter.value&#125; &lt;/span&gt;&#125;      </span><br><span class="line">            &lt;button onClick=&#123;counter.decrease&#125;&gt; decrease &lt;/button&gt;    </span><br><span class="line">        &lt;/div&gt;  </span><br><span class="line">           )&#125;;</span><br></pre></td></tr></table></figure>
+<p>初步印象：大致与原始的basic hooks有点不同的是，useState返回一个数组，分别是 <code>值</code>与 <code>操作</code>，而react-hanger提供的API貌似是将 <code>值</code>和 <code>一些操作</code>封装到一个对象中，比如 <code>counter</code>就是一个 <code>{value:count,increase:setCount(count+1),decrease:setCount(count-1)}</code>的对象。</p>
+<h3 id="三-源码部分"><a href="#三-源码部分" class="headerlink" title="三 源码部分"></a>三 源码部分</h3><p>其实翻看了react-hanger的源码之后会发现，react-hanger一共引用了四个React内置的Hook，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; useCallback, useEffect, useRef, useState &#125; from &quot;react&quot;;</span><br></pre></td></tr></table></figure>
+<p>然后返回一些“轮子”hooks，包括 <code>useNumber</code>、 <code>useArray</code>、 <code>useBoolean</code>等等。</p>
+<p>这些轮子可以大致分为两类：封装Hook和拆分Hook。</p>
+<h4 id="封装Hook"><a href="#封装Hook" class="headerlink" title="封装Hook"></a>封装Hook</h4><p>比如 <code>useStateful</code>、 <code>useNumber</code>、 <code>useArray</code>、 <code>useBoolean</code>都是对内置Hook <code>useState</code>的封装。</p>
+<h4 id="useStateful"><a href="#useStateful" class="headerlink" title="useStateful"></a>useStateful</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const useStateful = initial =&gt; &#123;  </span><br><span class="line">    const [value, setValue] = useState(initial);  </span><br><span class="line">    return &#123;    </span><br><span class="line">        value,    </span><br><span class="line">        setValue  </span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>利用ES6的解构赋值，将 <code>useState</code>返回的数组封装成一个对象重新返回，方便调用。</p>
+<h4 id="useNumber"><a href="#useNumber" class="headerlink" title="useNumber"></a>useNumber</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">export const useNumber = (  </span><br><span class="line">    initial,  </span><br><span class="line">    &#123; upperLimit, lowerLimit, loop, step = 1 &#125; = &#123;&#125;) =&gt; &#123;  </span><br><span class="line">    const [value, setValue] = useState(initial);  </span><br><span class="line">    return &#123;    </span><br><span class="line">        value,    </span><br><span class="line">        setValue,    </span><br><span class="line">        increase: useCallback(i =&gt; &#123;      </span><br><span class="line">            setValue(...);</span><br><span class="line">                     &#125;,[]),    </span><br><span class="line">        decrease: useCallback(d =&gt; &#123;      </span><br><span class="line">            setValue(...);</span><br><span class="line">                     &#125;, [])  </span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>useNumber</code>接收一个initial number和一个配置项对象，在内部是通过对initial number进行useState Hook，返回一个对象，除了基本的 <code>value</code>和 <code>setValue</code>，还有两个方法 <code>increase</code>和 <code>decrease</code>。这两个方法都是用 <code>useCallback</code>对 <code>setValue</code>进行的进一步封装。</p>
+<blockquote>
+<p>而 <code>useCallback</code>是一个比较重要的内置Hook， <code>useCallback</code> 的可以于缓存了每次渲染时 inline callback 的实例，在第二个参数数组内的值发生更改时才会更改。 这样可以配合上子组件的 <code>shouldComponentUpdate</code> 或者 <code>useMemo</code> 起到减少不必要的渲染的作用。</p>
+</blockquote>
+<p>而第二个参数为空数组的意思就是告诉React不管参数如何都要记忆。</p>
+<h4 id="useArray-amp-useBoolean-amp-useInput"><a href="#useArray-amp-useBoolean-amp-useInput" class="headerlink" title="useArray &amp; useBoolean &amp; useInput"></a>useArray &amp; useBoolean &amp; useInput</h4><p>至于 <code>useArray</code> 、 <code>useBoolean</code> 、 <code>useInput</code>这三个hook可以说和 <code>useNumber</code>大同小异，都是需要一个传入的initial值，在hook内部通过 <code>useState</code>初始化，再返回一些常用的操作方法。</p>
+<p>这里的 <code>useInput</code>是针对于受控组件，所以不需要 <code>useRef</code>。</p>
+<h4 id="useSetState"><a href="#useSetState" class="headerlink" title="useSetState"></a>useSetState</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export const useSetState = initialValue =&gt; &#123;  </span><br><span class="line">    const &#123; value, setValue &#125; = useStateful(initialValue);</span><br><span class="line">    return &#123;    </span><br><span class="line">        setState: useCallback(v =&gt; &#123;      </span><br><span class="line">            return setValue(oldValue =&gt; (&#123;        </span><br><span class="line">                ...oldValue,        </span><br><span class="line">                ...(typeof v === &quot;function&quot; ? v(oldValue) : v)</span><br><span class="line">            &#125;));    </span><br><span class="line">        &#125;, []),</span><br><span class="line">        state: value</span><br><span class="line">    &#125;;&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Unlike the <code>setState</code> method found in class components, <code>useState</code> does not automatically merge update objects. 与类组件中的setState方法不同，useState不会自动合并更新对象。</p>
+</blockquote>
+<p>熟悉React Hook的同学看了代码就知道这个hook是封装了什么了，因为useState返回的类似于 <code>setCount</code>的方法不会自动合并更新对象。这个hook帮助大家可以获得一个可以merge之前value的Hook型 <code>setState</code>。</p>
+<h4 id="拆分Hook"><a href="#拆分Hook" class="headerlink" title="拆分Hook"></a>拆分Hook</h4><p>上述几个算是封装hook，那么下面的几个就可以算是拆分hook，对 <code>useEffect</code>更精细化的处理。</p>
+<h4 id="useOnMount-amp-useOnUnmount"><a href="#useOnMount-amp-useOnUnmount" class="headerlink" title="useOnMount &amp; useOnUnmount"></a>useOnMount &amp; useOnUnmount</h4><p>众所周知， <code>useEffect</code>是被用来处理一些原先放在class组件中生命周期函数的副作用，比如 <code>componentDidMount</code>、 <code>componentDidUpdate</code>、 <code>componentWillUnmount</code>，集合而成的一个Hook。</p>
+<p>理论上，在每次渲染后都会触发 <code>useEffect</code>的效果，但是如果我只想在didmount里或者只想在willunmount里做一下事情，该怎么办？</p>
+<p>这时就用到了 <code>useEffect</code>的一个特点：第二个参数为效果依赖的值数组，也就是说只有当数组内的值变化才会触发 <code>useEffect</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">useEffect(  </span><br><span class="line">    () =&gt; &#123;    </span><br><span class="line">        const subscription = props.source.subscribe();    </span><br><span class="line">        return () =&gt; &#123;      </span><br><span class="line">            subscription.unsubscribe();</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,  [props.source],);</span><br></pre></td></tr></table></figure>
+<p>而如果第二个参数为一个空数组的时候，则相当于告诉React你的效果不依赖于组件中的任何值，因此该效果只能在mount上运行并在unmount上清理，它不会在更新时运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export const useOnUnmount = onUnmount =&gt;  useEffect(() =&gt; &#123;</span><br><span class="line">    return () =&gt; onUnmount &amp;&amp; onUnmount();</span><br><span class="line">&#125;, []);</span><br><span class="line">export const useOnMount = onMount =&gt;  useEffect(() =&gt; &#123; </span><br><span class="line">    onMount &amp;&amp; onMount();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<p>所以 <code>useOnMount</code>的实现就非常简单，在 <code>useEffect</code>内执行onMount函数且第二个参数是 <code>[]</code>， <code>useOnUnmount</code>的实现则是返回onUnmount函数且第二个参数是 <code>[]</code>。</p>
+<h4 id="useLifecycleHooks"><a href="#useLifecycleHooks" class="headerlink" title="useLifecycleHooks"></a>useLifecycleHooks</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export const useLifecycleHooks = (&#123; onMount, onUnmount &#125;) =&gt;  useEffect(() =&gt; &#123;</span><br><span class="line">    onMount &amp;&amp; onMount();</span><br><span class="line">    return () =&gt; onUnmount &amp;&amp; onUnmount();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<p><code>useLifecycleHooks</code>则是对 <code>useOnUnmount</code>和 <code>useOnMount</code>的整合，在 <code>useEffect</code>的第二个参数为 <code>[]</code>的情况下，执行onMount和返回onUnmount。</p>
+<h4 id="useLogger"><a href="#useLogger" class="headerlink" title="useLogger"></a>useLogger</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export const useLogger = (name, props) =&gt; &#123;  </span><br><span class="line">    useLifecycleHooks(&#123;    </span><br><span class="line">        onMount: () =&gt; console.log(`$&#123;name&#125; has mounted`),</span><br><span class="line">        onUnmount: () =&gt; console.log(`$&#123;name&#125; has unmounted`)  &#125;);</span><br><span class="line">    useEffect(() =&gt; &#123;</span><br><span class="line">        console.log(&quot;Props updated&quot;, props);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>useLogger</code>算是一个为hook commponent封装的log插件，通过在 <code>useLifecycleHooks</code>内传入onMount和onUnmount打印日志的函数，之后再通过原生的默认 <code>useEffect</code>不传递第二个参数来实现在更新过程中打印日志。</p>
+<h4 id="usePrevious"><a href="#usePrevious" class="headerlink" title="usePrevious"></a>usePrevious</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export const usePrevious = value =&gt; &#123;</span><br><span class="line">    const ref = useRef();</span><br><span class="line">    useEffect(() =&gt; &#123;</span><br><span class="line">        ref.current = value;</span><br><span class="line">    &#125;);  </span><br><span class="line">    return ref.current;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>usePrevious则可以获取之前的props或者state，来自于React的官方文档。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-Hooks"><span class="toc-text">一 Hooks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-React-hanger"><span class="toc-text">二 React-hanger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-源码部分"><span class="toc-text">三 源码部分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#封装Hook"><span class="toc-text">封装Hook</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useStateful"><span class="toc-text">useStateful</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useNumber"><span class="toc-text">useNumber</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useArray-amp-useBoolean-amp-useInput"><span class="toc-text">useArray &amp; useBoolean &amp; useInput</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useSetState"><span class="toc-text">useSetState</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拆分Hook"><span class="toc-text">拆分Hook</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useOnMount-amp-useOnUnmount"><span class="toc-text">useOnMount &amp; useOnUnmount</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useLifecycleHooks"><span class="toc-text">useLifecycleHooks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useLogger"><span class="toc-text">useLogger</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#usePrevious"><span class="toc-text">usePrevious</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/React-hanger/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/react/"><i class="fa fa-tags"></i>react</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/用JavaScript实现常用的数据结构/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
