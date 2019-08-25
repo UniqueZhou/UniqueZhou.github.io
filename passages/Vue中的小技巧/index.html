@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="UniqueZhou">
+  
+  
+  <title>Vue中的小技巧 | 个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="UNIQ个人博客">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"z1Eo3pwzu7hiIJK9b5JVq5tg-gzGzoHsz","appkey":"kEVqF6uf3fwSHrsnKyhGEdnc","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2017-10-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "UniqueZhou",
+    share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">UNIQ</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | Life is only inevitable, there is no chance.</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/friends/" target="_self">友链</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/uniquezhou/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/friends/" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-08-25
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Vue中的小技巧
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="一、-js适配经验："><a href="#一、-js适配经验：" class="headerlink" title="一、 js适配经验："></a>一、 js适配经验：</h2><p>在写代码的时候，很有可能写到这种代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].includes(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>或者是使用<code>promise</code>等es6的方法，但是我们的需求是在Android4.4上面完美运行。这样就会出现<code>includes is not undefied</code>等错误提示。我们可以通过webpack的插件来解决，具体的使用方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"babel-polyfill"</span></span><br><span class="line"><span class="keyword">import</span> es6Promise <span class="keyword">from</span> <span class="string">'es6-promise'</span></span><br><span class="line">es6Promise.polyfill()</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'es6-promise'</span>).polyfill()</span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack配置文件处</span></span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: [<span class="string">'babel-polyfill'</span>, <span class="string">'./src/main.js'</span>]</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="二、-全局定义"><a href="#二、-全局定义" class="headerlink" title="二、 全局定义"></a>二、 全局定义</h2><p>当我们写了很多库的时候，我们引入页面可能会变成这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue 1</span></span><br><span class="line"><span class="keyword">import</span> utils <span class="keyword">from</span> <span class="string">"library"</span></span><br><span class="line"><span class="comment">// vue 2</span></span><br><span class="line"><span class="keyword">import</span> utils <span class="keyword">from</span> <span class="string">"library"</span></span><br><span class="line">...</span><br><span class="line"><span class="comment">// vue n</span></span><br><span class="line"><span class="keyword">import</span> utils <span class="keyword">from</span> <span class="string">"library"</span></span><br></pre></td></tr></table></figure>
+<p>可以这样处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> http <span class="keyword">from</span> <span class="string">"http/http"</span></span><br><span class="line">Vue.prototype.$okhttp = http</span><br><span class="line"></span><br><span class="line"><span class="comment">// use</span></span><br><span class="line"><span class="keyword">this</span>.$okhttp</span><br></pre></td></tr></table></figure>
+<p>这样会节省很多没有必要的代码量</p>
+<h2 id="三、-自定义目录"><a href="#三、-自定义目录" class="headerlink" title="三、 自定义目录"></a>三、 自定义目录</h2><p>在写代码的时候，很多时候都存在这种情况 ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> component1 <span class="keyword">from</span> <span class="string">"../../../../component"</span></span><br><span class="line"><span class="keyword">import</span> component2 <span class="keyword">from</span> <span class="string">"../../../../../component"</span></span><br></pre></td></tr></table></figure>
+<p>这样写的缺陷是一旦某个目录发生变化就会导致引入错误。可以通过webpack路径解决</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  context: path.resolve(__dirname, <span class="string">'../'</span>),</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: [<span class="string">'babel-polyfill'</span>, <span class="string">'./src/main.js'</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;&#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [<span class="string">'.js'</span>, <span class="string">'.vue'</span>, <span class="string">'.json'</span>],</span><br><span class="line">    alias: &#123;</span><br><span class="line">      <span class="string">'vue$'</span>: <span class="string">'vue/dist/vue.esm.js'</span>,</span><br><span class="line">      <span class="string">'@'</span>: resolve(<span class="string">'src'</span>),</span><br><span class="line">      <span class="string">'components'</span>: resolve(<span class="string">'src/components'</span>),</span><br><span class="line">      <span class="string">'pages'</span>: resolve(<span class="string">'src/pages'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">&#125;,</span><br><span class="line">  node: &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在resolve-&gt;alias里面可以配置绝对相对路径，在使用的时候</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> component1 <span class="keyword">from</span> <span class="string">"pages/component"</span></span><br><span class="line"><span class="keyword">import</span> component2 <span class="keyword">from</span> <span class="string">"pages/component"</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、-路由懒加载"><a href="#四、-路由懒加载" class="headerlink" title="四、 路由懒加载"></a>四、 路由懒加载</h2><p>官方文档里面定义路由的时候都有两步：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"><span class="keyword">import</span> xxx <span class="keyword">from</span> <span class="string">'xxx'</span></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: xxx,</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在做大型项目的时候 很可能定义很多很多个路由，那样页面就会写的特别多。此时懒加载就会解决这个问题</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"xxx"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="五、-样式污染和样式覆盖的问题"><a href="#五、-样式污染和样式覆盖的问题" class="headerlink" title="五、 样式污染和样式覆盖的问题"></a>五、 样式污染和样式覆盖的问题</h2><p>在我们新建vue的时候，经常会看到<code>scoped</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span>&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>如果我们去掉<code>scoped</code>的时候会发现，在本vue项目内定义的css属性会影响到其他vue页面的css属性。这个就很坑了。所以，我们在使用的时候一定要用scoped</p>
+<p>但是在实际的开发中，也会遇到这么个问题。比如elementUI](<a href="http://element-cn.eleme.io/#/zh-CN/component/changelog)，虽然里面的资源库很强大，但是里面的视图不能完全符合策划的需求，此时就需要进行微调。" target="_blank" rel="noopener">http://element-cn.eleme.io/#/zh-CN/component/changelog)，虽然里面的资源库很强大，但是里面的视图不能完全符合策划的需求，此时就需要进行微调。</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang="stylus" scoped&gt;</span><br><span class="line">  <span class="selector-class">.custom-dialog</span></span><br><span class="line">    <span class="selector-class">.el-dialog__header</span></span><br><span class="line">      <span class="selector-tag">padding</span> 0</span><br><span class="line">    <span class="selector-class">.el-dialog__body</span></span><br><span class="line">      <span class="selector-tag">padding</span> 0</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>如果此时我们加上<code>scoped</code>标签的话，我们发现并没有效果，发现<code>去掉scoped</code>才会起作用。</p>
+<h2 id="六、-mock、mock"><a href="#六、-mock、mock" class="headerlink" title="六、 mock、mock"></a>六、 mock、mock</h2><p>很多情况下，后台还没有搭建完成之前。可能前端没办法进行数据的接入。这种情况可能是一个大问题，这样会严重拖慢项目开发，此时就需要<code>mock</code><br> 首先在webpack.dev.conf.js里面配置express，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="keyword">const</span> appData = <span class="built_in">require</span>(<span class="string">'../static/data/user.json'</span>)</span><br><span class="line"><span class="keyword">const</span> apiRouter = express.Router()</span><br><span class="line">app.use(<span class="string">'/api'</span>,apiRouter)</span><br></pre></td></tr></table></figure>
+<p>然后将接口通过<code>devServer</code>发布出去:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> before(app) &#123;</span><br><span class="line">  app.get(<span class="string">'/api/user'</span>,(req, res) =&gt; &#123;</span><br><span class="line">    res.json(&#123;</span><br><span class="line">      data: appData</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用的时候就直接打开<a href>http://localhost:8080/api/user</a>,就可以了。</p>
+<h2 id="六、-代理解决跨域"><a href="#六、-代理解决跨域" class="headerlink" title="六、 代理解决跨域"></a>六、 代理解决跨域</h2><p>有些时候，在进行本地开发的时候，可能会遇到跨域的问题。为了解决这个问题呢？主要有两种方法：<br> 1、 服务器设置<br> 服务端设置很简单，就是将本地开发的东西加上<code>“Access-Control-Allow-Origin”, “*”</code>,或者是直接将本地开发的ip直接设置成白名单，这样就可以了.<br> 2、 本地代理<br> 首先引入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install http-proxy-middleware --save</span><br></pre></td></tr></table></figure>
+<p>然后在<code>index.js</code>的标签下<code>proxyTable</code>使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'/lesson'</span>: &#123;</span><br><span class="line">        target: <span class="string">'http://xxx/v2/webapi/lesson'</span>, <span class="comment">// 代理的网址</span></span><br><span class="line">        changeOrigin: <span class="literal">true</span>, <span class="comment">// 允许跨域</span></span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">         <span class="string">'^/lesson'</span>: <span class="string">'/'</span></span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>使用的时候，就直接使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">axios(&#123;</span><br><span class="line">       method: <span class="string">'get'</span>,</span><br><span class="line">       url:<span class="string">'/lesson'</span> ,</span><br><span class="line">       params: qs.stringify(data)</span><br><span class="line">     &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (res) &#123;</span><br><span class="line">         <span class="comment">//...</span></span><br><span class="line">       &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">   &#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.error(error);</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="七、-页面统一判断"><a href="#七、-页面统一判断" class="headerlink" title="七、 页面统一判断"></a>七、 页面统一判断</h2><p>在开发中经常会遇到权限判断的问题，我们又不可能在每一个页面的生命周期中去判断一下，可以这样处理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  myAccess.checkhaveAccess(to.path) === <span class="literal">true</span> ? next() : next(<span class="string">'/forbid'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="八、-事件的传递："><a href="#八、-事件的传递：" class="headerlink" title="八、 事件的传递："></a>八、 事件的传递：</h2><p>一般来说事件的传递有很多种，比如父子之间传递数据就可以直接用<code>props</code>，和<code>emit</code>来做关联。<br> 父组件给子组件传递</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;child :datas=<span class="string">"content"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span> </span><br><span class="line">&lt;<span class="regexp">/parent&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">data()&#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">        content:'sichaoyun'</span></span><br><span class="line"><span class="regexp">    &#125;;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 子组件</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">props:["datas"];</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 或者是 </span></span><br><span class="line"><span class="regexp">props: &#123;</span></span><br><span class="line"><span class="regexp"> datas: String</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>子组件给父组件传递</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div @click=<span class="string">"open"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">methods: &#123;</span></span><br><span class="line"><span class="regexp">   open() &#123;</span></span><br><span class="line"><span class="regexp">        this.$emit('showbox','the msg'); /</span><span class="regexp">/触发showbox方法，'the msg'为向父组件传递的数据</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 父组件</span></span><br><span class="line"><span class="regexp">&lt;child @showbox="toshow" :msg="msg"&gt;&lt;/</span>child&gt; <span class="comment">//监听子组件触发的showbox事件,然后调用toshow方法</span></span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">    toshow(msg) &#123;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>兄弟组件之间的传递一般有几种方式：<br> 1、 注册全局事件<br> 2、 vuex<br> 3、 localstorage</p>
+<p> 使用全局事件则代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vm = <span class="keyword">new</span> Vue(); <span class="comment">//创建实例</span></span><br><span class="line"></span><br><span class="line">&lt;div @click=<span class="string">"ge"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">methods: &#123;</span><br><span class="line">    ge() &#123;</span><br><span class="line">        vm.$emit(<span class="string">'click'</span>,data); <span class="comment">//触发事件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">created() &#123;</span><br><span class="line">  vm.$on(<span class="string">'click'</span>, (arg) =&gt; &#123; </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="九、-列表渲染"><a href="#九、-列表渲染" class="headerlink" title="九、 列表渲染"></a>九、 列表渲染</h2><h3 id="v-for循环绑定model"><a href="#v-for循环绑定model" class="headerlink" title="v-for循环绑定model:"></a>v-for循环绑定model:</h3><p>这个是我在一个微信公众号上面看到的写法，很新颖:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据    </span></span><br><span class="line">     data() &#123;</span><br><span class="line">         <span class="keyword">return</span>&#123;</span><br><span class="line">          obj: &#123;</span><br><span class="line">             ob: <span class="string">"OB"</span>,</span><br><span class="line">             koro1: <span class="string">"Koro1"</span></span><br><span class="line">           &#125;,</span><br><span class="line">           model: &#123;</span><br><span class="line">             ob: <span class="string">"默认ob"</span>,</span><br><span class="line">             koro1: <span class="string">"默认koro1"</span></span><br><span class="line">           &#125;   </span><br><span class="line">         &#125;</span><br><span class="line">     &#125;,</span><br><span class="line">   <span class="comment">// html模板</span></span><br><span class="line">   &lt;div v-<span class="keyword">for</span>=<span class="string">"(value,key) in obj"</span>&gt;</span><br><span class="line">      &lt;input type=<span class="string">"text"</span> v-model=<span class="string">"model[key]"</span>&gt;</span><br><span class="line">   &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">     /</span><span class="regexp">/ input就跟数据绑定在一起了，那两个默认数据也会在input中显示</span></span><br></pre></td></tr></table></figure>
+<h3 id="v-if尽量不要与v-for在同一节点使用"><a href="#v-if尽量不要与v-for在同一节点使用" class="headerlink" title="v-if尽量不要与v-for在同一节点使用:"></a>v-if尽量不要与v-for在同一节点使用:</h3><p>v-for 的优先级比 v-if 更高,如果它们处于同一节点的话，那么每一个循环都会运行一遍v-if。</p>
+<p>如果想根据循环中的每一项的数据来判断是否渲染，可以这么做:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;index in datas&quot; v-if=&quot;Object.is(index,0)&quot;&gt;</span><br><span class="line">  &#123;&#123; index &#125;&#125;</span><br><span class="line">&lt;/li&gt;</span><br></pre></td></tr></table></figure>
+<p>如果你想要根据某些条件跳过循环，而又跟将要渲染的每一项数据没有关系的话，可以将v-if放在v-for的父节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 根据elseData是否为true 来判断是否渲染，跟每个元素没有关系    </span><br><span class="line">    &lt;ul v-if=&quot;condition&quot;&gt;</span><br><span class="line">     &lt;li v-for=&quot;index in datas&quot;&gt;</span><br><span class="line">       &#123;&#123; index &#125;&#125;</span><br><span class="line">     &lt;/li&gt;</span><br><span class="line">   &lt;/ul&gt;</span><br><span class="line">   // 数组是否有数据 跟每个元素没有关系</span><br><span class="line">   &lt;ul v-if=&quot;datas.length&quot;&gt;</span><br><span class="line">     &lt;li v-for=&quot;index in datas&quot;&gt;</span><br><span class="line">       &#123;&#123; index &#125;&#125;</span><br><span class="line">     &lt;/li&gt;</span><br><span class="line">   &lt;/ul&gt;</span><br><span class="line">   &lt;p v-else&gt;没有更多数据&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="十、-深度watch与watch立即触发回调"><a href="#十、-深度watch与watch立即触发回调" class="headerlink" title="十、 深度watch与watch立即触发回调"></a>十、 深度watch与watch立即触发回调</h2><p>watch有两个可选参数<br> <strong>选项：deep</strong><br> 在选项参数中指定 deep: true，可以监听对象中属性的变化。<br> <strong>选项：immediate</strong><br> 在选项参数中指定 immediate: true, 将立即以表达式的当前值触发回调，也就是默认触发一次。</p>
+<h2 id="十一、-路由的项目启动页和404页面"><a href="#十一、-路由的项目启动页和404页面" class="headerlink" title="十一、 路由的项目启动页和404页面"></a>十一、 路由的项目启动页和404页面</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">'/'</span>, <span class="comment">// 项目启动页</span></span><br><span class="line">        redirect:<span class="string">'/login'</span>  <span class="comment">// 重定向到下方声明的路由 </span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">'*'</span>, <span class="comment">// 404 页面 </span></span><br><span class="line">        component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./notfind'</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>比如你的域名为:<code>www.baidu.com</code></p>
+<p>项目启动页指的是: 当你进入<code>www.baidu.com</code>，会自动跳转到login登录页。</p>
+<p>404页面指的是: 当进入一个没有 声明/没有匹配 的路由页面时就会跳转到404页面。</p>
+<p>比如进入<code>www.baidu.com/testRouter</code>,就会自动跳转到notFind页面。</p>
+<p>当你没有声明一个404页面，进入<code>www.baidu.com/testRouter</code>，显示的页面是一片空白。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、-js适配经验："><span class="toc-text">一、 js适配经验：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、-全局定义"><span class="toc-text">二、 全局定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、-自定义目录"><span class="toc-text">三、 自定义目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、-路由懒加载"><span class="toc-text">四、 路由懒加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、-样式污染和样式覆盖的问题"><span class="toc-text">五、 样式污染和样式覆盖的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、-mock、mock"><span class="toc-text">六、 mock、mock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、-代理解决跨域"><span class="toc-text">六、 代理解决跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、-页面统一判断"><span class="toc-text">七、 页面统一判断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、-事件的传递："><span class="toc-text">八、 事件的传递：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、-列表渲染"><span class="toc-text">九、 列表渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v-for循环绑定model"><span class="toc-text">v-for循环绑定model:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if尽量不要与v-for在同一节点使用"><span class="toc-text">v-if尽量不要与v-for在同一节点使用:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、-深度watch与watch立即触发回调"><span class="toc-text">十、 深度watch与watch立即触发回调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一、-路由的项目启动页和404页面"><span class="toc-text">十一、 路由的项目启动页和404页面</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: UNIQ</div>
+      
+        <div>
+          原文链接: 
+          <a href target="_blank">http://yoursite.com/passages/Vue中的小技巧/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://godbmw.com/" target="_blank">GodBMW</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://ruanyifeng.com/" target="_blank">阮一峰的个人网站</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://uniquezhou.github.io/" target="_blank">Hexo搭建流程</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="#########" target="_self">#</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://juejin.im/user/5c989347f265da610e5ed7aa" target="_blank">掘金</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://www.zhihu.com/people/unique-71/activities" target="_blank">知乎</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 943428965@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 Theme-AD. 
+      Created by <a href="https://uniquezhou.github.io" target="_blank">UniqueZhou</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/从输入URL到页面呈现发生了什么？/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+    <a id="share-btn-twitter" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-twitter"></i>
+    </a>
+  
+  
+    <a id="share-btn-facebook" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-facebook"></i>
+    </a>
+  
+  
+    <a id="share-btn-weibo" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-weibo"></i>
+    </a>
+  
+  
+    <a id="share-btn-qq" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-qq"></i>
+    </a>
+  
+  
+    <a id="share-btn-wechat" href="javascript:void(0);" target="_blank">
+      <i class="fa fa-wechat"></i>
+    </a>
+  
+</div>
+    
+
+
+
+
+
+    
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":100,"height":185},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
